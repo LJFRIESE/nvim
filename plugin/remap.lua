@@ -64,8 +64,8 @@ vim.keymap.set('n', 'Q', '<nop>')
 
 vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz', { desc = 'Jump to next error' })
 vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz', { desc = 'Jump to prev error' })
-vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz', { desc = 'Jump to next location' })
-vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz', { desc = 'Jump to prev location' })
+-- vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz', { desc = 'Jump to next location' })
+-- vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz', { desc = 'Jump to prev location' })
 
 vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Find and [R]eplace in current buffer' })
 -- Linux specific command to send cmd to terminal
@@ -125,4 +125,12 @@ vim.keymap.set('n', 'gc', '<Plug>(comment_toggle_linewise)', { desc = 'Toggle co
 
 -- Toggle in VISUAL mode
 vim.keymap.set('x', 'gc', '<Plug>(comment_toggle_linewise_visual)', { desc = 'Toggle comment for selection' })
---
+
+-- Fugitive
+
+vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = 'Launch Fugitive ([G]it [S]tuff)' })
+
+-- vim.keymap.set('n', '<leader>C-.', '<cmd>vertical resize +5<cr>')
+-- vim.keymap.set('n', '<leader>C-,', '<cmd>vertical resize -5<cr>')
+-- vim.keymap.set('n', '<leader>C-.', '<cmd>horizontal resize +5<cr>')
+-- vim.keymap.set('n', '<leader>C-,', '<cmd>horizontal resize -5<cr>')
