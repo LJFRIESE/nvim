@@ -1,85 +1,3 @@
-vim.keymap.set('n', '<leader>cdconf', ':cd C:/Users/LUCASFRI/AppData/Local/nvim<CR>')
-vim.keymap.set('n', '<leader>cdgit', ':cd C:/Users/LUCASFRI/git <CR>')
--- [[ Basic Keymaps ]]
---  See `:help vim.keymap.set()`
-
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
-
--- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-
--- Exit terminal mode in the builtin terminal
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
--- or just use <C-\><C-n> to exit terminal mode
-vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal  ode' })
-
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
--- Move current line up/down in visual mode
-vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv")
-vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
--- Join subsequent line to current line
-vim.keymap.set('n', 'J', 'mzJ`z')
--- Jump up/down half page
-vim.keymap.set('n', '<C-d>', '<C-d>zz')
-vim.keymap.set('n', '<C-u>', '<C-u>zz')
-
--- vim.keymap.set('n', 'n', 'nzzzv')
--- vim.keymap.set('n', 'N', 'Nzzzv')
-
--- toggle vimwithme plugin
-vim.keymap.set('n', '<leader>vwm', function()
-  require('vim-with-me').StartVimWithMe()
-end)
-vim.keymap.set('n', '<leader>svwm', function()
-  require('vim-with-me').StopVimWithMe()
-end)
-
--- -- Uncomment once I know what x mode is....
--- -- greatest remap ever
--- vim.keymap.set('x', '<leader>p', [["_dP]])
---
--- Related to keeping seperate clipboards. yy goes to system, this does not
--- next greatest remap ever : asbjornHaland
-vim.keymap.set({ 'n', 'v' }, '<leader>y', [["+y]])
--- This does go to system
-vim.keymap.set('n', '<leader>Y', [["+Y]])
--- Delete line without overwriting clipboard
-vim.keymap.set({ 'n', 'v' }, '<leader>d', [["_d]])
-
--- This is going to get me cancelled
-vim.keymap.set('i', '<C-c>', '<Esc>')
-
-vim.keymap.set('n', 'Q', '<nop>')
---[[ vim.keymap.set('n', '<C-f>', '<cmd>silent !tmux neww tmux-sessionizer<CR>') ]]
--- vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format current buffer' })
-
-vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz', { desc = 'Jump to next error' })
-vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz', { desc = 'Jump to prev error' })
--- vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz', { desc = 'Jump to next location' })
--- vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz', { desc = 'Jump to prev location' })
-
-vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Find and [R]eplace in current buffer' })
--- Linux specific command to send cmd to terminal
---vim.keymap.set('n', '<leader>x', '<cmd>!chmod +x %<CR>', { silent = true })
-
--- Template for error handling in... Go?
---vim.keymap.set('n', '<leader>ee', 'oif err != nil {<CR>}<Esc>Oreturn err<Esc>')
-
-vim.keymap.set('n', '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>', { desc = '[M]ake it [R]ain' })
-
-vim.keymap.set('n', '<leader><leader>', function()
-  vim.cmd 'so'
-end, { desc = '[S]hout [O]ut' })
-
 -- Harpoon
 local harpoon = require 'harpoon'
 vim.keymap.set('n', '<leader>a', function()
@@ -89,48 +7,143 @@ vim.keymap.set('n', '<C-e>', function()
   harpoon.ui:toggle_quick_menu(harpoon:list())
 end, { desc = 'Open harpoon UI' })
 
-vim.keymap.set('n', '<C-h>', function()
+vim.keymap.set('n', '1', function()
   harpoon:list():select(1)
 end, { desc = 'Select harpoon 1' })
-vim.keymap.set('n', '<C-t>', function()
+vim.keymap.set('n', '2', function()
   harpoon:list():select(2)
 end, { desc = 'Select harpoon 2' })
-vim.keymap.set('n', '<C-n>', function()
+vim.keymap.set('n', '3', function()
   harpoon:list():select(3)
 end, { desc = 'Select harpoon 3' })
-vim.keymap.set('n', '<C-s>', function()
+vim.keymap.set('n', '4', function()
   harpoon:list():select(4)
 end, { desc = 'Select harpoon 4' })
 
-vim.keymap.set('n', '<leader><C-h>', function()
-  harpoon:list():replace_at(1)
-end, { desc = 'Replace harpoon 1' })
-vim.keymap.set('n', '<leader><C-t>', function()
-  harpoon:list():replace_at(2)
-end, { desc = 'Replace harpoon 2' })
-vim.keymap.set('n', '<leader><C-n>', function()
-  harpoon:list():replace_at(3)
-end, { desc = 'Replace harpoon 3' })
-vim.keymap.set('n', '<leader><C-s>', function()
-  harpoon:list():replace_at(4)
-end, { desc = 'Replace harpoon 4' })
+-- vim.keymap.set('n', '<leader><C-h>', function()
+--   harpoon:list():replace_at(1)
+-- end, { desc = 'Replace harpoon 1' })
+-- vim.keymap.set('n', '<leader><C-t>', function()
+--   harpoon:list():replace_at(2)
+-- end, { desc = 'Replace harpoon 2' })
+-- vim.keymap.set('n', '<leader><C-n>', function()
+--   harpoon:list():replace_at(3)
+-- end, { desc = 'Replace harpoon 3' })
+-- vim.keymap.set('n', '<leader><C-s>', function()
+--   harpoon:list():replace_at(4)
+-- end, { desc = 'Replace harpoon 4' })
 
 -- Commenting
-vim.keymap.set('n', 'gcc', function()
+vim.keymap.set('n', '<leader>cc', function()
   return vim.v.count == 0 and '<Plug>(comment_toggle_linewise_current)' or '<Plug>(comment_toggle_linewise_count)'
-end, { expr = true, desc = 'Toggle comment selection' })
-
--- Toggle in Op-pending mode
-vim.keymap.set('n', 'gc', '<Plug>(comment_toggle_linewise)', { desc = 'Toggle comment for selection' })
-
--- Toggle in VISUAL mode
-vim.keymap.set('x', 'gc', '<Plug>(comment_toggle_linewise_visual)', { desc = 'Toggle comment for selection' })
+end, { expr = true, desc = 'Toggle comment' })
+vim.keymap.set('n', 'cc', '<Plug>(comment_toggle_linewise)', { desc = 'Toggle comment {motion}' })
+vim.keymap.set('x', '<leader>cc', '<Plug>(comment_toggle_linewise_visual)', { desc = 'Toggle comment' })
 
 -- Fugitive
-
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = 'Launch Fugitive ([G]it [S]tuff)' })
 
--- vim.keymap.set('n', '<leader>C-.', '<cmd>vertical resize +5<cr>')
--- vim.keymap.set('n', '<leader>C-,', '<cmd>vertical resize -5<cr>')
--- vim.keymap.set('n', '<leader>C-.', '<cmd>horizontal resize +5<cr>')
--- vim.keymap.set('n', '<leader>C-,', '<cmd>horizontal resize -5<cr>')
+-- Telescope
+-- See `:help telescope.builtin`
+local builtin = require 'telescope.builtin'
+vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
+vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
+vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+
+vim.keymap.set('n', '<leader>/', function()
+  builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+    winblend = 10,
+    previewer = false,
+  })
+end, { desc = '[/] Fuzzily search in current buffer' })
+
+--  See `:help telescope.builtin.live_grep()` for information about particular keys
+vim.keymap.set('n', '<leader>s/', function()
+  builtin.live_grep {
+    grep_open_files = true,
+    prompt_title = 'Live Grep in Open Files',
+  }
+end, { desc = '[S]earch [/] in Open Files' })
+
+-- Shortcut for searching your Neovim configuration files
+vim.keymap.set('n', '<leader>sn', function()
+  builtin.find_files { cwd = vim.fn.stdpath 'config' }
+end, { desc = '[S]earch [N]eovim files' })
+
+-- Trouble
+vim.keymap.set('n', '<leader>tt', function()
+  require('trouble').toggle() { desc = '[T]oggle [t]rouble' }
+end)
+vim.keymap.set('n', '[t', function()
+  require('trouble').next { desc = 'Jump to next error', skip_groups = true, jump = true }
+end)
+vim.keymap.set('n', ']t', function()
+  require('trouble').previous { desc = 'Jump to prev error', skip_groups = true, jump = true }
+end)
+
+-- toggle vimwithme plugin
+vim.keymap.set('n', '<leader>vwm', function()
+  require('vim-with-me').StartVimWithMe()
+end, { desc = 'Start vimwithme' })
+vim.keymap.set('n', '<leader>svwm', function()
+  require('vim-with-me').StopVimWithMe()
+end, { desc = 'Stop vimwithme' })
+
+-- Misc
+vim.keymap.set('n', '<leader>pv', vim.cmd.Lex, { desc = 'Toggle directory explorer' })
+vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'Delete and...?' })
+
+vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format current buffer' })
+
+vim.keymap.set({ 'n', 'x' }, '<leader>y', [["+y]], { desc = 'Yank | No clipboard' })
+vim.keymap.set({ 'n', 'x' }, '<leader>Y', [["+Y]], { desc = 'Yank | Yes clipboard' })
+vim.keymap.set({ 'n', 'x' }, '<leader>d', [["_d]], { desc = '[D]elete | No clipboard' })
+vim.keymap.set({ 'n', 'x' }, '<leader>D', [["_D]], { desc = '[D]elete |  clipboard' })
+
+-- Move current line up/down in visual mode
+vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move text down' })
+vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move text up' })
+-- Join subsequent line to current line
+vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join subsequent line to current line' })
+-- Jump up/down half page
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Jump half-page down' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Jump half-page up' })
+
+-- Navigate text
+vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz', { desc = 'Jump to next error' })
+vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz', { desc = 'Jump to prev error' })
+vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz', { desc = 'Jump to next location' })
+vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz', { desc = 'Jump to prev location' })
+
+-- Diagnostic keymaps
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = 'Find and [R]eplace in current buffer' })
+
+-- Pane navigation
+--  See `:help wincmd` for a list of all window commands
+vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+
+vim.keymap.set('n', '<leader>-', '<cmd>vertical resize -5<cr>', { desc = 'Window size decrease' })
+vim.keymap.set('n', '<leader>=', '<cmd>vertical resize +5<cr>', { desc = 'Window size increase' })
+
+vim.keymap.set('n', '<leader>gc', ':cd C:/Users/LUCASFRI/AppData/Local/nvim<CR>', { desc = '[G]o to [C]onfig' })
+vim.keymap.set('n', '<leader>gg', ':cd C:/Users/LUCASFRI/git <CR>', { desc = '[G]o to [G]it directory' })
+
+vim.keymap.set('n', '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>', { desc = '[M]ake it [R]ain' })
+
+vim.keymap.set('i', '<C-c>', '<Esc>', { desc = 'Esc' })
+vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Kill search highlight' })
