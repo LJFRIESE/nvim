@@ -33,7 +33,8 @@ end, { desc = 'Select harpoon 4' })
 --   harpoon:list():replace_at(4)
 -- end, { desc = 'Replace harpoon 4' })
 
--- Commenting
+-- [C]ommenting
+
 vim.keymap.set('n', '<leader>cc', function()
   return vim.v.count == 0 and '<Plug>(comment_toggle_linewise_current)' or '<Plug>(comment_toggle_linewise_count)'
 end, { expr = true, desc = 'Toggle comment' })
@@ -44,6 +45,7 @@ vim.keymap.set('x', '<leader>cc', '<Plug>(comment_toggle_linewise_visual)', { de
 vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = 'Launch Fugitive ([G]it [S]tuff)' })
 
 -- Telescope
+-- [S]earch
 -- See `:help telescope.builtin`
 local builtin = require 'telescope.builtin'
 vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
@@ -79,14 +81,14 @@ end, { desc = '[S]earch [N]eovim files' })
 
 -- Trouble
 vim.keymap.set('n', '<leader>tt', function()
-  require('trouble').toggle() { desc = '[T]oggle [t]rouble' }
-end)
+  require('trouble').toggle()
+end, { desc = '[T]oggle [t]rouble' })
 vim.keymap.set('n', '[t', function()
-  require('trouble').next { desc = 'Jump to next error', skip_groups = true, jump = true }
-end)
+  require('trouble').next { skip_groups = true, jump = true }
+end, { desc = 'Jump to next error' })
 vim.keymap.set('n', ']t', function()
   require('trouble').previous { desc = 'Jump to prev error', skip_groups = true, jump = true }
-end)
+end, { desc = 'Jump to prev error' })
 
 -- toggle vimwithme plugin
 vim.keymap.set('n', '<leader>vwm', function()
@@ -105,7 +107,7 @@ vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format current bu
 vim.keymap.set({ 'n', 'x' }, '<leader>y', [["+y]], { desc = 'Yank | No clipboard' })
 vim.keymap.set({ 'n', 'x' }, '<leader>Y', [["+Y]], { desc = 'Yank | Yes clipboard' })
 vim.keymap.set({ 'n', 'x' }, '<leader>d', [["_d]], { desc = '[D]elete | No clipboard' })
-vim.keymap.set({ 'n', 'x' }, '<leader>D', [["_D]], { desc = '[D]elete |  clipboard' })
+vim.keymap.set({ 'n', 'x' }, '<leader>D', [["_D]], { desc = '[D]elete | Clipboard' })
 
 -- Move current line up/down in visual mode
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move text down' })
