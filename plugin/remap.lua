@@ -1,3 +1,5 @@
+local wk = require 'which-key'
+
 -- Harpoon
 local harpoon = require 'harpoon'
 vim.keymap.set('n', '<leader>a', function()
@@ -34,7 +36,9 @@ end, { desc = 'Select harpoon 4' })
 -- end, { desc = 'Replace harpoon 4' })
 
 -- [C]ommenting
-
+wk.add {
+  { '<leader>c', group = '[C]ommenting' },
+}
 vim.keymap.set('n', '<leader>cc', function()
   return vim.v.count == 0 and '<Plug>(comment_toggle_linewise_current)' or '<Plug>(comment_toggle_linewise_count)'
 end, { expr = true, desc = 'Toggle comment' })
@@ -47,6 +51,9 @@ vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = 'Launch Fugitive ([G]it 
 -- Telescope
 -- [S]earch
 -- See `:help telescope.builtin`
+wk.add {
+  { '<leader>s', group = '[S]earch' },
+}
 local builtin = require 'telescope.builtin'
 vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
@@ -103,7 +110,9 @@ vim.keymap.set('n', '<leader>pv', vim.cmd.Lex, { desc = 'Toggle directory explor
 vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'Delete and...?' })
 
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format current buffer' })
-
+wk.add {
+  { '<leader>d', group = '[D]elete' },
+}
 vim.keymap.set({ 'n', 'x' }, '<leader>y', [["+y]], { desc = 'Yank | No clipboard' })
 vim.keymap.set({ 'n', 'x' }, '<leader>Y', [["+Y]], { desc = 'Yank | Yes clipboard' })
 vim.keymap.set({ 'n', 'x' }, '<leader>d', [["_d]], { desc = '[D]elete | No clipboard' })
@@ -142,6 +151,9 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 vim.keymap.set('n', '<leader>-', '<cmd>vertical resize -5<cr>', { desc = 'Window size decrease' })
 vim.keymap.set('n', '<leader>=', '<cmd>vertical resize +5<cr>', { desc = 'Window size increase' })
 
+wk.add {
+  { '<leader>g', group = '[G]o to' },
+}
 vim.keymap.set('n', '<leader>gc', ':cd C:/Users/LUCASFRI/AppData/Local/nvim<CR>', { desc = '[G]o to [C]onfig' })
 vim.keymap.set('n', '<leader>gg', ':cd C:/Users/LUCASFRI/git <CR>', { desc = '[G]o to [G]it directory' })
 
