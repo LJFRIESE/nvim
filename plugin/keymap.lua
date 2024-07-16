@@ -87,16 +87,16 @@ vim.keymap.set('n', '<leader>sn', function()
 end, { desc = '[S]earch [N]eovim files' })
 
 -- Trouble
-vim.keymap.set('n', '<leader>tt', function()
-  require('trouble').toggle()
-end, { desc = '[T]oggle [t]rouble' })
-vim.keymap.set('n', '[t', function()
-  require('trouble').next { skip_groups = true, jump = true }
-end, { desc = 'Jump to next error' })
-vim.keymap.set('n', ']t', function()
-  require('trouble').previous { desc = 'Jump to prev error', skip_groups = true, jump = true }
-end, { desc = 'Jump to prev error' })
-
+-- vim.keymap.set('n', '<leader>tt', function()
+--   require('trouble').toggle()
+-- end, { desc = '[T]oggle [t]rouble' })
+-- vim.keymap.set('n', '[t', function()
+--   require('trouble').next { skip_groups = true, jump = true }
+-- end, { desc = 'Jump to next error' })
+-- vim.keymap.set('n', ']t', function()
+--   require('trouble').previous { desc = 'Jump to prev error', skip_groups = true, jump = true }
+-- end, { desc = 'Jump to prev error' })
+--
 -- toggle vimwithme plugin
 vim.keymap.set('n', '<leader>vwm', function()
   require('vim-with-me').StartVimWithMe()
