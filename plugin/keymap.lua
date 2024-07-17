@@ -103,18 +103,17 @@ end, { desc = '[S]earch [N]eovim files' })
 -- vim.keymap.set('n', ']t', function()
 --   require('trouble').previous { desc = 'Jump to prev error', skip_groups = true, jump = true }
 -- end, { desc = 'Jump to prev error' })
---
+
 -- toggle vimwithme plugin
-vim.keymap.set('n', '<leader>vwm', function()
-  require('vim-with-me').StartVimWithMe()
-end, { desc = 'Start vimwithme' })
-vim.keymap.set('n', '<leader>svwm', function()
-  require('vim-with-me').StopVimWithMe()
-end, { desc = 'Stop vimwithme' })
+-- vim.keymap.set('n', '<leader>vwm', function()
+--   require('vim-with-me').StartVimWithMe()
+-- end, { desc = 'Start vimwithme' })
+-- vim.keymap.set('n', '<leader>svwm', function()
+--   require('vim-with-me').StopVimWithMe()
+-- end, { desc = 'Stop vimwithme' })
 
 -- Misc
-vim.keymap.set('n', '<leader>pv', vim.cmd.Lex, { desc = 'Toggle directory explorer' })
-vim.keymap.set('x', '<leader>p', [["_dP]], { desc = 'Delete and...?' })
+vim.keymap.set('n', '<leader>pv', '<cmd>Neotree toggle<cr>')
 
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format current buffer' })
 wk.add {
@@ -124,12 +123,15 @@ vim.keymap.set({ 'n', 'x' }, '<leader>y', [["+y]], { desc = 'Yank | No clipboard
 vim.keymap.set({ 'n', 'x' }, '<leader>Y', [["+Y]], { desc = 'Yank | Yes clipboard' })
 vim.keymap.set({ 'n', 'x' }, '<leader>d', [["_d]], { desc = '[D]elete | No clipboard' })
 vim.keymap.set({ 'n', 'x' }, '<leader>D', [["_D]], { desc = '[D]elete | Clipboard' })
+vim.keymap.set('x', '<leader>p', [["_dP]], { desc = '[P]aste over | Retain yank' })
 
 -- Move current line up/down in visual mode
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move text down' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move text up' })
+
 -- Join subsequent line to current line
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join subsequent line to current line' })
+
 -- Jump up/down half page
 vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Jump half-page down' })
 vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Jump half-page up' })
@@ -168,3 +170,13 @@ vim.keymap.set('n', '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>', { d
 
 vim.keymap.set('i', '<C-c>', '<Esc>', { desc = 'Esc' })
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Kill search highlight' })
+
+wk.add {
+  { '<leader>r', group = '[R]eplace' },
+}
+wk.add {
+  { '<leader>t', group = '[T]rouble' },
+}
+wk.add {
+  { '<leader>z', group = '[Z]en' },
+}

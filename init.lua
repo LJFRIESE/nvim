@@ -4,7 +4,6 @@ local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 -- Set <space> as the leader key
 -- See `:help mapleader`
 vim.g.mapleader = ' '
-vim.keymap.set('n', '<leader>pv', vim.cmd.Lex)
 
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
