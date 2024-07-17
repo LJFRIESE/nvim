@@ -1,5 +1,6 @@
 local wk = require 'which-key'
-
+-- Undotree
+vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
 -- Harpoon
 local harpoon = require 'harpoon'
 vim.keymap.set('n', '<leader>a', function()

@@ -3,9 +3,6 @@ return {
   'eandrju/cellular-automaton.nvim',
   'nvim-lua/plenary.nvim',
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-  -- "gc" to comment visual regions/lines
-  { 'numToStr/Comment.nvim', opts = {} },
-  -- Highlight todo, notes, etc in comments
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
   --
   -- require 'kickstart.plugins.debug',
@@ -14,8 +11,7 @@ return {
   -- require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
-},
-{
+}, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
