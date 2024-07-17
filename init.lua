@@ -19,6 +19,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup {
-  spec = 'ljfries/plugins',
+  spec = 'ljfriese/plugins',
   change_detection = { notify = false },
 }
