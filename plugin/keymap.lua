@@ -180,3 +180,6 @@ wk.add {
 wk.add {
   { '<leader>z', group = '[Z]en' },
 }
+
+vim.keymap.set({ 'n', 'i' }, '<leader>ii', '<esc>i```{r}<cr>```<esc>O', { desc = '[i]nsert code chunk' })
+vim.keymap.set({ 'n' }, '<leader>ci', ':split  term://r<cr>', { desc = '[c]ode [i]nterpreter' })

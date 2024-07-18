@@ -81,6 +81,8 @@ return { -- LSP Configuration & Plugins
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
     capabilities.textDocument.completion.completionItem.snippetSupport = true
+    -- stops quarto preview fighting with nvim
+    capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
     -- Enable the following language servers
     -- Add any additional override configuration in the following tables. Available keys are:
     --  - cmd (table): Override the default command used to start the server

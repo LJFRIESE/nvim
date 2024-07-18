@@ -88,3 +88,5 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- vim.opt.colorcolumn = "80"
+
+vim.b.slime_cell_delimiter = '```'
