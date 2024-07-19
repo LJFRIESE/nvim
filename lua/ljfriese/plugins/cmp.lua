@@ -99,12 +99,12 @@ return { -- Autocompletion
             nvim_lsp = '[LSP]',
             nvim_lsp_signature_help = '[sig]',
             luasnip = '[snip]',
+            treesitter = '[TS]',
             buffer = '[buf]',
             path = '[path]',
             spell = '[spell]',
             pandoc_references = '[ref]',
             tags = '[tag]',
-            treesitter = '[TS]',
             calc = '[calc]',
             latex_symbols = '[tex]',
             emoji = '[emoji]',
@@ -118,21 +118,22 @@ return { -- Autocompletion
         { name = 'nvim_lsp' },
         { name = 'luasnip', keyword_length = 3, max_item_count = 3 },
         { name = 'pandoc_references' },
-        { name = 'buffer', keyword_length = 5, max_item_count = 3 },
+        { name = 'buffer', keyword_length = 2, max_item_count = 3 },
         { name = 'spell' },
-        { name = 'treesitter', keyword_length = 5, max_item_count = 3 },
+        { name = 'treesitter', keyword_length = 2, max_item_count = 3 },
         { name = 'calc' },
         { name = 'latex_symbols' },
         { name = 'emoji' },
+        { name = 'vim-dadbod-completion' },
       },
       view = {
         entries = 'native',
       },
-      -- window = {
-      --   documentation = {
-      --     border = require('misc.style').border,
-      -- },
-      -- },
+      window = {
+        documentation = {
+          border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
+        },
+      },
     }
 
     -- for friendly snippets

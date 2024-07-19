@@ -24,18 +24,15 @@ return { -- LSP Configuration & Plugins
         --  To jump back, press <C-t>.
         map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-        -- Find references for the word under your cursor.
         map('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-        -- Jump to the implementation of the word under your cursor.
         map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
-        -- Jump to the type of the word under your cursor.
-        map('<leader>D', require('telescope.builtin').lsp_type_definitions, 'Type [D]efinition')
+        map('gT', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype')
         -- Fuzzy find all the symbols in your current document.
         map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
         map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
         -- Rename the variable under your cursor.
         map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-        map('<leader>la', vim.lsp.buf.code_action, '[C]ode [A]ction')
+        map('<leader>dc', vim.lsp.buf.code_action, '[Do] [C]ode action')
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
         -- The following two autocommands are used to highlight references of the
@@ -67,9 +64,9 @@ return { -- LSP Configuration & Plugins
 
         -- The following autocommand is used to enable inlay hints
         if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-          map('<leader>th', function()
+          map('<leader>h', function()
             vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-          end, '[T]oggle Inlay [H]ints')
+          end, 'Toggle [H]ide hints')
         end
       end,
     })
@@ -83,20 +80,17 @@ return { -- LSP Configuration & Plugins
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     -- stops quarto preview fighting with nvim
     capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
-    -- Enable the following language servers
-    -- Add any additional override configuration in the following tables. Available keys are:
-    --  - cmd (table): Override the default command used to start the server
-    --  - filetypes (table): Override the default list of associated filetypes for the server
-    --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-    --  - settings (table): Override the default settings passed when initializing the server.
-    --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
     local servers = {
+
       marksman = { filetypes = { 'markdown', 'quarto' }, root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml') },
       r_language_server = {
         settings = {
-          r = { flags = lsp_flags, lsp = {
-            rich_documentation = false,
-          } },
+          r = {
+            flags = lsp_flags,
+            lsp = {
+              rich_documentation = false,
+            },
+          },
         },
       },
       lua_ls = {
@@ -149,6 +143,7 @@ return { -- LSP Configuration & Plugins
       'sqlfmt',
       'sqlfluff',
       'tree-sitter-cli',
+      'sql-formatter',
     })
     require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

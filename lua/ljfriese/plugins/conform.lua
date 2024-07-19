@@ -18,10 +18,10 @@ return { -- Autoformat
       -- have a well standardized coding style. You can add additional
       -- languages here or re-enable it for the disabled ones.
       local disable_filetypes = { c = true, cpp = true }
-      local slow_timeout = { r = true, qmd = true }
+      local slow_timeout = { r = true, qmd = true, sql = true }
       local timeout = 500
       if slow_timeout[vim.bo[bufnr].filetype] then
-        timeout = 2000
+        timeout = 20000
       end
       return {
         timeout_ms = timeout,
@@ -30,7 +30,7 @@ return { -- Autoformat
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
-      sql = { 'sqlfmt', 'sqlfluff' },
+      sql = { 'sql_formatter' }, --'sqlfmt', 'sqlfluff' },
       r = { 'styler' },
       quarto = { 'styler' },
     },
