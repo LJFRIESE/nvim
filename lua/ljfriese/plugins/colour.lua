@@ -4,7 +4,14 @@ return { -- You can easily change to a different colorscheme.
   --
   -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
   'rose-pine/neovim',
-  priority = 1000, -- Make sure to load this before all the other start plugins.
+  bold_vert_split = true,
+  dim_nc_background = true,
+  disable_background = true,
+  disable_float_background = true,
+  disable_italics = false,
+  priority = 1000, -- Make sure to load this before all the other start plugins.}
+  -- You can configure highlights by doing something like:
+  -- vim.cmd.hi 'Comment gui=none'
   init = function()
     -- Load the colorscheme here.
     -- Like many other themes, this one has different styles, and you could load

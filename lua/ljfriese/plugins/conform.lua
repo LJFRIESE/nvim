@@ -12,7 +12,16 @@ return { -- Autoformat
     },
   },
   opts = {
-    -- log_level = vim.log.levels.DEBUG,
+    log_level = vim.log.levels.DEBUG,
+    formatters = {
+      sqlfluff = {
+        inherit = true,
+        command = 'sqlfluff',
+        args = { 'fix', '--dialect', 'oracle' },
+        stdin = true,
+      },
+    },
+
     notify_on_error = false,
     format_on_save = function(bufnr)
       -- Disable "format_on_save lsp_fallback" for languages that don't
