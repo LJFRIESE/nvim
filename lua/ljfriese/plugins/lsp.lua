@@ -63,11 +63,11 @@ return { -- LSP Configuration & Plugins
         end
 
         -- The following autocommand is used to enable inlay hints
-        if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-          map('<leader>h', function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-          end, 'Toggle [H]ide hints')
-        end
+        -- if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+        --   map('<leader>h', function()
+        --     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        --   end, 'Toggle [H]ide hints')
+        -- end
       end,
     })
     local lsp_flags = {

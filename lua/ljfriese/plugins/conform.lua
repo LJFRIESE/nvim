@@ -12,7 +12,8 @@ return { -- Autoformat
     },
   },
   opts = {
-    notify_on_error = true,
+    -- log_level = vim.log.levels.DEBUG,
+    notify_on_error = false,
     format_on_save = function(bufnr)
       -- Disable "format_on_save lsp_fallback" for languages that don't
       -- have a well standardized coding style. You can add additional
@@ -30,7 +31,7 @@ return { -- Autoformat
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
-      sql = { 'sql_formatter' },
+      sql = { 'sqlfluff' },
       r = { 'styler' },
       quarto = { 'styler' },
     },

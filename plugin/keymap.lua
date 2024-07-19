@@ -2,40 +2,100 @@ local wk = require 'which-key'
 -- Undotree
 vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
 -- Harpoon
+
 local harpoon = require 'harpoon'
-vim.keymap.set('n', '<leader>a', function()
-  harpoon:list():add()
-end, { desc = 'Add to harpoon' })
-vim.keymap.set('n', '<C-e>', function()
-  harpoon.ui:toggle_quick_menu(harpoon:list())
-end, { desc = 'Open harpoon UI' })
+wk.add {
+  '<leader>h',
+  group = '[H]arpoon',
+  {
+    -- Toggle previous & next buffers stored within Harpoon list
+    -- {
+    --   '<leader>H',
+    --   function()
+    --     harpoon:list():prev()
+    --   end,
+    -- },
+    -- {
+    --   '<leader>L',
+    --   function()
+    --     harpoon:list():next()
+    --   end,
+    -- },
+    --
+    {
+      '<leader>ha',
+      function()
+        harpoon:list():add()
+      end,
+      desc = 'Add to harpoon',
+    },
+    {
+      '<leader>he',
+      function()
+        harpoon.ui:toggle_quick_menu(harpoon:list())
+      end,
+      desc = 'Open harpoon UI',
+    },
 
-vim.keymap.set('n', '1', function()
-  harpoon:list():select(1)
-end, { desc = 'Select harpoon 1' })
-vim.keymap.set('n', '2', function()
-  harpoon:list():select(2)
-end, { desc = 'Select harpoon 2' })
-vim.keymap.set('n', '3', function()
-  harpoon:list():select(3)
-end, { desc = 'Select harpoon 3' })
-vim.keymap.set('n', '4', function()
-  harpoon:list():select(4)
-end, { desc = 'Select harpoon 4' })
+    {
+      '<leader>hh',
+      function()
+        harpoon:list():select(1)
+      end,
+      desc = 'Select harpoon 1',
+    },
+    {
+      '<leader>hj',
+      function()
+        harpoon:list():select(2)
+      end,
+      desc = 'Select harpoon 2',
+    },
+    {
+      '<leader>hk',
+      function()
+        harpoon:list():select(3)
+      end,
+      desc = 'Select harpoon 3',
+    },
+    {
+      '<leader>hl',
+      function()
+        harpoon:list():select(4)
+      end,
+      desc = 'Select harpoon 4',
+    },
 
--- vim.keymap.set('n', '<leader><C-h>', function()
---   harpoon:list():replace_at(1)
--- end, { desc = 'Replace harpoon 1' })
--- vim.keymap.set('n', '<leader><C-t>', function()
---   harpoon:list():replace_at(2)
--- end, { desc = 'Replace harpoon 2' })
--- vim.keymap.set('n', '<leader><C-n>', function()
---   harpoon:list():replace_at(3)
--- end, { desc = 'Replace harpoon 3' })
--- vim.keymap.set('n', '<leader><C-s>', function()
---   harpoon:list():replace_at(4)
--- end, { desc = 'Replace harpoon 4' })
-
+    {
+      '<leader>hH',
+      function()
+        harpoon:list():replace_at(1)
+      end,
+      desc = 'Replace harpoon 1',
+    },
+    {
+      '<leader>hJ',
+      function()
+        harpoon:list():replace_at(2)
+      end,
+      desc = 'Replace harpoon 2',
+    },
+    {
+      '<leader>hK',
+      function()
+        harpoon:list():replace_at(3)
+      end,
+      desc = 'Replace harpoon 3',
+    },
+    {
+      '<leader>hL',
+      function()
+        harpoon:list():replace_at(4)
+      end,
+      desc = 'Replace harpoon 4',
+    },
+  },
+}
 -- [C]ommenting
 wk.add {
   { '<leader>c', group = '[C]omment' },
@@ -133,8 +193,8 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move text up' })
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join subsequent line to current line' })
 
 -- Jump up/down half page
-vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Jump half-page down' })
-vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Jump half-page up' })
+vim.keymap.set('n', '<J>', '<C-d>zz', { desc = 'Jump half-page down' })
+vim.keymap.set('n', '<K>', '<C-u>zz', { desc = 'Jump half-page up' })
 
 -- Navigate text
 vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz', { desc = 'Jump to next error' })
