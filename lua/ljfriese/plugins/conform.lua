@@ -30,7 +30,7 @@ return { -- Autoformat
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
-      sql = { 'sql_formatter' }, --'sqlfmt', 'sqlfluff' },
+      sql = { 'sql_formatter' },
       r = { 'styler' },
       quarto = { 'styler' },
     },

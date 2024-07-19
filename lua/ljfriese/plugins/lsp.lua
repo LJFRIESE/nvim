@@ -81,7 +81,7 @@ return { -- LSP Configuration & Plugins
     -- stops quarto preview fighting with nvim
     capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
     local servers = {
-
+      sqls = { 'sql' },
       marksman = { filetypes = { 'markdown', 'quarto' }, root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml') },
       r_language_server = {
         settings = {

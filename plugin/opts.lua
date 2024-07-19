@@ -87,6 +87,9 @@ vim.opt.inccommand = 'split'
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 
+-- undotree for ewindows:q
+
+vim.g.undotree_DiffCommand = 'FC'
 -- vim.opt.colorcolumn = "80"
 
 vim.b.slime_cell_delimiter = '```'

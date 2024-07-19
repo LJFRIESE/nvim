@@ -113,7 +113,7 @@ end, { desc = '[S]earch [N]eovim files' })
 -- end, { desc = 'Stop vimwithme' })
 
 -- Misc
-vim.keymap.set('n', '<leader>pv', '<cmd>Neotree toggle<cr>')
+vim.keymap.set('n', '<leader>pv', '<cmd>Neotree toggle<cr>', { desc = 'Toggle file tree' })
 
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format current buffer' })
 wk.add {
@@ -139,8 +139,8 @@ vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Jump half-page up' })
 -- Navigate text
 vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz', { desc = 'Jump to next error' })
 vim.keymap.set('n', '<C-j>', '<cmd>cprev<CR>zz', { desc = 'Jump to prev error' })
-vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz', { desc = 'Jump to next location' })
-vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz', { desc = 'Jump to prev location' })
+-- vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz', { desc = 'Jump to next location' })
+-- vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz', { desc = 'Jump to prev location' })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -157,9 +157,9 @@ vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right win
 vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
 vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
-vim.keymap.set('n', '<leader>-', '<cmd>vertical resize -5<cr>', { desc = 'Window size decrease' })
-vim.keymap.set('n', '<leader>=', '<cmd>vertical resize +5<cr>', { desc = 'Window size increase' })
-
+-- vim.keymap.set('n', '<leader>-', '<cmd>vertical resize -5<cr>', { desc = 'Window size decrease' })
+-- vim.keymap.set('n', '<leader>=', '<cmd>vertical resize +5<cr>', { desc = 'Window size increase' })
+--
 wk.add {
   { '<leader>g', group = '[G]o to' },
 }
