@@ -57,24 +57,24 @@ return { -- LSP Configuration & Plugins
             group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
             callback = function(event2)
               vim.lsp.buf.clear_references()
-              vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+              vim.api.nvim_clear_autocmds({ group = 'kickstart-lsp-highlight', buffer = event2.buf })
             end,
           })
         end
 
         -- The following autocommand is used to enable inlay hints
-        -- if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-        --   map('<leader>h', function()
-        --     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-        --   end, 'Toggle [H]ide hints')
-        -- end
+        if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+          map('<leader><C-h>', function()
+            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+          end, 'Toggle [H]ide hints')
+        end
       end,
     })
     local lsp_flags = {
       allow_incremental_sync = true,
       debounce_text_changes = 150,
     }
-    local util = require 'lspconfig.util'
+    local util = require('lspconfig.util')
     local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
     capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -119,7 +119,7 @@ return { -- LSP Configuration & Plugins
       end
 
       local f = assert(io.popen('quarto --paths', 'r'))
-      local s = assert(f:read '*a')
+      local s = assert(f:read('*a'))
       f:close()
       return strsplit(s, '\n')[2]
     end
@@ -128,7 +128,7 @@ return { -- LSP Configuration & Plugins
     local lua_plugin_paths = {}
     local resource_path = get_quarto_resource_path()
     if resource_path == nil then
-      vim.notify_once 'quarto not found, lua library files not loaded'
+      vim.notify_once('quarto not found, lua library files not loaded')
     else
       table.insert(lua_library_files, resource_path .. '/lua-types')
       table.insert(lua_plugin_paths, resource_path .. '/lua-plugin/plugin.lua')
@@ -145,9 +145,9 @@ return { -- LSP Configuration & Plugins
       'tree-sitter-cli',
       'sql-formatter',
     })
-    require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+    require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
-    require('mason-lspconfig').setup {
+    require('mason-lspconfig').setup({
       handlers = {
         function(server_name)
           local server = servers[server_name] or {}
@@ -155,6 +155,6 @@ return { -- LSP Configuration & Plugins
           require('lspconfig')[server_name].setup(server)
         end,
       },
-    }
+    })
   end,
 }

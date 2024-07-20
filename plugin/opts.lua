@@ -1,7 +1,7 @@
-vim.cmd 'set textwidth=0'
-vim.cmd 'set wrapmargin=0'
-vim.cmd 'set wrap'
-vim.cmd 'set linebreak'
+vim.cmd('set textwidth=0')
+vim.cmd('set wrapmargin=0')
+vim.cmd('set wrap')
+vim.cmd('set linebreak')
 
 vim.opt.guicursor = ''
 
@@ -36,7 +36,7 @@ vim.opt.termguicolors = true
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = 'yes'
-vim.opt.isfname:append '@-@'
+vim.opt.isfname:append('@-@')
 
 vim.opt.updatetime = 50
 
@@ -93,3 +93,6 @@ vim.g.undotree_DiffCommand = 'FC'
 -- vim.opt.colorcolumn = "80"
 
 vim.b.slime_cell_delimiter = '```'
+-- do these work? treesitter folding auto?
+vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.opt.foldtext = 'v:lua.vim.treesitter.foldtext()'

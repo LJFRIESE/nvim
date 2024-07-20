@@ -225,7 +225,7 @@ local conf_path = vim.fn.stdpath('config')
 
 wk.add({
   hidden = true,
-  { '<leader>pv', '<cmd>Neotree<cr>' },
+  { '<leader>pv', '<cmd>Neotree toggle<cr>' },
   { '<leader>gc', ':cd ' .. conf_path .. '<CR>', desc = '[G]o to [C]onfig' },
   { '<leader>gg', ':cd ~/git <CR>', desc = '[G]o to [G]it directory' },
   { '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>', desc = '[M]ake it [R]ain' },
