@@ -28,11 +28,11 @@ return { -- LSP Configuration & Plugins
         map('gI', require('telescope.builtin').lsp_implementations, '[G]oto [I]mplementation')
         map('gT', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype')
         -- Fuzzy find all the symbols in your current document.
-        map('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-        map('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+        map('<leader>syd', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+        map('<leader>syw', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
         -- Rename the variable under your cursor.
         map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-        map('<leader>dc', vim.lsp.buf.code_action, '[Do] [C]ode action')
+        map('<leader>gx', vim.lsp.buf.code_action, 'Execute code action')
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
 
         -- The following two autocommands are used to highlight references of the

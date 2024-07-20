@@ -21,3 +21,9 @@ require('lazy').setup {
   spec = 'ljfriese/plugins',
   change_detection = { notify = false },
 }
+
+-- Silence some checkhealth warnings
+
+-- let g:loaded_node_provider = 0
+-- let g:lgoaded_perl_provider = 0
+-- let g:loaded_python3_provider = 0

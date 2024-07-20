@@ -5,7 +5,7 @@ return { -- Autoformat
     {
       '<leader>f',
       function()
-        require('conform').format { async = true, lsp_fallback = true }
+        require('conform').format({ async = true, lsp_fallback = true })
       end,
       mode = '',
       desc = '[F]ormat buffer',
@@ -27,7 +27,7 @@ return { -- Autoformat
       -- Disable "format_on_save lsp_fallback" for languages that don't
       -- have a well standardized coding style. You can add additional
       -- languages here or re-enable it for the disabled ones.
-      local disable_filetypes = { c = true, cpp = true }
+      local disable_filetypes = {}
       local slow_timeout = { r = true, qmd = true, sql = true }
       local timeout = 500
       if slow_timeout[vim.bo[bufnr].filetype] then

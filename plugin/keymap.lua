@@ -1,10 +1,10 @@
-local wk = require 'which-key'
+local wk = require('which-key')
 -- Undotree
-vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle)
+vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle, { desc = 'Toggle UndoTree' })
 -- Harpoon
 
-local harpoon = require 'harpoon'
-wk.add {
+local harpoon = require('harpoon')
+wk.add({
   '<leader>h',
   group = '[H]arpoon',
   {
@@ -20,8 +20,7 @@ wk.add {
     --   function()
     --     harpoon:list():next()
     --   end,
-    -- },
-    --
+    -- }-
     {
       '<leader>ha',
       function()
@@ -95,11 +94,11 @@ wk.add {
       desc = 'Replace harpoon 4',
     },
   },
-}
+})
 -- [C]ommenting
-wk.add {
+wk.add({
   { '<leader>c', group = '[C]omment' },
-}
+})
 vim.keymap.set('n', '<leader>cc', function()
   return vim.v.count == 0 and '<Plug>(comment_toggle_linewise_current)' or '<Plug>(comment_toggle_linewise_count)'
 end, { expr = true, desc = 'Toggle comment' })
@@ -118,10 +117,10 @@ vim.keymap.set('n', '<leader>gs', vim.cmd.Git, { desc = 'Launch Fugitive ([G]it 
 -- Telescope
 -- [S]earch
 -- See `:help telescope.builtin`
-wk.add {
+wk.add({
   { '<leader>s', group = '[S]earch' },
-}
-local builtin = require 'telescope.builtin'
+})
+local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
 vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
@@ -134,23 +133,23 @@ vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Fi
 vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
 
 vim.keymap.set('n', '<leader>/', function()
-  builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+  builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
     winblend = 10,
     previewer = false,
-  })
+  }))
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 --  See `:help telescope.builtin.live_grep()` for information about particular keys
 vim.keymap.set('n', '<leader>s/', function()
-  builtin.live_grep {
+  builtin.live_grep({
     grep_open_files = true,
     prompt_title = 'Live Grep in Open Files',
-  }
+  })
 end, { desc = '[S]earch [/] in Open Files' })
 
 -- Shortcut for searching your Neovim configuration files
 vim.keymap.set('n', '<leader>sn', function()
-  builtin.find_files { cwd = vim.fn.stdpath 'config' }
+  builtin.find_files({ cwd = vim.fn.stdpath('config') })
 end, { desc = '[S]earch [N]eovim files' })
 
 -- Trouble
@@ -176,14 +175,15 @@ end, { desc = '[S]earch [N]eovim files' })
 vim.keymap.set('n', '<leader>pv', '<cmd>Neotree toggle<cr>', { desc = 'Toggle file tree' })
 
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format current buffer' })
-wk.add {
-  { '<leader>d', group = '[D]elete' },
-}
-vim.keymap.set({ 'n', 'x' }, '<leader>y', [["+y]], { desc = 'Yank | No clipboard' })
-vim.keymap.set({ 'n', 'x' }, '<leader>Y', [["+Y]], { desc = 'Yank | Yes clipboard' })
-vim.keymap.set({ 'n', 'x' }, '<leader>d', [["_d]], { desc = '[D]elete | No clipboard' })
-vim.keymap.set({ 'n', 'x' }, '<leader>D', [["_D]], { desc = '[D]elete | Clipboard' })
+-- wk.add {
+--   { '<leader>d', group = '[D]elete' },
+-- }
+-- vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y', { desc = 'Yank | No clipboard' })
+-- vim.keymap.set({ 'n', 'x' }, '<leader>Y', '"*Y', { desc = 'Yank | Yes clipboard' })
+
+vim.keymap.set({ 'n', 'x' }, '<leader>D', '"_D', { desc = '[D]elete | No Clipboard' })
 vim.keymap.set('x', '<leader>p', [["_dP]], { desc = '[P]aste over | Retain yank' })
+vim.keymap.set('n', '<c-p>', 'o<c-r>"<esc>', { desc = '[P]aste | New line' })
 
 -- Move current line up/down in visual mode
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move text down' })
@@ -191,10 +191,6 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move text up' })
 
 -- Join subsequent line to current line
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join subsequent line to current line' })
-
--- Jump up/down half page
-vim.keymap.set('n', '<J>', '<C-d>zz', { desc = 'Jump half-page down' })
-vim.keymap.set('n', '<K>', '<C-u>zz', { desc = 'Jump half-page up' })
 
 -- Navigate text
 vim.keymap.set('n', '<C-k>', '<cmd>cnext<CR>zz', { desc = 'Jump to next error' })
@@ -220,26 +216,36 @@ vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper win
 -- vim.keymap.set('n', '<leader>-', '<cmd>vertical resize -5<cr>', { desc = 'Window size decrease' })
 -- vim.keymap.set('n', '<leader>=', '<cmd>vertical resize +5<cr>', { desc = 'Window size increase' })
 --
-wk.add {
+wk.add({
   { '<leader>g', group = '[G]o to' },
-}
-vim.keymap.set('n', '<leader>gc', ':cd C:/Users/LUCASFRI/AppData/Local/nvim<CR>', { desc = '[G]o to [C]onfig' })
-vim.keymap.set('n', '<leader>gg', ':cd C:/Users/LUCASFRI/git <CR>', { desc = '[G]o to [G]it directory' })
+})
 
-vim.keymap.set('n', '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>', { desc = '[M]ake it [R]ain' })
+--TODO: Set path HOME to C drive on work
+local conf_path = vim.fn.stdpath('config')
+
+wk.add({
+  hidden = true,
+  { '<leader>pv', '<cmd>Neotree<cr>' },
+  { '<leader>gc', ':cd ' .. conf_path .. '<CR>', desc = '[G]o to [C]onfig' },
+  { '<leader>gg', ':cd ~/git <CR>', desc = '[G]o to [G]it directory' },
+  { '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>', desc = '[M]ake it [R]ain' },
+})
 
 vim.keymap.set('i', '<C-c>', '<Esc>', { desc = 'Esc' })
-vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Kill search highlight' })
+-- vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Kill search highlight' })
 
-wk.add {
+wk.add({
   { '<leader>r', group = '[R]eplace' },
-}
-wk.add {
+})
+wk.add({
   { '<leader>t', group = '[T]rouble' },
-}
-wk.add {
+})
+wk.add({
   { '<leader>z', group = '[Z]en' },
-}
+})
 
-vim.keymap.set({ 'n' }, '<leader>ii', '<esc>i```{r}<cr>```<esc>O', { desc = '[i]nsert code chunk' })
-vim.keymap.set({ 'n' }, '<leader>ci', ':split  term://r<cr>', { desc = '[c]ode [i]nterpreter' })
+wk.add({
+  { '<leader>sy', group = '[Sy]mbols' },
+})
+-- vim.keymap.set({ 'n' }, '<leader>i', '<esc>i```{r}<cr>```<esc>O', { desc = '[i]nsert code chunk' })
+vim.keymap.set({ 'n' }, '<leader>tt', ':split  term://<cr>', { desc = '[t]erminal' })
