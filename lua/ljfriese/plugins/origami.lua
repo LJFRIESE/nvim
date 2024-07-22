@@ -30,6 +30,39 @@ return {
       -- them to 99.
       vim.opt.foldlevel = 99
       vim.opt.foldlevelstart = 99
+      vim.opt.fillchars = {
+        horiz = '─',
+        horizup = '┴',
+        horizdown = '┬',
+        vert = '│',
+        vertleft = '┤',
+        vertright = '├',
+        verthoriz = '┼',
+        fold = ' ',
+        foldopen = '',
+        foldclose = '',
+        foldsep = '│',
+      }
+      local fcs = vim.opt.fillchars:get()
+
+      local function get_fold(lnum)
+        local foldN = vim.fn.foldlevel(vim.v.lnum)
+        if foldN <= vim.fn.foldlevel(lnum - 1) then
+          return ''
+        end
+        if foldN > tonumber(vim.o.foldcolumn) then
+          vim.o.foldcolumn = tostring(foldN)
+        end
+        vim.o.numberwidth = 3
+        return vim.fn.foldclosed(lnum) == -1 and fcs.foldopen or fcs.foldclose
+        -- return ''
+      end
+
+      _G.get_statuscol = function()
+        get_fold(vim.v.lnum)
+        return '%s%=%r%=%C%S'
+      end
+      vim.o.statuscolumn = '%!v:lua.get_statuscol()'
     end,
     opts = {
       provider_selector = function(_, ft, _)
