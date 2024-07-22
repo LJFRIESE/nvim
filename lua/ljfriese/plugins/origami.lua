@@ -30,21 +30,6 @@ return {
       -- them to 99.
       vim.opt.foldlevel = 99
       vim.opt.foldlevelstart = 99
-      vim.opt.fillchars = {
-        horiz = '─',
-        horizup = '┴',
-        horizdown = '┬',
-        vert = '│',
-        vertleft = '┤',
-        vertright = '├',
-        verthoriz = '┼',
-        fold = ' ',
-        foldopen = '⏵',
-        foldclose = '⏷',
-        foldsep = '│',
-      }
-      -- vim.o.foldcolumn = 'auto:9' -- 0 = disablei, 9 = max
-      local fcs = vim.opt.fillchars:get()
     end,
     opts = {
       provider_selector = function(_, ft, _)

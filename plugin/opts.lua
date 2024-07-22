@@ -14,7 +14,6 @@ vim.opt.fillchars = {
   foldclose = '',
   foldsep = '│',
 }
--- vim.o.foldcolumn = 'auto:9' -- 0 = disablei, 9 = max
 local fcs = vim.opt.fillchars:get()
 
 local function get_fold(lnum)
@@ -26,19 +25,15 @@ local function get_fold(lnum)
     vim.o.foldcolumn = tostring(foldN)
   end
   vim.o.numberwidth = 3
-  -- return vim.fn.foldclosed(lnum) == -1 and fcs.foldopen or fcs.foldclose
-  return ''
+  return vim.fn.foldclosed(lnum) == -1 and fcs.foldopen or fcs.foldclose
+  -- return ''
 end
 
 _G.get_statuscol = function()
-  return '%s%=%r%=%C' .. get_fold(vim.v.lnum) --.. '%S'
+  get_fold(vim.v.lnum)
+  return '%s%=%r%=%C%S'
 end
-vim.o.statuscolumn = '%!v:lua.get_statuscol()' --..'%#StatusColumnBorder#▐%#StatusColumnBuffer#'
-
-vim.cmd('set textwidth=0')
-vim.cmd('set wrapmargin=0')
-vim.cmd('set wrap')
-vim.cmd('set linebreak')
+vim.o.statuscolumn = '%!v:lua.get_statuscol()'
 
 vim.opt.guicursor = ''
 
@@ -113,10 +108,6 @@ vim.opt.splitright = true
 vim.opt.splitbelow = true
 
 -- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
