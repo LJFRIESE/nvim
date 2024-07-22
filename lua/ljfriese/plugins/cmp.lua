@@ -19,16 +19,16 @@ return { -- Autocompletion
     'jmbuhr/otter.nvim',
   },
   config = function()
-    local cmp = require 'cmp'
-    local luasnip = require 'luasnip'
-    local lspkind = require 'lspkind'
+    local cmp = require('cmp')
+    local luasnip = require('luasnip')
+    local lspkind = require('lspkind')
 
     local has_words_before = function()
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
+      return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
     end
 
-    cmp.setup {
+    cmp.setup({
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
@@ -53,12 +53,12 @@ return { -- Autocompletion
           end
         end, { 'i', 's' }),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<c-y>'] = cmp.mapping.confirm {
+        ['<c-y>'] = cmp.mapping.confirm({
           select = true,
-        },
-        ['<CR>'] = cmp.mapping.confirm {
+        }),
+        ['<CR>'] = cmp.mapping.confirm({
           select = true,
-        },
+        }),
 
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
@@ -92,7 +92,7 @@ return { -- Autocompletion
 
       ---@diagnostic disable-next-line: missing-fields
       formatting = {
-        format = lspkind.cmp_format {
+        format = lspkind.cmp_format({
           mode = 'symbol',
           menu = {
             otter = '[🦦]',
@@ -109,7 +109,7 @@ return { -- Autocompletion
             latex_symbols = '[tex]',
             emoji = '[emoji]',
           },
-        },
+        }),
       },
       sources = {
         { name = 'otter' }, -- for code chunks in quarto
@@ -134,12 +134,12 @@ return { -- Autocompletion
           border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
         },
       },
-    }
+    })
 
     -- for friendly snippets
     require('luasnip.loaders.from_vscode').lazy_load()
     -- for custom snippets
-    require('luasnip.loaders.from_vscode').lazy_load { paths = { vim.fn.stdpath 'config' .. '/snips' } }
+    require('luasnip.loaders.from_vscode').lazy_load({ paths = { vim.fn.stdpath('config') .. '/snips' } })
     -- link quarto and rmarkdown to markdown snippets
     luasnip.filetype_extend('quarto', { 'markdown' })
     luasnip.filetype_extend('rmarkdown', { 'markdown' })

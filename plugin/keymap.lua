@@ -236,15 +236,9 @@ vim.keymap.set('i', '<C-c>', '<Esc>', { desc = 'Esc' })
 
 wk.add({
   { '<leader>r', group = '[R]eplace' },
-})
-wk.add({
   { '<leader>t', group = '[T]rouble' },
-})
-wk.add({
   { '<leader>z', group = '[Z]en' },
-})
-
-wk.add({
+  { '<leader>z', group = '[z] Fold control' },
   { '<leader>sy', group = '[Sy]mbols' },
 })
 -- vim.keymap.set({ 'n' }, '<leader>i', '<esc>i```{r}<cr>```<esc>O', { desc = '[i]nsert code chunk' })
