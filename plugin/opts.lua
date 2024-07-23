@@ -1,17 +1,57 @@
 -- file explore
+-- INFO fold commands usually change the foldlevel, which fixes folds, e.g.
+-- auto-closing them after leaving insert mode, however ufo does not seem to
+-- have equivalents for zr and zm because there is no saved fold level.
+-- Consequently, the vim-internal fold levels need to be disabled by setting
+-- them to 99.
+-- vim.opt.foldlevel = 99
+-- vim.opt.foldlevelstart = 99
+vim.opt.fillchars = {
+  horiz = '─',
+  horizup = '┴',
+  horizdown = '┬',
+  vert = '│',
+  vertleft = '┤',
+  vertright = '├',
+  verthoriz = '┼',
+  fold = ' ',
+  foldopen = '',
+  foldclose = '',
+  foldsep = '│',
+}
+local fcs = vim.opt.fillchars:get()
+
+-- Stolen from Akinsho
+local function get_fold(lnum)
+  if vim.fn.foldlevel(lnum) <= vim.fn.foldlevel(lnum - 1) then
+    return ' '
+  end
+  return vim.fn.foldclosed(lnum) == -1 and fcs.foldopen or fcs.foldclose
+end
+
+local function line_func()
+  return vim.v.relnum == 0 and vim.v.lnum or vim.v.relnum
+end
+_G.get_statuscol = function()
+  return '%s%{' .. line_func() .. '}%= ' .. get_fold(vim.v.lnum) .. ' '
+end
+
+vim.o.statuscolumn = '%!v:lua.get_statuscol()'
+
+vim.o.rnu = true
+vim.o.nu = true
+
 vim.g.netrw_liststyle = 3
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_keepdir = 0 --have cd follow browsing
+
 -- ui
 vim.opt.guicursor = ''
 
 vim.opt.colorcolumn = { '80' }
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
-
-vim.opt.nu = true
-vim.opt.relativenumber = true
 
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4

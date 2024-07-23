@@ -203,7 +203,7 @@ local conf_path = vim.fn.stdpath('config')
 
 wk.add({
   hidden = true,
-  { '<leader>pv', '<cmd>25Lex<cr>' },
+  { '<leader>pv', '<cmd>25Lex<cr>' }, --'<cmd>25Lex<cr>'
   { '<leader>gc', ':cd ' .. conf_path .. '<CR>', desc = '[G]o to [C]onfig' },
   { '<leader>gg', ':cd ~/git <CR>', desc = '[G]o to [G]it directory' },
   { '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>', desc = '[M]ake it [R]ain' },
@@ -222,6 +222,6 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'Escape terminal' })
 vim.keymap.set('i', '<C-c>', '<Esc>', { desc = 'Esc' })
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Kill search highlight' })
 vim.keymap.set({ 'n' }, '<c-c>t', ':split<cr>:terminal<cr>i', { desc = '[t]erminal' })
-vim.keymap.set('n', '<leader>pv', '<cmd>Neotree toggle<cr>', { desc = 'Toggle file tree' })
+-- vim.keymap.set('n', '<leader>pv', '<cmd>Neotree toggle<cr>', { desc = 'Toggle file tree' })
 vim.keymap.set('n', '<leader>f', vim.lsp.buf.format, { desc = 'Format current buffer' })
 -- vim.keymap.set({ 'n' }, '<leader>i', '<esc>i```{r}<cr>```<esc>O', { desc = '[i]nsert code chunk' })

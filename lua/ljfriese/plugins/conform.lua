@@ -7,18 +7,19 @@ return { -- Autoformat
       function()
         require('conform').format({ async = true, lsp_fallback = true })
       end,
-      mode = '',
+      mode = 'n',
       desc = '[F]ormat buffer',
     },
   },
   opts = {
-    log_level = vim.log.levels.DEBUG,
+    -- log_level = vim.log.levels.DEBUG,
     formatters = {
       sqlfluff = {
         inherit = true,
         command = 'sqlfluff',
-        args = { 'fix', '--dialect', 'oracle' },
+        args = { 'lint', '--dialect', 'oracle', '--processes', -1 },
         stdin = true,
+        require_cwd = false,
       },
     },
 
@@ -31,7 +32,7 @@ return { -- Autoformat
       local slow_timeout = { r = true, qmd = true, sql = true }
       local timeout = 500
       if slow_timeout[vim.bo[bufnr].filetype] then
-        timeout = 20000
+        timeout = 50000
       end
       return {
         timeout_ms = timeout,
@@ -40,7 +41,7 @@ return { -- Autoformat
     end,
     formatters_by_ft = {
       lua = { 'stylua' },
-      sql = { 'sqlfluff' },
+      sql = { 'sqlfmt' },
       r = { 'styler' },
       quarto = { 'styler' },
     },
