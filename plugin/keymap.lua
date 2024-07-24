@@ -262,6 +262,8 @@ wk.add({
 
 wk.add({
   { '<leader>r', group = '[R]eplace' },
+  { 'g', group = '[G]o to ...' },
+  { 'gs', group = '[S]urrounding ...' },
   { '<leader>t', group = '[T]rouble' },
   -- { '<leader>z', group = '[Z]en' },
   { '<leader>z', group = 'Fold control' },

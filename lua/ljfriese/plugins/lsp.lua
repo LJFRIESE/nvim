@@ -18,7 +18,7 @@ return { -- LSP Configuration & Plugins
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event)
         local map = function(keys, func, desc)
-          vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+          vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc })
         end
         -- Jump to the definition of the word under your cursor.
         --  To jump back, press <C-t>.

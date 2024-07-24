@@ -151,3 +151,4 @@ vim.opt.cursorline = true
 vim.g.undotree_DiffCommand = 'FC'
 
 vim.b.slime_cell_delimiter = '```'
+vim.opt.termguicolors = true

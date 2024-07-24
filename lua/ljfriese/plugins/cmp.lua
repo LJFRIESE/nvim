@@ -17,6 +17,7 @@ return { -- Autocompletion
     'rafamadriz/friendly-snippets',
     'onsails/lspkind-nvim',
     'jmbuhr/otter.nvim',
+     "R-nvim/cmp-r"
   },
   config = function()
     local cmp = require('cmp')
@@ -107,7 +108,7 @@ return { -- Autocompletion
             tags = '[tag]',
             calc = '[calc]',
             latex_symbols = '[tex]',
-            emoji = '[emoji]',
+            -- emoji = '[emoji]',
           },
         }),
       },
@@ -125,6 +126,7 @@ return { -- Autocompletion
         { name = 'latex_symbols' },
         { name = 'emoji' },
         { name = 'vim-dadbod-completion' },
+         { name = "cmp_r" },
       },
       view = {
         entries = 'native',
