@@ -15,7 +15,7 @@ vim.opt.fillchars = {
   vertright = '├',
   verthoriz = '┼',
   fold = ' ',
-  foldopen = '',
+  foldopen = '⎧',
   foldclose = '',
   foldsep = '│',
 }
@@ -23,9 +23,33 @@ local fcs = vim.opt.fillchars:get()
 
 -- Stolen from Akinsho
 local function get_fold(lnum)
-  if vim.fn.foldlevel(lnum) <= vim.fn.foldlevel(lnum - 1) then
-    return ' '
+  if vim.fn.foldclosedend(lnum - 1) ~= -1 then
+    return ''
   end
+  -- series of non-folded lines
+  if vim.fn.foldlevel(lnum) == 0 and vim.fn.foldlevel(lnum - 1) == 0 then
+    return ''
+  end
+  -- series of lines within same fold
+  if vim.fn.foldlevel(lnum) == vim.fn.foldlevel(lnum - 1) and vim.fn.foldlevel(lnum) == vim.fn.foldlevel(lnum - 1) then
+    return '⎜'
+  end
+  -- line whose prior fold is greater, but subsequent is same
+  if vim.fn.foldlevel(lnum) <= vim.fn.foldlevel(lnum - 1) and vim.fn.foldlevel(lnum) == vim.fn.foldlevel(lnum + 1) then
+    return '⎝'
+  end
+  if vim.fn.foldlevel(lnum) <= vim.fn.foldlevel(lnum - 1) then
+    return '⎝'
+  end
+  -- line is a top-level fold
+  if vim.fn.foldlevel(lnum) == 1 then
+    return '⯈'
+  end
+  -- line at the end of a top-level fold. Prior line was inside a fold
+  if vim.fn.foldlevel(lnum) == 0 then
+    return '⎝'
+  end
+  -- line is start of a non-top level fold
   return vim.fn.foldclosed(lnum) == -1 and fcs.foldopen or fcs.foldclose
 end
 
