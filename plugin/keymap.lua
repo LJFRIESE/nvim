@@ -3,7 +3,6 @@ local wk = require('which-key')
 vim.keymap.set('n', '<leader><F5>', vim.cmd.UndotreeToggle, { desc = 'Toggle UndoTree' })
 -- Harpoon
 
-local harpoon = require('harpoon')
 wk.add({
   '<leader>h',
   group = '[H]arpoon',
@@ -27,13 +26,6 @@ wk.add({
         harpoon:list():add()
       end,
       desc = 'Add to harpoon',
-    },
-    {
-      '<leader>he',
-      function()
-        harpoon.ui:toggle_quick_menu(harpoon:list())
-      end,
-      desc = 'Open harpoon UI',
     },
 
     {
