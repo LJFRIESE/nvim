@@ -8,7 +8,7 @@ return { -- Autocompletion
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-calc',
-    'hrsh7th/cmp-emoji',
+    -- 'hrsh7th/cmp-emoji',
     'saadparwaiz1/cmp_luasnip',
     'f3fora/cmp-spell',
     'ray-x/cmp-treesitter',
@@ -17,7 +17,7 @@ return { -- Autocompletion
     'rafamadriz/friendly-snippets',
     'onsails/lspkind-nvim',
     'jmbuhr/otter.nvim',
-     "R-nvim/cmp-r"
+    'R-nvim/cmp-r',
   },
   config = function()
     local cmp = require('cmp')
@@ -126,7 +126,7 @@ return { -- Autocompletion
         { name = 'latex_symbols' },
         { name = 'emoji' },
         { name = 'vim-dadbod-completion' },
-         { name = "cmp_r" },
+        { name = 'cmp_r' },
       },
       view = {
         entries = 'native',

@@ -3,8 +3,6 @@ return {
   'eandrju/cellular-automaton.nvim',
   'nvim-lua/plenary.nvim',
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
-  'numToStr/Comment.nvim',
-  { 'mbbill/undotree' },
   { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
   --
   -- require 'kickstart.plugins.debug',

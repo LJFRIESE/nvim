@@ -21,20 +21,20 @@ function R(name)
   require('plenary.reload').reload_module(name)
 end
 
-vim.filetype.add {
+vim.filetype.add({
   extension = {
     templ = 'templ',
   },
-}
+})
 
 autocmd('TextYankPost', {
   group = yank_group,
   pattern = '*',
   callback = function()
-    vim.highlight.on_yank {
+    vim.highlight.on_yank({
       higroup = 'IncSearch',
-      timeout = 40,
-    }
+      timeout = 100,
+    })
   end,
 })
 

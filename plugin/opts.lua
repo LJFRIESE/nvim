@@ -77,7 +77,7 @@ vim.g.have_nerd_font = true
 
 -- ui
 opt.guicursor = ''
-opt.colorcolumn = { '80' }
+-- opt.colorcolumn = { '80' }
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 
 opt.tabstop = 4
@@ -88,7 +88,6 @@ opt.expandtab = true
 opt.smartindent = true
 
 -- Enable break indent
-opt.breakindent = true
 opt.wrap = false
 
 opt.swapfile = false
@@ -146,8 +145,12 @@ opt.inccommand = 'split'
 -- Show which line your cursor is on
 opt.cursorline = true
 
--- undotree for ewindows:q
-
 vim.g.undotree_DiffCommand = 'FC'
 
 vim.b.slime_cell_delimiter = '```'
+-- Prevent 'o' from adding a comment
+
+vim.opt_global.formatoptions:remove('o')
+-- Max n suggestions in popups
+
+vim.opt.pumheight = 7

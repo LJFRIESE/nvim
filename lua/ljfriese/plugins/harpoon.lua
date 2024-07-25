@@ -26,5 +26,45 @@ return {
     vim.keymap.set('n', '<leader>he', function()
       toggle_telescope(harpoon:list())
     end, { desc = 'Open harpoon window' })
+    -- Toggle previous & next buffers stored within Harpoon list
+    -- {
+    --   '<leader>H',
+    --   function()
+    --     harpoon:list():prev()
+    --   end,
+    -- },
+    -- {
+    --   '<leader>L',
+    --   function()
+    --     harpoon:list():next()
+    --   end,
+    -- }-
+    vim.keymap.set('n', '<leader>ha', function()
+      harpoon:list():add()
+    end, { desc = 'Add to harpoon' })
+    vim.keymap.set('n', '<leader>hh', function()
+      harpoon:list():select(1)
+    end, { desc = 'Select harpoon 1' })
+    vim.keymap.set('n', '<leader>hj', function()
+      harpoon:list():select(2)
+    end, { desc = 'Select harpoon 2' })
+    vim.keymap.set('n', '<leader>hk', function()
+      harpoon:list():select(3)
+    end, { desc = 'Select harpoon 3' })
+    vim.keymap.set('n', '<leader>hl', function()
+      harpoon:list():select(4)
+    end, { desc = 'Select harpoon 4' })
+    vim.keymap.set('n', '<leader>hH', function()
+      harpoon:list():replace_at(1)
+    end, { desc = 'Replace harpoon 1' })
+    vim.keymap.set('n', '<leader>hJ', function()
+      harpoon:list():replace_at(2)
+    end, { desc = 'Replace harpoon 2' })
+    vim.keymap.set('n', '<leader>hK', function()
+      harpoon:list():replace_at(3)
+    end, { desc = 'Replace harpoon 3' })
+    vim.keymap.set('n', '<leader>hL', function()
+      harpoon:list():replace_at(4)
+    end, { desc = 'Replace harpoon 4' })
   end,
 }
