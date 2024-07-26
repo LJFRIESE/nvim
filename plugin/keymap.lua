@@ -47,7 +47,9 @@ wk.add({
   { '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>', desc = '[M]ake it [R]ain' },
 })
 
+-- vim.keymap.set('n', 's', '<Nop>')
 wk.add({
+  { 's', group = '[S]urround' },
   { '<leader>r', group = '[R]eplace' },
   { 'g', group = '[G]o to ...' },
   { 'gs', group = '[S]urrounding ...' },

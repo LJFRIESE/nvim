@@ -1,4 +1,5 @@
 return {
+  active = false,
   -- { 'echasnovski/mini.nvim', opts = { n_lines = 500 } },
   {
     'echasnovski/mini.ai',
@@ -62,13 +63,13 @@ return {
 
       -- Module mappings. Use `''` (empty string) to disable one.
       mappings = {
-        add = 'gsa',
-        delete = 'gsd',
-        find = 'gsf',
-        find_left = 'gsF',
-        highlight = 'gsh',
-        replace = 'gsr',
-        update_n_lines = 'gsn',
+        add = 'sa',
+        delete = 'sd',
+        find = 'sf',
+        find_left = 'sF',
+        highlight = 'sh',
+        replace = 'sr',
+        update_n_lines = 'sn',
       },
 
       -- Number of lines within which surrounding is searched

@@ -150,7 +150,7 @@ vim.g.undotree_DiffCommand = 'FC'
 vim.b.slime_cell_delimiter = '```'
 -- Prevent 'o' from adding a comment
 
-vim.opt_global.formatoptions:remove('o')
+vim.opt.formatoptions:remove('o')
 -- Max n suggestions in popups
 
 vim.opt.pumheight = 7
