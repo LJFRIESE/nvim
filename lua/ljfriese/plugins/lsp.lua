@@ -78,6 +78,7 @@ return { -- LSP Configuration & Plugins
     capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
     local servers = {
+      html = { 'html' },
       ruff = { 'python' },
       sqls = { 'sql' },
       marksman = { filetypes = { 'markdown', 'quarto' }, root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml') },
@@ -112,6 +113,7 @@ return { -- LSP Configuration & Plugins
     -- for you, so that they are available from within Neovim.
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
+      'html',
       'ruff',
       'pyright',
       'stylua', -- Used to format Lua code
