@@ -5,18 +5,14 @@ return { -- LSP Configuration & Plugins
     { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-
-    -- Useful status updates for LSP.
-    -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
     { 'j-hui/fidget.nvim', opts = {} },
-    -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
     { 'folke/neodev.nvim', opts = {} },
   },
   config = function()
     --  This function gets run when an LSP attaches to a particular buffer.
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
-      callback = function(event)
+      callback = function(event) -- having maps in callback here means the keybinds only exist when lsp is active
         local map = function(keys, func, desc)
           vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc })
         end
@@ -80,7 +76,9 @@ return { -- LSP Configuration & Plugins
     capabilities.textDocument.completion.completionItem.snippetSupport = true
     -- stops quarto preview fighting with nvim
     capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
+
     local servers = {
+      ruff = { 'python' },
       sqls = { 'sql' },
       marksman = { filetypes = { 'markdown', 'quarto' }, root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml') },
       r_language_server = {
@@ -109,38 +107,15 @@ return { -- LSP Configuration & Plugins
       },
     }
 
-    local function get_quarto_resource_path()
-      local function strsplit(s, delimiter)
-        local result = {}
-        for match in (s .. delimiter):gmatch('(.-)' .. delimiter) do
-          table.insert(result, match)
-        end
-        return result
-      end
-
-      local f = assert(io.popen('quarto --paths', 'r'))
-      local s = assert(f:read('*a'))
-      f:close()
-      return strsplit(s, '\n')[2]
-    end
-
-    local lua_library_files = vim.api.nvim_get_runtime_file('', true)
-    local lua_plugin_paths = {}
-    local resource_path = get_quarto_resource_path()
-    if resource_path == nil then
-      vim.notify_once('quarto not found, lua library files not loaded')
-    else
-      table.insert(lua_library_files, resource_path .. '/lua-types')
-      table.insert(lua_plugin_paths, resource_path .. '/lua-plugin/plugin.lua')
-    end
-
     require('mason').setup()
     -- You can add other tools here that you want Mason to install
     -- for you, so that they are available from within Neovim.
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
+      'ruff',
+      'pyright',
       'stylua', -- Used to format Lua code
-      'sqlfmt',
+      -- 'sqlfmt',
       'sqlfluff',
       'tree-sitter-cli',
       'sql-formatter',

@@ -1,12 +1,12 @@
 return {
-    'jpalardy/vim-slime',
-    init = function()
-      vim.g.slime_target = 'neovim'
-      vim.g.slime_python_ipython = 1
-      vim.g.slime_dispatch_ipython_pause = 100
-      vim.g.slime_cell_delimiter = '#\\s\\=%%'
-  
-      vim.cmd [[
+  'jpalardy/vim-slime',
+  init = function()
+    vim.g.slime_target = 'neovim'
+    vim.g.slime_python_ipython = 1
+    vim.g.slime_dispatch_ipython_pause = 100
+    vim.g.slime_cell_delimiter = '#\\s\\=%%'
+
+    vim.cmd([[
         function! _EscapeText_quarto(text)
         if slime#config#resolve("python_ipython") && len(split(a:text,"\n")) > 1
         return ["%cpaste -q\n", slime#config#resolve("dispatch_ipython_pause"), a:text, "--\n"]
@@ -20,12 +20,11 @@ return {
         return substitute(dedented_lines, add_eol_pat, "\n", "g")
         end
         endfunction
-        ]]
-    end,
-    config = function()
-      vim.keymap.set({ 'n' }, '<leader>stt', function()
-        vim.cmd [[ call slime#send_cell() ]]
-      end, { desc = 'send code cell to terminal' })
-    end,
-  }
-  
+        ]])
+  end,
+  config = function()
+    vim.keymap.set({ 'n' }, '<c-c>s', function()
+      vim.cmd([[ call slime#send_cell() ]])
+    end, { desc = 'send code cell to terminal' })
+  end,
+}

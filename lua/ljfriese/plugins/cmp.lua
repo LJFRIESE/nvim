@@ -127,6 +127,7 @@ return { -- Autocompletion
         { name = 'emoji' },
         { name = 'vim-dadbod-completion' },
         { name = 'cmp_r' },
+        { name = 'pyright' },
       },
       view = {
         entries = 'native',

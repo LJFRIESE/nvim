@@ -21,6 +21,28 @@ return { -- Autoformat
         stdin = true,
         require_cwd = false,
       },
+      sqlfmt = {
+        meta = {
+          -- currently in maint mode. Switch to https://github.com/nene/prettier-plugin-sql-cst when available
+          url = 'https://github.com/sql-formatter-org/sql-formatter',
+          description = 'A whitespace formatter for different query languages.',
+        },
+        command = 'sql-formatter',
+        args = {
+          dialect = 'plsql', -- change to 'sql' (default) if not performing correctly
+          tabWidth = '\t',
+          useTabs = true,
+          keywordCase = 'upper',
+          dataTypeCase = 'upper',
+          functionCase = 'upper',
+          identifierCase = 'upper',
+          logicalOperatorNewline = 'after',
+          expressionWidth = 80,
+          linesBetweenQueries = 2,
+          denseOperators = false,
+          newlineBeforeSemicolon = true,
+        },
+      },
     },
 
     notify_on_error = false,
@@ -40,6 +62,7 @@ return { -- Autoformat
       }
     end,
     formatters_by_ft = {
+      python = { 'ruff_format' },
       lua = { 'stylua' },
       sql = { 'sqlfmt' },
       r = { 'styler' },
