@@ -47,6 +47,20 @@ wk.add({
   { '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>', desc = '[M]ake it [R]ain' },
 })
 
+-- Open compiler
+vim.api.nvim_set_keymap('n', '<C-c>o', '<cmd>CompilerOpen<cr>', { desc = '[O]pen Compiler', noremap = true, silent = true })
+
+-- Redo last selected option
+vim.api.nvim_set_keymap(
+  'n',
+  '<C-c>a',
+  '<cmd>CompilerStop<cr>' -- (Optional, to dispose all tasks before redo)
+    .. '<cmd>CompilerRedo<cr>',
+  { desc = 'Compile [A]gain', noremap = true, silent = true }
+)
+
+-- Toggle compiler results
+vim.api.nvim_set_keymap('n', '<C-c>r', '<cmd>CompilerToggleResults<cr>', { desc = '[R]esults toggle', noremap = true, silent = true })
 -- vim.keymap.set('n', 's', '<Nop>')
 wk.add({
   { 's', group = '[S]urround' },
