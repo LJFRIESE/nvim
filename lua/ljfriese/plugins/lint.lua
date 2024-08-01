@@ -1,4 +1,5 @@
 return {
+  lazy = true,
   -- Linting
   'mfussenegger/nvim-lint',
   event = { 'BufReadPre', 'BufNewFile' },

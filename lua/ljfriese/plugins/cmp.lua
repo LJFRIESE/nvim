@@ -1,4 +1,5 @@
 return { -- Autocompletion
+  lazy = true,
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
   dependencies = {

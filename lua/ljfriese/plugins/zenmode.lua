@@ -1,4 +1,5 @@
 return {
+  lazy = true,
   'folke/zen-mode.nvim',
   config = function()
     vim.keymap.set('n', '<c-z>z', function()
@@ -15,4 +16,3 @@ return {
     end, { desc = '[Z]en mode' })
   end,
 }
-

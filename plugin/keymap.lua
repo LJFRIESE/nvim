@@ -6,7 +6,8 @@ vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move text down' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move text up' })
 vim.keymap.set('n', '<cr>', 'i<cr><esc>k$', { desc = 'Insert linebreak' })
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join subsequent line to current line' })
-vim.keymap.set('n', '<leader>rr', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[R]egex' })
+vim.keymap.set('n', '<leader>rg', [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[G]lobal replace' })
+vim.keymap.set('n', '<leader>rl', [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[L]ine replace' })
 
 -- vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y', { desc = 'Yank | No clipboard' })
 -- vim.keymap.set({ 'n', 'x' }, '<leader>Y', '"*Y', { desc = 'Yank | Yes clipboard' })
@@ -47,24 +48,10 @@ wk.add({
   { '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>', desc = '[M]ake it [R]ain' },
 })
 
--- Open compiler
-vim.api.nvim_set_keymap('n', '<C-c>o', '<cmd>CompilerOpen<cr>', { desc = '[O]pen Compiler', noremap = true, silent = true })
-
--- Redo last selected option
-vim.api.nvim_set_keymap(
-  'n',
-  '<C-c>a',
-  '<cmd>CompilerStop<cr>' -- (Optional, to dispose all tasks before redo)
-    .. '<cmd>CompilerRedo<cr>',
-  { desc = 'Compile [A]gain', noremap = true, silent = true }
-)
-
--- Toggle compiler results
-vim.api.nvim_set_keymap('n', '<C-c>r', '<cmd>CompilerToggleResults<cr>', { desc = '[R]esults toggle', noremap = true, silent = true })
 -- vim.keymap.set('n', 's', '<Nop>')
 wk.add({
   { 's', group = '[S]urround' },
-  { '<leader>r', group = '[R]eplace' },
+  { '<leader>r', group = '[R]egex' },
   { 'g', group = '[G]o to ...' },
   { 'gs', group = '[S]urrounding ...' },
   { '<leader>t', group = '[T]rouble' },

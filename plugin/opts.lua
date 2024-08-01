@@ -152,5 +152,4 @@ vim.b.slime_cell_delimiter = '```'
 
 vim.opt.formatoptions:remove('o')
 -- Max n suggestions in popups
-
 vim.opt.pumheight = 7
