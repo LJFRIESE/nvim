@@ -9,6 +9,7 @@ return {
       'lint',
       '--format=json',
       '--dialect=oracle',
+      '--processes=-1',
     }
 
     lint.linters_by_ft = {

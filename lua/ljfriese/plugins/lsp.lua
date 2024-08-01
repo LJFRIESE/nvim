@@ -76,6 +76,7 @@ return { -- LSP Configuration & Plugins
     -- stops quarto preview fighting with nvim
     capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
+    capabilities.textDocument.foldingRange = { lineFoldingOnly = true }
     local servers = {
       html = { 'html' },
       ruff = { 'python' },
