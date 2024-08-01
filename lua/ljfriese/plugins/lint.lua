@@ -1,6 +1,5 @@
 return {
   lazy = true,
-  -- Linting
   'mfussenegger/nvim-lint',
   event = { 'BufReadPre', 'BufNewFile' },
   config = function()
@@ -16,6 +15,7 @@ return {
     lint.linters_by_ft = {
       markdown = { 'markdownlint' },
       quarto = { 'lintr' },
+      r  = { 'lintr' },
       sql = { 'sqlfluff' },
     }
 

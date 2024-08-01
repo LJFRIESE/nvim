@@ -1,26 +1,23 @@
+local slow_format_filetypes = {}
 return { -- Autoformat
   'stevearc/conform.nvim',
   lazy = true,
-  keys = {
-    {
-      '<leader>f',
-      function()
-        require('conform').format({ async = true, lsp_fallback = true })
-      end,
-      mode = 'n',
-      desc = '[F]ormat buffer',
-    },
-  },
+  cmd = { "ConformInfo" },
   opts = {
     -- log_level = vim.log.levels.DEBUG,
+    notify_on_error = true,
     formatters = {
       sqlfluff = {
         args = { 'fix', '--dialect=oracle', '-' },
       },
       sql_formatter = {
         args = {
-          '--language',
-          'plsql',
+          '--config',
+          '{ "lanaguage": "plsql", }'
+        }
+        --args = {
+        --   '--language',
+        --   'plsql',
           -- '--tabWidth',
           -- '\t',
           -- '--useTabs',
@@ -43,26 +40,9 @@ return { -- Autoformat
           -- 'false',
           -- '--newlineBeforeSemicolon',
           -- 'true',
-        },
+        -- },
       },
     },
-
-    notify_on_error = false,
-    format_on_save = function(bufnr)
-      -- Disable "format_on_save lsp_fallback" for languages that don't
-      -- have a well standardized coding style. You can add additional
-      -- languages here or re-enable it for the disabled ones.
-      local disable_filetypes = { sql = true }
-      local slow_timeout = { r = true, qmd = true, sql = true }
-      local timeout = 500
-      if slow_timeout[vim.bo[bufnr].filetype] then
-        timeout = 50000
-      end
-      return {
-        timeout_ms = timeout,
-        lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
-      }
-    end,
     formatters_by_ft = {
       python = { 'ruff_format' },
       lua = { 'stylua' },
@@ -70,5 +50,28 @@ return { -- Autoformat
       r = { 'styler' },
       quarto = { 'styler' },
     },
-  },
-}
+    format_on_save = function(bufnr)
+      -- Disable with a global or buffer-local variable
+      if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+        return
+      end
+      if slow_format_filetypes[vim.bo[bufnr].filetype] then
+        return
+      end
+      local function on_format(err)
+        if err and err:match('timeout$') then
+          slow_format_filetypes[vim.bo[bufnr].filetype] = true
+        end
+      end
+
+        return { timeout_ms = 200, lsp_format = 'fallback' }, on_format
+      end,
+
+      format_after_save = function(bufnr)
+        if not slow_format_filetypes[vim.bo[bufnr].filetype] then
+          return
+        end
+        return { lsp_format = 'fallback' }
+      end,
+    },
+  }
