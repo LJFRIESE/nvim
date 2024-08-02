@@ -20,10 +20,9 @@ vim.keymap.set('n', '<leader>rl', [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
-vim.keymap.set('n', '<leader>k', '<cmd>lnext<CR>zz', { desc = 'Jump to next location' })
 -- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
+
 -- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
-vim.keymap.set('n', '<leader>j', '<cmd>lprev<CR>zz', { desc = 'Jump to prev location' })
 
 -- Window navigation
 --  See `:help wincmd` for a list of all window commands
@@ -42,7 +41,7 @@ vim.keymap.set({ 'n' }, '<c-c>t', ':split<cr>:terminal<cr>i', { desc = '[t]ermin
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'Escape terminal' })
 -- vim.keymap.set({ 'n' }, '<leader>i', '<esc>i```{r}<cr>```<esc>O', { desc = '[i]nsert code chunk' })
 
-vim.keymap.set('', '<leader>f', function()
+vim.keymap.set('', '<leader>bf', function()
   require('conform').format({ async = true }, function(err)
     if not err then
       local mode = vim.api.nvim_get_mode().mode
@@ -52,7 +51,7 @@ vim.keymap.set('', '<leader>f', function()
     end
   end)
   print('Format complete')
-end, { desc = '[F]ormat code' })
+end, { desc = '[F]ormat' })
 
 local config_path = vim.fn.stdpath('config')
 local wk = require('which-key')
@@ -81,4 +80,5 @@ wk.add({
   { '<leader>s', group = '[S]earch' },
   { '<leader>c', group = '[C]omment' },
   { '<leader>h', group = '[H]arpoon' },
+  { '<leader>b', group = '[B]uffer' },
 })

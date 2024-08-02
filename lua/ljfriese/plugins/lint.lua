@@ -29,8 +29,8 @@ return {
         -- print('Lint complete')
       end,
     })
-    vim.keymap.set('n', '<leader>l', function()
+    vim.keymap.set('n', '<leader>bl', function()
       lint.try_lint()
-    end, { desc = '[L]int buffer' })
+    end, { desc = '[L]int' })
   end,
 }
