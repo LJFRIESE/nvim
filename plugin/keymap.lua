@@ -1,6 +1,6 @@
 -- Manipulate text
 vim.keymap.set({ 'n', 'x' }, '<leader>d', '"_d', { desc = '[d]elete | Black hole' })
-vim.keymap.set('x', '<leader>p', [["_dP]], { desc = '[P]aste over | Black hole' })
+vim.keymap.set({'n', 'x'}, '<leader>p', [["_dP]], { desc = '[P]aste over | Black hole' })
 -- vim.keymap.set('n', '<c-p>', 'o<c-r>"<esc>', { desc = '[P]aste | New line' })
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move text down' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move text up' })
@@ -58,12 +58,12 @@ local wk = require('which-key')
 wk.add({
   hidden = true,
   { '<leader>pv', '<cmd>Ex<cr>' }, --'<cmd>25Lex<cr>'
-  { '<leader>gc', ':cd ' .. config_path .. '<CR>', desc = '[G]o to [C]onfig' },
-  { '<leader>gg', ':cd ~/git <CR>', desc = '[G]o to [G]it directory' },
   { '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>', desc = '[M]ake it [R]ain' },
 })
 
-wk.add({ 'n', ']}', desc = 'Jump to next instance of word under cursor' })
+wk.add({{ 'n', ']}', desc = 'Jump to next instance of word under cursor' },
+  { '<leader>gc', ':cd ' .. config_path .. '<CR>', desc = '[G]o to [C]onfig' },
+  { '<leader>gg', ':cd ~/git <CR>', desc = '[G]o to [G]it directory' },})
 
 -- No idea why t doesn't work
 wk.add({ 't', group = '[T]rouble' })
