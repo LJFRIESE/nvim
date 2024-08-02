@@ -26,6 +26,7 @@ return {
       group = lint_augroup,
       callback = function()
         require('lint').try_lint()
+        -- print('Lint complete')
       end,
     })
     vim.keymap.set('n', '<leader>l', function()
