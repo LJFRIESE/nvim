@@ -3,22 +3,27 @@ return { -- Autocompletion
   'hrsh7th/nvim-cmp',
   event = 'InsertEnter',
   dependencies = {
-    'L3MON4D3/LuaSnip',
     'hrsh7th/cmp-nvim-lsp',
     'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
+    'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-calc',
-    -- 'hrsh7th/cmp-emoji',
-    'saadparwaiz1/cmp_luasnip',
     'f3fora/cmp-spell',
-    'ray-x/cmp-treesitter',
-    'kdheepak/cmp-latex-symbols',
-    'jmbuhr/cmp-pandoc-references',
+
+    'L3MON4D3/LuaSnip',
+    'saadparwaiz1/cmp_luasnip',
     'rafamadriz/friendly-snippets',
+
+    'ray-x/cmp-treesitter',
+    'ray-x/cmp-sql',
+    -- Symbols
     'onsails/lspkind-nvim',
+    'kdheepak/cmp-latex-symbols',
+
     'jmbuhr/otter.nvim',
     'R-nvim/cmp-r',
+    'jmbuhr/cmp-pandoc-references',
   },
   config = function()
     local cmp = require('cmp')
@@ -36,6 +41,7 @@ return { -- Autocompletion
           luasnip.lsp_expand(args.body)
         end,
       },
+mode = "symbol_text",
       completion = { completeopt = 'menu,menuone,noinsert' },
       mapping = {
         ['<C-f>'] = cmp.mapping.scroll_docs(-4),
@@ -54,11 +60,9 @@ return { -- Autocompletion
             fallback()
           end
         end, { 'i', 's' }),
+
         ['<C-e>'] = cmp.mapping.abort(),
         ['<c-y>'] = cmp.mapping.confirm({
-          select = true,
-        }),
-        ['<CR>'] = cmp.mapping.confirm({
           select = true,
         }),
 
@@ -68,7 +72,7 @@ return { -- Autocompletion
           elseif has_words_before() then
             cmp.complete()
           else
-            fallback()
+          fallback()
           end
         end, { 'i', 's' }),
         ['<S-Tab>'] = cmp.mapping(function(fallback)
@@ -109,9 +113,38 @@ return { -- Autocompletion
             tags = '[tag]',
             calc = '[calc]',
             latex_symbols = '[tex]',
-            -- emoji = '[emoji]',
           },
         }),
+      },
+      experimental = {
+          ghost_text = true
+        },
+        sorting = {
+          comparators = {
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.recently_used,
+            cmp.config.compare.score,
+            cmp.config.compare.locality,
+            -- copied from cmp-under, but I don't think I need the plugin for this.
+            -- I might add some more of my own.
+            function(entry1, entry2)
+              local _, entry1_under = entry1.completion_item.label:find "^_+"
+              local _, entry2_under = entry2.completion_item.label:find "^_+"
+              entry1_under = entry1_under or 0
+              entry2_under = entry2_under or 0
+              if entry1_under > entry2_under then
+                return false
+              elseif entry1_under < entry2_under then
+                return true
+              end
+            end,
+
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+          },
       },
       sources = {
         { name = 'otter' }, -- for code chunks in quarto

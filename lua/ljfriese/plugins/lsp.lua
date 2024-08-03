@@ -116,11 +116,9 @@ return { -- LSP Configuration & Plugins
       'html',
       'ruff',
       'pyright',
-      'stylua', -- Used to format Lua code
-      -- 'sqlfmt',
+      'stylua',
       'sqlfluff',
       'tree-sitter-cli',
-      'sql-formatter',
     })
     require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
