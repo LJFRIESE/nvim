@@ -81,4 +81,5 @@ wk.add({
   { '<leader>c', group = '[C]omment' },
   { '<leader>h', group = '[H]arpoon' },
   { '<leader>b', group = '[B]uffer' },
+  { 'z', group = 'Fold code'},
 })
