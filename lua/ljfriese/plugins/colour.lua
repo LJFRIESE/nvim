@@ -1,24 +1,12 @@
-return { -- You can easily change to a different colorscheme.
-  -- Change the name of the colorscheme plugin below, and then
-  -- change the command in the config to whatever the name of that colorscheme is.
-  --
-  -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
-  'rose-pine/neovim',
-  bold_vert_split = true,
-  dim_nc_background = true,
-  disable_background = true,
-  disable_float_background = true,
-  disable_italics = false,
+return {
+  'tanvirtin/monokai.nvim',
   priority = 1000, -- Make sure to load this before all the other start plugins.}
-  -- You can configure highlights by doing something like:
-  -- vim.cmd.hi 'Comment gui=none'
+  opts = {
+    italics = false,
+  },
   init = function()
-    -- Load the colorscheme here.
-    -- Like many other themes, this one has different styles, and you could load
-    -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-    vim.cmd.colorscheme('rose-pine')
-
-    -- You can configure highlights by doing something like:
-    vim.cmd.hi('Comment gui=none')
+    vim.cmd.colorscheme('monokai_pro')
+  vim.api.nvim_set_hl(0, 'TreesitterContext', { link = 'Normal', default = true })
+    -- vim.cmd.hi('Comment gui=none')
   end,
 }
