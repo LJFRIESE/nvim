@@ -4,24 +4,24 @@ return{
         local config = require("rose-pine.config")
         local utilities = require("rose-pine.utilities")
         local palette = {
-                _nc = "#f8f0e7",
-                base = "#2e2e2e",
-                surface = "#272a30",
-                overlay = "#4d5154",
-                muted = "#2e323C",
-                subtle = "#797979",
-                text = "#fcfcfa",
-                love = "#ff6188",
-                gold = "#ffd866",
-                rose = "#e87d3e",
-                pine = "#78dce8",
-                foam = "#9ccfd8",
-                iris = "#ab9df2",
-                leaf = "#a9dc76",
-                highlight_low = "#21202e",
-                highlight_med = "#403d52",
-                highlight_high = "#524f67",
-                none = "none",
+            _nc = "#f8f0e7",
+            base = "#2e2e2e",
+            surface = "#272a30",
+            overlay = "#4d5154",
+            muted = "#2e323C",
+            subtle = "#797979",
+            text = "#fcfcfa",
+            love = "#ff6188",
+            gold = "#f6c177",
+            rose = "#e87d3e",
+            pine = "#78dce8",
+            foam = "#9ccfd8",
+            iris = "#ab9df2",
+            leaf = "#a9dc76",
+            highlight_low = "#21202e",
+            highlight_med = "#403d52",
+            highlight_high = "#524f67",
+            none = "none",
         }
         local styles = config.options.styles
 
@@ -101,18 +101,19 @@ return{
                 ["@keyword.function"] = {fg = palette.foam},
                 ["@keyword.exception"] = {fg = palette.love},
 
-
+                CursorLine = { bg = palette.surface },
                 -- Operator = { fg = palette.love },
                 MatchParen = { fg = palette.muted, bg = palette.leaf, blend = 100},
 
-                CursorLineNr = { fg = palette._nc},
-                LineNr = { fg = palette.leaf },
+                CursorLineNr = { fg = palette.text},
+                LineNr = { fg = palette.subtle },
 
                 -- TreesitterContext = { bg = palette.base },
-                TreesitterContextLineNumber = { fg = palette.leaf },
+                TreesitterContextLineNumber = { fg = palette.subtle },
 
                 IblIndent = { fg = palette.muted },
                 IblScope = { fg = palette.subtle},
+                IblWhitespace = { fg = palette.rose},
 
                 MiniStatuslineDevinfo = { fg = palette.subtle, bg = palette.base },
                 MiniStatuslineFileinfo = { link = "MiniStatuslineDevinfo" },
