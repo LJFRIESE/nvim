@@ -79,7 +79,7 @@ return{
             highlight_groups = {
                 --- Functions
                 ["@function"] = { fg = palette.pine },
-                ["@function.builtin"] = { fg = palette.rose, bold = styles.bold },
+                ["@function.builtin"] = { fg = palette.love, bold = styles.bold },
                 ["@function.call"] = {fg = palette.leaf},
                 ["@function.macro"] = { link = "Function" },
                 ["@function.method"] = { fg = palette.leaf },
@@ -89,15 +89,15 @@ return{
                 ["@type"] = { fg = palette.foam },
                 ["@type.builtin"] = { fg = palette.foam, bold = styles.bold },
 
-                ["@boolean"] = { fg = palette.iris },
-                ["@number"] = { fg = palette.iris },
-                ["@number.float"] = { fg = palette.iris },
+                ["@boolean"] = { fg = palette.rose },
+                ["@number"] = { fg = palette.rose },
+                ["@number.float"] = { fg = palette.rose },
 
                 -- ["@attribute"] = {},
                 ["@property"] = { fg = palette.iris, italic = styles.italic },
 
                 --- Keywords
-                Keyword = { fg = palette.rose },
+                Keyword = { fg = palette.love },
                 ["@keyword.function"] = {fg = palette.foam},
                 ["@keyword.exception"] = {fg = palette.love},
 
