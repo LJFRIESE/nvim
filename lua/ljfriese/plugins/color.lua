@@ -24,7 +24,6 @@ return{
             none = "none",
         }
         local styles = config.options.styles
-
         local groups = {}
         for group, color in pairs(config.options.groups) do
             groups[group] = utilities.parse_color(color)
@@ -78,6 +77,7 @@ return{
             },
             highlight_groups = {
                 --- Functions
+                Function = { fg = palette.pine },
                 ["@function"] = { fg = palette.pine },
                 ["@function.builtin"] = { fg = palette.love, bold = styles.bold },
                 ["@function.call"] = {fg = palette.leaf},
@@ -100,6 +100,8 @@ return{
                 Keyword = { fg = palette.love },
                 ["@keyword.function"] = {fg = palette.foam},
                 ["@keyword.exception"] = {fg = palette.love},
+
+                Special = { fg = palette.rose },
 
                 CursorLine = { bg = palette.surface },
                 -- Operator = { fg = palette.love },
@@ -126,7 +128,7 @@ return{
                 MiniStatuslineModeReplace = { fg = palette.base, bg = palette.pine, bold = styles.bold },
                 MiniStatuslineModeVisual = { fg = palette.base, bg = palette.iris, bold = styles.bold },
             },
-
+            -- NormalFloat = { bg = palette.muted},
             before_highlight = function(group, highlight, palette)
                 -- Disable all undercurls
                 -- if highlight.undercurl then
