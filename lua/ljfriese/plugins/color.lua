@@ -1,5 +1,6 @@
 return{
-    { 'LJFRIESE/colorscheme',
+    { 'rose-pine/neovim',
+    name = 'color',
     config = function()
         local config = require("rose-pine.config")
         local utilities = require("rose-pine.utilities")
@@ -75,9 +76,16 @@ return{
                 h5 = "pine",
                 h6 = "foam",
             },
+
             highlight_groups = {
                 --- Functions
                 Function = { fg = palette.pine },
+                LspInfoBorder = { fg = palette.gold },
+                -- NormalFloat = {  bg = palette.surface },
+                FloatBorder = { fg = palette.gold },
+                FloatcwFooter = { fg = palette.gold },
+                FloatTitle = { fg = palette.gold },
+    --- Functions
                 ["@function"] = { fg = palette.pine },
                 ["@function.builtin"] = { fg = palette.love, bold = styles.bold },
                 ["@function.call"] = {fg = palette.leaf},
@@ -144,5 +152,4 @@ return{
         })
         vim.cmd("colorscheme rose-pine")
     end},
-    { 'tanvirtin/monokai.nvim'},
 }

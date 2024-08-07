@@ -1,5 +1,6 @@
 return {
   'jpalardy/vim-slime',
+  lazy=true,
   init = function()
     vim.g.slime_target = 'neovim'
     vim.g.slime_python_ipython = 1
