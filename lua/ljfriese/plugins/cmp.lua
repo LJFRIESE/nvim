@@ -41,7 +41,7 @@ return { -- Autocompletion
           luasnip.lsp_expand(args.body)
         end,
       },
-mode = "symbol_text",
+      mode = "symbol_text",
       completion = { completeopt = 'menu,menuone,noinsert' },
       mapping = {
         ['<C-f>'] = cmp.mapping.scroll_docs(-4),
@@ -167,9 +167,8 @@ mode = "symbol_text",
         entries = 'native',
       },
       window = {
-        documentation = {
-          border = { '╭', '─', '╮', '│', '╯', '─', '╰', '│' },
-        },
+           completion = cmp.config.window.bordered(),
+           documentation = cmp.config.window.bordered()
       },
     })
 
