@@ -46,12 +46,13 @@ return {
       notify_on_error = true,
       formatters = {
         sqlfluff = {
-          args = { 'fix', '--dialect=oracle', '--process=-1', '-' },
+          args = { 'fix', '--dialect=oracle', '--processes=-1', '-' },
         },
       },
       -- Mason installs LSP, formatters, and linters.
       -- When possible, ensure installs over here: ./lsp.lua
       formatters_by_ft = {
+        markdown = { 'prettierd' },
         python = { 'ruff_format' },
         lua = { 'stylua' },
         sql = { 'sqlfluff' },

@@ -1,21 +1,21 @@
 return { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
-  'folke/neodev.nvim' ,
   dependencies = {
-    { 'williamboman/mason.nvim', config = {ui = {border = 'rounded' }} }, -- NOTE: Must be loaded before dependants
+    { 'williamboman/mason.nvim', config = { ui = { border = 'rounded' } } }, -- NOTE: Must be loaded before dependants
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-    { 'j-hui/fidget.nvim', opts = {notification = {window = {border = 'rounded'}}} },
+    { 'j-hui/fidget.nvim', opts = { notification = { window = { border = 'rounded' } } } },
+    'hrsh7th/cmp-nvim-lsp',
+    'folke/neodev.nvim',
   },
   config = function()
-
-    require("lspconfig.ui.windows").default_options.border = "rounded"
+    require('lspconfig.ui.windows').default_options.border = 'rounded'
     -- Specify how the border looks like
     -- pop up border
     local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
     function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
       opts = opts or {}
-      opts.border = "rounded"
+      opts.border = 'rounded'
       return orig_util_open_floating_preview(contents, syntax, opts, ...)
     end
     --  This function gets run when an LSP attaches to a particular buffer.
@@ -88,10 +88,11 @@ return { -- LSP Configuration & Plugins
 
     capabilities.textDocument.foldingRange = { lineFoldingOnly = true }
     local servers = {
+      prettierd = { 'markdown' },
       html = { 'html' },
       ruff = { 'python' },
       sqls = { 'sql' },
-      marksman = { filetypes = { 'markdown', 'quarto' }, root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml') },
+      marksman = { filetypes = { 'quarto' }, root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml') },
       r_language_server = {
         settings = {
           r = {
