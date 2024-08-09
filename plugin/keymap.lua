@@ -22,17 +22,17 @@ vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 -- vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
 
--- vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Window navigation
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+-- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+-- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
 -- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
-vim.keymap.set('n', '<leader><', '<cmd>vertical resize -5<cr>', { desc = 'Window size decrease' })
-vim.keymap.set('n', '<leader>>', '<cmd>vertical resize +5<cr>', { desc = 'Window size increase' })
+vim.keymap.set('n', '<leader><', '<C-w>h', { desc = 'Go to left window' })
+vim.keymap.set('n', '<leader>>', '<C-w>l', { desc = 'Go to right window' })
 
 -- Misc
 vim.keymap.set('i', '<C-c>', '<Esc>', { desc = 'Esc' })
@@ -74,7 +74,7 @@ wk.add({
   { 'g', group = '[G]o to ...' },
   { 'gs', group = '[s]urrounding ...' },
   -- { '<leader>z', group = '[Z]en' },
-  -- { '<leader>z', group = 'Fold control' },
+  { '<leader>z', group = 'Fold control' },
   { '<leader>sy', group = '[Sy]mbols' },
   { '<leader>g', group = '[G]o to' },
   { '<leader>s', group = '[S]earch' },

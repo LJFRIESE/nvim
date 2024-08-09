@@ -6,7 +6,6 @@ return { -- LSP Configuration & Plugins
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     { 'j-hui/fidget.nvim', opts = { notification = { window = { border = 'rounded' } } } },
     'hrsh7th/cmp-nvim-lsp',
-    'folke/neodev.nvim',
   },
   config = function()
     require('lspconfig.ui.windows').default_options.border = 'rounded'

@@ -1,14 +1,10 @@
-local opt = vim.opt
 
--- file explore
--- INFO fold commands usually change the foldlevel, which fixes folds, e.g.
+-- INFO: fold commands usually change the foldlevel, which fixes folds, e.g.
 -- auto-closing them after leaving insert mode, however ufo does not seem to
 -- have equivalents for zr and zm because there is no saved fold level.
 -- Consequently, the vim-internal fold levels need to be disabled by setting
 -- them to 99.
--- opt.foldlevel = 99
--- opt.foldlevelstart = 99
-opt.fillchars = {
+vim.opt.fillchars = {
   horiz = '─',
   horizup = '┴',
   horizdown = '┬',
@@ -21,7 +17,7 @@ opt.fillchars = {
   foldclose = '',
   foldsep = '│',
 }
-local fcs = opt.fillchars:get()
+local fcs = vim.opt.fillchars:get()
 
 -- Stolen from Akinsho
 local function get_fold(lnum)
@@ -64,6 +60,10 @@ end
 
 -- Global vars
 vim.o.statuscolumn = '%!v:lua.get_statuscol()'
+vim.g.have_nerd_font = true
+
+vim.opt.mouse = 'a'
+vim.opt.clipboard = 'unnamedplus'
 
 vim.o.rnu = true
 vim.o.nu = true
@@ -73,83 +73,61 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_keepdir = 0 --have cd follow browsing
 
-vim.g.have_nerd_font = true
-
 -- ui
-opt.guicursor = ''
--- opt.colorcolumn = { '80' }
--- Set to true if you have a Nerd Font installed and selected in the terminal
-
-opt.tabstop = 4
-opt.softtabstop = 4
-opt.shiftwidth = 4
-
-opt.expandtab = true
-opt.smartindent = true
-
--- Enable break indent
-opt.wrap = false
-
-opt.swapfile = false
-opt.backup = false
--- opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
-opt.undofile = true
+-- Show which line your cursor is on
+vim.opt.cursorline = true
+vim.opt.termguicolors = true
+vim.opt.guicursor = ''
+vim.opt.colorcolumn = { '80' }
+-- Don't show the mode, since it's already in the status line
+vim.opt.showmode = false
 
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
-opt.hlsearch = true
-opt.incsearch = true
-
-opt.termguicolors = true
-
-opt.scrolloff = 8
-opt.signcolumn = 'yes'
-opt.isfname:append('@-@')
-
--- Enable mouse mode, can be useful for resizing splits for example!
-opt.mouse = 'a'
-
--- Don't show the mode, since it's already in the status line
-opt.showmode = false
-
--- Sync clipboard between OS and Neovim.
---  Remove this option if you want your OS clipboard to remain independent.
---  See `:help 'clipboard'`
-opt.clipboard = 'unnamedplus'
-
--- Save undo history
-opt.undofile = true
-
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-opt.ignorecase = true
-opt.smartcase = true
-
--- Keep signcolumn on by default
-opt.signcolumn = 'yes'
-
--- Decrease update time
-opt.updatetime = 250
-
--- Decrease mapped sequence wait time
--- Displays which-key popup sooner
-opt.timeoutlen = 300
-
--- Configure how new splits should be opened
-opt.splitright = true
-opt.splitbelow = true
-
--- Sets how neovim will display certain whitespace characters in the editor.
+vim.opt.hlsearch = true
+vim.opt.incsearch = true
 
 -- Preview substitutions live, as you type!
-opt.inccommand = 'split'
+vim.opt.inccommand = 'split'
 
--- Show which line your cursor is on
-opt.cursorline = true
+vim.opt.scrolloff = 8
+vim.opt.signcolumn = 'yes'
+vim.opt.isfname:append('@-@')
 
-vim.g.undotree_DiffCommand = 'FC'
+-- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 
-vim.b.slime_cell_delimiter = '```'
--- Prevent 'o' from adding a comment
-
-vim.opt.formatoptions:remove('o')
 -- Max n suggestions in popups
 vim.opt.pumheight = 7
+
+-- windows
+vim.opt.splitright = true
+vim.opt.splitbelow = true
+
+-- whitespace
+vim.opt.tabstop = 4
+vim.opt.softtabstop = 4
+vim.opt.shiftwidth = 4
+
+vim.opt.expandtab = true
+vim.opt.smartindent = true
+
+-- Enable break indent
+vim.opt.wrap = false
+
+-- Undo
+vim.opt.swapfile = false
+vim.opt.backup = false
+vim.opt.undofile = true
+
+-- Decrease update time
+vim.opt.updatetime = 250
+
+-- Save undo history
+vim.opt.undofile = true
+vim.g.undotree_DiffCommand = 'FC'
+
+-- Plugins
+
+vim.opt.timeoutlen = 150-- Decrease mapped sequence wait time
+vim.b.slime_cell_delimiter = '```'
