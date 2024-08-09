@@ -89,9 +89,11 @@ vim.opt.incsearch = true
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
 
-vim.opt.scrolloff = 8
 vim.opt.signcolumn = 'yes'
 vim.opt.isfname:append('@-@')
+
+vim.opt_global.sidescroll = 20
+vim.opt_global.scrolloff = 8
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.opt.ignorecase = true
@@ -131,3 +133,7 @@ vim.g.undotree_DiffCommand = 'FC'
 
 vim.opt.timeoutlen = 150-- Decrease mapped sequence wait time
 vim.b.slime_cell_delimiter = '```'
+
+-- matchpairs	list of pairs that match for the "%" command
+-- 	(local to buffer)
+--  	set mps=(:),{:},[:]
