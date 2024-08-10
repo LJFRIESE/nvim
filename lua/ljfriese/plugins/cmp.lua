@@ -44,15 +44,17 @@ return { -- Autocompletion
       mode = "symbol_text",
       completion = { completeopt = 'menu,menuone,noinsert' },
       mapping = {
-        ['<C-f>'] = cmp.mapping.scroll_docs(-4),
+        ['<C-u>'] = cmp.mapping.scroll_docs(-4),
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
 
+        -- Jump to next field in completion template
         ['<C-n>'] = cmp.mapping(function(fallback)
           if luasnip.expand_or_jumpable() then
             luasnip.expand_or_jump()
             fallback()
           end
         end, { 'i', 's' }),
+        -- Jump to prev field in completion template
         ['<C-p>'] = cmp.mapping(function(fallback)
           if luasnip.jumpable(-1) then
             luasnip.jump(-1)
@@ -82,17 +84,6 @@ return { -- Autocompletion
             fallback()
           end
         end, { 'i', 's' }),
-
-        ['<C-l>'] = cmp.mapping(function()
-          if luasnip.expand_or_locally_jumpable() then
-            luasnip.expand_or_jump()
-          end
-        end, { 'i', 's' }),
-        ['<C-h>'] = cmp.mapping(function()
-          if luasnip.locally_jumpable(-1) then
-            luasnip.jump(-1)
-          end
-        end, { 'i', 's' }),
       },
       autocomplete = false,
 
@@ -117,7 +108,7 @@ return { -- Autocompletion
         }),
       },
       experimental = {
-          ghost_text = true
+          ghost_text = false
         },
         sorting = {
           comparators = {
@@ -126,8 +117,6 @@ return { -- Autocompletion
             cmp.config.compare.recently_used,
             cmp.config.compare.score,
             cmp.config.compare.locality,
-            -- copied from cmp-under, but I don't think I need the plugin for this.
-            -- I might add some more of my own.
             function(entry1, entry2)
               local _, entry1_under = entry1.completion_item.label:find "^_+"
               local _, entry2_under = entry2.completion_item.label:find "^_+"

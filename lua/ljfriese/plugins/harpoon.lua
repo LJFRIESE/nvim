@@ -23,23 +23,25 @@ return {
     --     :find()
     -- end
     harpoon:setup()
-    vim.keymap.set('n', '<leader>he', function()
+    vim.keymap.set('n', '<leader>e', function()
       harpoon.ui:toggle_quick_menu(harpoon:list())
     end, { desc = 'Open harpoon window' })
     -- Toggle previous & next buffers stored within Harpoon list
-    -- {
-    --   '<leader>H',
-    --   function()
-    --     harpoon:list():prev()
-    --   end,
-    -- },
-    -- {
-    --   '<leader>L',
-    --   function()
-    --     harpoon:list():next()
-    --   end,
-    -- }-
-    vim.keymap.set('n', '<leader>ha', function()
+    vim.keymap.set('n',
+      '<leader>H',
+      function()
+        harpoon:list():prev()
+      end,
+      {desc = 'Open prev Harpoon window'}
+      )
+    vim.keymap.set('n',
+      '<leader>L',
+      function()
+        harpoon:list():next()
+      end,
+      {desc = 'Open next Harpoon window'}
+      )
+    vim.keymap.set('n', '<leader>a', function()
       harpoon:list():add()
     end, { desc = 'Add to harpoon' })
     vim.keymap.set('n', '<leader>hh', function()

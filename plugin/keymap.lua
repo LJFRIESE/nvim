@@ -8,14 +8,11 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move text up' })
 vim.keymap.set('n', 'oo', '$i<right><cr><esc>k$', { desc = 'Insert linebreak above' })
 vim.keymap.set('n', 'OO', '$ki<right><cr><esc>j$', { desc = 'Insert linebreak below' })
 
-vim.keymap.set('n', '<C-j>', 'i<cr><esc>', { desc = 'Split current line' })
+vim.keymap.set('n', '<c-J>', 'i<cr><esc>', { desc = 'Split current line' })
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join subsequent line to current line' })
 
 vim.keymap.set('n', '<leader>rg', [[:%s/\\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[G]lobal replace' })
 vim.keymap.set('n', '<leader>rl', [[:s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[L]ine replace' })
-
--- vim.keymap.set({ 'n', 'x' }, '<leader>y', '"+y', { desc = 'Yank | No clipboard' })
--- vim.keymap.set({ 'n', 'x' }, '<leader>Y', '"*Y', { desc = 'Yank | Yes clipboard' })
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
@@ -25,14 +22,8 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagn
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Window navigation
---  See `:help wincmd` for a list of all window commands
--- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
--- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
--- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
--- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
 vim.keymap.set('n', '<leader><', '<C-w>h', { desc = 'Go to left window' })
-vim.keymap.set('n', '<leader>>', '<C-w>l', { desc = 'Go to right window' })
+    vim.keymap.set('n', '<leader>>', '<C-w>l', { desc = 'Go to right window' })
 
 -- Misc
 vim.keymap.set('i', '<C-c>', '<Esc>', { desc = 'Esc' })
@@ -65,21 +56,26 @@ wk.add({{ 'n', ']}', desc = 'Jump to next instance of word under cursor' },
   { '<leader>gc', ':cd ' .. config_path .. '<CR>', desc = '[G]o to [C]onfig' },
   { '<leader>gg', ':cd ~/git <CR>', desc = '[G]o to [G]it directory' },})
 
--- No idea why t doesn't work
-wk.add({ 't', group = '[T]rouble' })
+vim.keymap.set('n', '<leader>Z', function()
+  require('zen-mode').toggle()
+  vim.wo.wrap = false
+  vim.wo.number = true
+  vim.wo.rnu = true
+end, { desc = '[Z]en mode' })
+
+  -- No idea why t doesn't work
+wk.add({ 'tt', group = '[T]rouble' })
 -- vim.keymap.set('n', 's', '<Nop>')
 wk.add({
-  -- { 's', group = '[S]urround' },
   { '<leader>r', group = '[R]egex' },
   { 'g', group = '[G]o to ...' },
   { 'gs', group = '[s]urrounding ...' },
-  -- { '<leader>z', group = '[Z]en' },
   { '<leader>z', group = 'Fold control' },
   { '<leader>sy', group = '[Sy]mbols' },
   { '<leader>g', group = '[G]o to' },
   { '<leader>s', group = '[S]earch' },
   { '<leader>c', group = '[C]omment' },
-  { '<leader>h', group = '[H]arpoon' },
+  { '<leader>h', group = '[H]arpoon window' },
   { '<leader>b', group = '[B]uffer' },
   { 'z', group = 'Fold code'},
 })

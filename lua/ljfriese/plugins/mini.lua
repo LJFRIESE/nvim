@@ -1,5 +1,4 @@
 return {
-  -- { 'echasnovski/mini.nvim', opts = { n_lines = 500 } },
   {
     'echasnovski/mini.ai',
     dependencies = {

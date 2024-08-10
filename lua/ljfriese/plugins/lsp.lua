@@ -5,7 +5,6 @@ return { -- LSP Configuration & Plugins
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     { 'j-hui/fidget.nvim', opts = { notification = { window = { border = 'rounded' } } } },
-    'hrsh7th/cmp-nvim-lsp',
   },
   config = function()
     require('lspconfig.ui.windows').default_options.border = 'rounded'
@@ -111,7 +110,6 @@ return { -- LSP Configuration & Plugins
             completion = {
               callSnippet = 'Replace',
             },
-            -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
             diagnostics = { disable = { 'missing-parameter', 'missing-fields' } },
           },
         },
