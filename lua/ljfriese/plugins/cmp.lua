@@ -4,7 +4,7 @@ return { -- Autocompletion
   event = 'InsertEnter',
   dependencies = {
     'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-nvim-lsp-signature-help',
+    -- 'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
@@ -104,6 +104,7 @@ return { -- Autocompletion
             tags = '[tag]',
             calc = '[calc]',
             latex_symbols = '[tex]',
+            sql = '[sql]',
           },
         }),
       },
@@ -136,7 +137,12 @@ return { -- Autocompletion
           },
       },
       sources = {
-        { name = 'otter' }, -- for code chunks in quarto
+        {
+            name = 'lazydev',
+            -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
+            group_index = 0,
+          },
+          { name = 'otter' }, -- for code chunks in quarto
         { name = 'path' },
         { name = 'nvim_lsp_signature_help' },
         { name = 'nvim_lsp' },
@@ -151,6 +157,7 @@ return { -- Autocompletion
         { name = 'vim-dadbod-completion' },
         { name = 'cmp_r' },
         { name = 'pyright' },
+        { name = 'sql' }
       },
       view = {
         entries = 'native',

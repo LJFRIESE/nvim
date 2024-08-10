@@ -5,10 +5,11 @@ return { -- LSP Configuration & Plugins
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     { 'j-hui/fidget.nvim', opts = { notification = { window = { border = 'rounded' } } } },
+    'hrsh7th/cmp-nvim-lsp',
+    "ray-x/lsp_signature.nvim",
   },
-  config = function()
+  config= function()
     require('lspconfig.ui.windows').default_options.border = 'rounded'
-    -- Specify how the border looks like
     -- pop up border
     local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
     function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
@@ -20,6 +21,14 @@ return { -- LSP Configuration & Plugins
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event) -- having maps in callback here means the keybinds only exist when lsp is active
+        require("lsp_signature").on_attach({
+          bind = true, -- This is mandatory, otherwise border config won't get registered.
+          handler_opts = {
+            border = "rounded"
+          },
+          hint_enable = false,
+        })
+
         local map = function(keys, func, desc)
           vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc })
         end

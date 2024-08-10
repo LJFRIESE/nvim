@@ -8,7 +8,7 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move text up' })
 vim.keymap.set('n', 'oo', '$i<right><cr><esc>k$', { desc = 'Insert linebreak above' })
 vim.keymap.set('n', 'OO', '$ki<right><cr><esc>j$', { desc = 'Insert linebreak below' })
 
-vim.keymap.set('n', '<c-J>', 'i<cr><esc>', { desc = 'Split current line' })
+vim.keymap.set('n', '<c-j>', 'i<cr><esc>', { desc = 'Split current line' })
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join subsequent line to current line' })
 
 vim.keymap.set('n', '<leader>rg', [[:%s/\\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = '[G]lobal replace' })
