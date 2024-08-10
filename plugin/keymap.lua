@@ -52,9 +52,10 @@ wk.add({
   { '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>', desc = '[M]ake it [R]ain' },
 })
 
-wk.add({{ 'n', ']}', desc = 'Jump to next instance of word under cursor' },
+wk.add({
   { '<leader>gc', ':cd ' .. config_path .. '<CR>', desc = '[G]o to [C]onfig' },
-  { '<leader>gg', ':cd ~/git <CR>', desc = '[G]o to [G]it directory' },})
+  { '<leader>gg', ':cd ~/git <CR>', desc = '[G]o to [G]it directory' },
+})
 
 vim.keymap.set('n', '<leader>Z', function()
   require('zen-mode').toggle()
