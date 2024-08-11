@@ -1,7 +1,7 @@
-vim.keymap.set('n','<M-l>', 'D')
+vim.keymap.set('n', '<M-l>', 'D')
 -- Manipulate text
 vim.keymap.set({ 'n', 'x' }, '<leader>d', '"_d', { desc = '[d]elete | Black hole' })
-vim.keymap.set({'n', 'x'}, '<leader>p', [["_dP]], { desc = '[P]aste over | Black hole' })
+vim.keymap.set({ 'n', 'x' }, '<leader>p', [["_dP]], { desc = '[P]aste over | Black hole' })
 -- vim.keymap.set('n', '<c-p>', 'o<c-r>"<esc>', { desc = '[P]aste | New line' })
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move text down' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move text up' })
@@ -24,7 +24,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 
 -- Window navigation
 vim.keymap.set('n', '<leader><', '<C-w>h', { desc = 'Go to left window' })
-    vim.keymap.set('n', '<leader>>', '<C-w>l', { desc = 'Go to right window' })
+vim.keymap.set('n', '<leader>>', '<C-w>l', { desc = 'Go to right window' })
 
 -- Misc
 vim.keymap.set('i', '<C-c>', '<Esc>', { desc = 'Esc' })
@@ -32,6 +32,10 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Kill search highli
 vim.keymap.set({ 'n' }, '<c-c>t', ':split<cr>:terminal<cr>i', { desc = '[t]erminal' })
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'Escape terminal' })
 -- vim.keymap.set({ 'n' }, '<leader>i', '<esc>i```{r}<cr>```<esc>O', { desc = '[i]nsert code chunk' })
+
+
+vim.keymap.set('n', '<leader>c',
+function() require("nvim-highlight-colors").toggle() end, {desc = 'Toggle [c]olours'} )
 
 vim.keymap.set('', '<leader>bf', function()
   require('conform').format({ async = true }, function(err)
@@ -65,7 +69,7 @@ vim.keymap.set('n', '<leader>Z', function()
   vim.wo.rnu = true
 end, { desc = '[Z]en mode' })
 
-  -- No idea why t doesn't work
+-- No idea why t doesn't work
 wk.add({ 'tt', group = '[T]rouble' })
 -- vim.keymap.set('n', 's', '<Nop>')
 wk.add({
@@ -76,8 +80,8 @@ wk.add({
   { '<leader>sy', group = '[Sy]mbols' },
   { '<leader>g', group = '[G]o to' },
   { '<leader>s', group = '[S]earch' },
-  { '<leader>c', group = '[C]omment' },
+  -- { '<leader>c', group = '[C]omment' },
   { '<leader>h', group = '[H]arpoon window' },
   { '<leader>b', group = '[B]uffer' },
-  { 'z', group = 'Fold code'},
+  { 'z', group = 'Fold code' },
 })
