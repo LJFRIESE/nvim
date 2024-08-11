@@ -4,7 +4,10 @@ return { -- Highlight, edit, and navigate code
   build = ':TSUpdate',
   opts = {
     ensure_installed = { 'yaml', 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'vim', 'vimdoc', 'sql', 'r', 'markdown', 'markdown_inline', 'rnoweb', 'sql' },
-    auto_install = true,
+    -- auto_install = true,
+    -- highlight = {
+    --   additionalvim_regex_highlighting={enable=true}},
+    -- indent = {enable = true},
   },
   config = function(_, opts)
     require('nvim-treesitter.install').prefer_git = true

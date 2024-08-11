@@ -1,3 +1,4 @@
+vim.keymap.set('n','<M-l>', 'D')
 -- Manipulate text
 vim.keymap.set({ 'n', 'x' }, '<leader>d', '"_d', { desc = '[d]elete | Black hole' })
 vim.keymap.set({'n', 'x'}, '<leader>p', [["_dP]], { desc = '[P]aste over | Black hole' })
