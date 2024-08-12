@@ -131,6 +131,7 @@ return { -- LSP Configuration & Plugins
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
       'html',
+      'lua_ls',
       'ruff',
       'pyright',
       'stylua',
