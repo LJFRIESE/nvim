@@ -117,13 +117,17 @@ return { -- Autocompletio
       },
       window = {
         completion = {
-          title = 'cmp',
+          title = 'Suggestions',
           border = 'rounded',
           winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder,Search:None',
-          col_offset = -3,
-          side_padding = 0,
+          -- col_offset = -3,
+          -- side_padding = 0,
         },
-        documentation = cmp.config.window.bordered(),
+        documentation = {
+          title = 'Documentation',
+          border = 'rounded',
+          winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder,Search:None',
+        },
       },
       formatting = {
         format = lspkind.cmp_format({
@@ -210,16 +214,28 @@ return { -- Autocompletio
     -- Setup sql
     cmp.setup.filetype({ 'sql' }, {
       sources = {
-        { name = 'luasnip', group_index = 1 },
-        { name = 'nvim_lsp', group_index = 2 },
-        { name = 'vim-dadbod-completion', group_index = 3 },
-        { name = 'sqls', group_index = 4 },
-        { name = 'treesitter', group_index = 5 },
-        { name = 'buffer', group_index = 6 },
+        { name = 'nvim_lsp', max_item_count = 4 },
+        { name = 'vim-dadbod-completion', max_item_count = 3 },
+        { name = 'luasnip', max_item_count = 2 },
+        { name = 'sqls'},
+        { name = 'treesitter'},
+        { name = 'buffer'},
       },
+      -- sorting = {
+      --   comparators = {
+      --     cmp.config.compare.length,
+      --     cmp.config.compare.kind,
+      --     cmp.config.compare.offset,
+      --     cmp.config.compare.exact,
+      --     cmp.config.compare.recently_used,
+      --     cmp.config.compare.score,
+      --     cmp.config.compare.sort_text,
+      --     cmp.config.compare.order,
+      --   },
+      -- },
     })
     -- `/` cmdline setup.
-    cmp.setup.cmdline('/', {
+    cmp.setup.cmdline({ '/', '?' }, {
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
         { name = 'buffer' },
