@@ -165,6 +165,7 @@ return { -- Autocompletio
           cmp.config.compare.order,
         },
       },
+      -- General setup
       sources = cmp.config.sources({
         {
           name = 'lazydev',
@@ -177,7 +178,6 @@ return { -- Autocompletio
         },
         {
           { name = 'nvim_lsp_signature_help' },
-          -- { name = "vim-dadbod-completion",},
           { name = 'nvim_lsp' },
           { name = 'treesitter', max_item_count = 3 },
         },
@@ -191,15 +191,24 @@ return { -- Autocompletio
         },
       }),
     })
+    cmp.setup.filetype({ 'markdown' }, {
+      sources = {
+        { name = 'buffer', max_item_count = 3 },
+        { name = 'path' },
+        { name = 'calc' },
+        { name = 'latex_symbols' },
+        { name = 'treesitter', max_item_count = 3 },
+      },
+    })
 
-    -- Setup up vim-dadbod
+    -- Setup sql
     cmp.setup.filetype({ 'sql' }, {
       sources = {
         { name = 'vim-dadbod-completion' },
-        -- { name = 'sql' }
-         { name = 'nvim_lsp' },
-          { name = 'treesitter', max_item_count = 3 },
-        { name = 'buffer' },
+        { name = 'nvim_lsp' },
+        { name = 'nvim_lsp_signature_help' },
+        { name = 'treesitter', max_item_count = 3 },
+        { name = 'buffer', max_item_count = 3 },
       },
     })
     -- `/` cmdline setup.
