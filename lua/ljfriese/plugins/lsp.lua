@@ -98,43 +98,49 @@ return { -- LSP Configuration & Plugins
       prettierd = { 'markdown' },
       html = { 'html' },
       ruff = { 'python' },
-      sqls = { 'sql',
-      settings = {
-        sqls = {
-          connections = {
-            {
-              driver = 'sqlite3',
-              dataSourceName = 'sqlite///:tutorial.db',
+      sqls = {
+        'sql', {
+        cmd = { 'sqls' },
+        filetypes = { 'sql' },
+        settings = {
+          sql = {
+            root_dir = util.root_pattern 'config.yml',
+            single_file_support = true,
+            connections = {
+              {
+                driver = 'sqlite3',
+                dataSourceName = 'file:C:/Users/lucas/project/tutorial.sqlite3',
+              },
             },
           },
         },
       },
-    },
-    marksman = { filetypes = { 'quarto' }, root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml') },
-    r_language_server = {
-      settings = {
-        r = {
-          flags = lsp_flags,
-          lsp = {
-            rich_documentation = false,
+      },
+      marksman = { filetypes = { 'quarto' }, root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml') },
+      r_language_server = {
+        settings = {
+          r = {
+            flags = lsp_flags,
+            lsp = {
+              rich_documentation = false,
+            },
           },
         },
       },
-    },
-    lua_ls = {
-      -- cmd = {...},
-      -- filetypes = { ...},
-      -- capabilities = {},
-      settings = {
-        Lua = {
-          completion = {
-            callSnippet = 'Replace',
+      lua_ls = {
+        -- cmd = {...},
+        -- filetypes = { ...},
+        -- capabilities = {},
+        settings = {
+          Lua = {
+            completion = {
+              callSnippet = 'Replace',
+            },
+            diagnostics = { disable = { 'missing-parameter', 'missing-fields' } },
           },
-          diagnostics = { disable = { 'missing-parameter', 'missing-fields' } },
         },
       },
-    },
-  }
+    }
 
     require('mason').setup()
     -- You can add other tools here that you want Mason to install
