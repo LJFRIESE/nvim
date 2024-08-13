@@ -172,12 +172,12 @@ return { -- Autocompletio
           group_index = 0,
         },
         {
-          { name = "vim-dadbod-completion",},
           { name = 'luasnip', max_item_count = 3 },
           { name = 'buffer', max_item_count = 3 },
         },
         {
           { name = 'nvim_lsp_signature_help' },
+          { name = "vim-dadbod-completion",},
           { name = 'nvim_lsp' },
           { name = 'treesitter', max_item_count = 3 },
         },
