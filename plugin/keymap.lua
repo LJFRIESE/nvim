@@ -33,9 +33,9 @@ vim.keymap.set({ 'n' }, '<c-c>t', ':split<cr>:terminal<cr>i', { desc = '[t]ermin
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'Escape terminal' })
 -- vim.keymap.set({ 'n' }, '<leader>i', '<esc>i```{r}<cr>```<esc>O', { desc = '[i]nsert code chunk' })
 
-
-vim.keymap.set('n', '<leader>c',
-function() require("nvim-highlight-colors").toggle() end, {desc = 'Toggle [c]olours'} )
+vim.keymap.set('n', '<leader>c', function()
+  require('nvim-highlight-colors').toggle()
+end, { desc = 'Toggle [c]olours' })
 
 vim.keymap.set('', '<leader>bf', function()
   require('conform').format({ async = true }, function(err)
@@ -61,6 +61,14 @@ wk.add({
   { '<leader>gc', ':cd ' .. config_path .. '<CR>', desc = '[G]o to [C]onfig' },
   { '<leader>gg', ':cd ~/git <CR>', desc = '[G]o to [G]it directory' },
 })
+
+vim.keymap.set({ 'n', 'i' }, '<C-k>', function()
+  require('lsp_signature').toggle_float_win()
+end, { silent = true, noremap = true, desc = 'toggle signature' })
+
+-- vim.keymap.set({ 'n', 'i' }, '<Leader>k', function()
+--   vim.lsp.buf.signature_help()
+-- end, { silent = true, noremap = true, desc = 'toggle signature' })
 
 vim.keymap.set('n', '<leader>Z', function()
   require('zen-mode').toggle()

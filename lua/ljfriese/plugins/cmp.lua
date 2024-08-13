@@ -4,7 +4,7 @@ return { -- Autocompletio
   event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
     'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-nvim-lsp-signature-help',
+    -- 'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
@@ -16,7 +16,7 @@ return { -- Autocompletio
 
     "kristijanhusak/vim-dadbod-completion",
     'ray-x/cmp-treesitter',
-    -- 'ray-x/cmp-sql',
+
     -- Symbols
     'onsails/lspkind-nvim',
     'kdheepak/cmp-latex-symbols',
@@ -110,6 +110,7 @@ return { -- Autocompletio
       },
       window = {
         completion = {
+          title = 'cmp',
           border = 'rounded',
           winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder,Search:None',
           col_offset = -3,
@@ -123,7 +124,7 @@ return { -- Autocompletio
           menu = {
             otter = '[🦦]',
             nvim_lsp = '[LSP]',
-            nvim_lsp_signature_help = '[sig]',
+            -- nvim_lsp_signature_help = '[sig]',
             luasnip = '[snip]',
             treesitter = '[TS]',
             buffer = '[buf]',
@@ -177,7 +178,7 @@ return { -- Autocompletio
           { name = 'buffer', max_item_count = 3 },
         },
         {
-          { name = 'nvim_lsp_signature_help' },
+          -- { name = 'nvim_lsp_signature_help' },
           { name = 'nvim_lsp' },
           { name = 'treesitter', max_item_count = 3 },
         },
@@ -206,7 +207,7 @@ return { -- Autocompletio
       sources = {
         { name = 'vim-dadbod-completion' },
         { name = 'nvim_lsp' },
-        { name = 'nvim_lsp_signature_help' },
+        -- { name = 'nvim_lsp_signature_help' },
         { name = 'treesitter', max_item_count = 3 },
         { name = 'buffer', max_item_count = 3 },
       },

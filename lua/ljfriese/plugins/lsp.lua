@@ -1,19 +1,22 @@
 return { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
   dependencies = {
-    { 'williamboman/mason.nvim', config = { ui = { border = 'rounded' } } }, -- NOTE: Must be loaded before dependants
+    { 'williamboman/mason.nvim', config = { ui = { title = 'Mason', border = 'rounded' } } }, -- NOTE: Must be loaded before dependants
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     { 'j-hui/fidget.nvim', opts = { notification = { window = { border = 'rounded' } } } },
     'hrsh7th/cmp-nvim-lsp',
-    "ray-x/lsp_signature.nvim",
+    { 'ray-x/lsp_signature.nvim' },
   },
-  config= function()
+  config = function()
     require('lspconfig.ui.windows').default_options.border = 'rounded'
+    -- require('lspconfig.ui.windows').default_options.title = LspInfoList
+
     -- pop up border
     local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
     function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
       opts = opts or {}
+      opts.title = 'LSP'
       opts.border = 'rounded'
       return orig_util_open_floating_preview(contents, syntax, opts, ...)
     end
@@ -21,17 +24,17 @@ return { -- LSP Configuration & Plugins
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event) -- having maps in callback here means the keybinds only exist when lsp is active
-        require("lsp_signature").on_attach({
-          bind = true, -- This is mandatory, otherwise border config won't get registered.
-          handler_opts = {
-            border = "rounded"
-          },
+        require('lsp_signature').on_attach({
           hint_enable = false,
+          hint_inline = function()
+            return 'eol'
+          end,
         })
 
         local map = function(keys, func, desc)
           vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc })
         end
+
         -- Jump to the definition of the word under your cursor.
         --  To jump back, press <C-t>.
         map('gd', require('telescope.builtin').lsp_definitions, '[G]oto [D]efinition')
@@ -46,7 +49,6 @@ return { -- LSP Configuration & Plugins
         map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
         map('<leader>gx', vim.lsp.buf.code_action, 'Execute code action')
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
-
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
@@ -99,22 +101,23 @@ return { -- LSP Configuration & Plugins
       html = { 'html' },
       ruff = { 'python' },
       sqls = {
-        'sql', {
-        cmd = { 'sqls' },
-        filetypes = { 'sql' },
-        settings = {
-          sql = {
-            root_dir = util.root_pattern 'config.yml',
-            single_file_support = true,
-            connections = {
-              {
-                driver = 'sqlite3',
-                dataSourceName = 'file:C:/Users/lucas/project/tutorial.sqlite3',
+        'sql',
+        {
+          cmd = { 'sqls' },
+          filetypes = { 'sql' },
+          settings = {
+            sql = {
+              root_dir = util.root_pattern('config.yml'),
+              single_file_support = true,
+              connections = {
+                {
+                  driver = 'sqlite3',
+                  dataSourceName = 'file:C:/Users/lucas/project/tutorial.sqlite3',
+                },
               },
             },
           },
         },
-      },
       },
       marksman = { filetypes = { 'quarto' }, root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml') },
       r_language_server = {
