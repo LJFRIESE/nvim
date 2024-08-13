@@ -36,7 +36,6 @@ return { -- Autocompletio
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
     end
-
     cmp.setup({
       snippet = {
         expand = function(args)
@@ -47,6 +46,13 @@ return { -- Autocompletio
       completion = { completeopt = 'menu,menuone,noinsert' },
       autocomplete = false,
       mapping = {
+        ['<C-g>'] = function()
+          if cmp.visible_docs() then
+            cmp.close_docs()
+          else
+            cmp.open_docs()
+          end
+        end,
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
 
@@ -204,11 +210,12 @@ return { -- Autocompletio
     -- Setup sql
     cmp.setup.filetype({ 'sql' }, {
       sources = {
-        { name = 'vim-dadbod-completion', max_item_count = 3 },
-        { name = 'sqls', max_item_count = 3 },
-        { name = 'nvim_lsp' },
-        { name = 'treesitter', max_item_count = 3 },
-        { name = 'buffer', max_item_count = 3 },
+        { name = 'luasnip', group_index = 1 },
+        { name = 'nvim_lsp', group_index = 2 },
+        { name = 'vim-dadbod-completion', group_index = 3 },
+        { name = 'sqls', group_index = 4 },
+        { name = 'treesitter', group_index = 5 },
+        { name = 'buffer', group_index = 6 },
       },
     })
     -- `/` cmdline setup.
