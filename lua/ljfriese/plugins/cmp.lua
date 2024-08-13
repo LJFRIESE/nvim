@@ -1,4 +1,4 @@
-return { -- Autocompletion
+return { -- Autocompletio
   lazy = true,
   'hrsh7th/nvim-cmp',
   event = { 'InsertEnter', 'CmdlineEnter' },
@@ -14,6 +14,7 @@ return { -- Autocompletion
     'saadparwaiz1/cmp_luasnip',
     'rafamadriz/friendly-snippets',
 
+    "kristijanhusak/vim-dadbod-completion",
     'ray-x/cmp-treesitter',
     'ray-x/cmp-sql',
     -- Symbols
@@ -118,7 +119,7 @@ return { -- Autocompletion
       },
       formatting = {
         format = lspkind.cmp_format({
-          mode = 'symbol_text',
+          mode = 'symbol',
           menu = {
             otter = '[🦦]',
             nvim_lsp = '[LSP]',
@@ -131,6 +132,7 @@ return { -- Autocompletion
             tags = '[tag]',
             calc = '[calc]',
             latex_symbols = '[tex]',
+            ['vim-dadbod-completion'] = '[DB]',
             sql = '[sql]',
           },
         }),
@@ -169,24 +171,34 @@ return { -- Autocompletion
           -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
           group_index = 0,
         },
-      }, {
-        { name = 'luasnip', max_item_count = 3 },
-        { name = 'buffer', max_item_count = 3 },
-      }, {
-        { name = 'nvim_lsp_signature_help' },
-        { name = 'nvim_lsp' },
-        { name = 'treesitter', max_item_count = 3 },
-      }, {
-        { name = 'otter' }, -- for code chunks in quarto
-        { name = 'path' },
-        -- { name = 'pandoc_references' },
-        { name = 'calc' },
-        { name = 'latex_symbols' },
-        { name = 'cmp_r' },
-      }, {
+        {
+          { name = "vim-dadbod-completion",},
+          { name = 'luasnip', max_item_count = 3 },
+          { name = 'buffer', max_item_count = 3 },
+        },
+        {
+          { name = 'nvim_lsp_signature_help' },
+          { name = 'nvim_lsp' },
+          { name = 'treesitter', max_item_count = 3 },
+        },
+        {
+          { name = 'otter' }, -- for code chunks in quarto
+          { name = 'path' },
+          -- { name = 'pandoc_references' },
+          { name = 'calc' },
+          { name = 'latex_symbols' },
+          { name = 'cmp_r' },
+        },
+      }),
+    })
+
+    -- Setup up vim-dadbod
+    cmp.setup.filetype({ 'sql' }, {
+      sources = {
         { name = 'vim-dadbod-completion' },
         { name = 'sql' },
-      }),
+        { name = 'buffer' },
+      },
     })
     -- `/` cmdline setup.
     cmp.setup.cmdline('/', {

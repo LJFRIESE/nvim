@@ -17,7 +17,7 @@ return {
 
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
-        quarto = { 'lintr' },
+        -- quarto = { 'lintr' },
         sql = { 'sqlfluff' },
       }
 

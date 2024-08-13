@@ -137,3 +137,5 @@ vim.b.slime_cell_delimiter = '```'
 -- matchpairs	list of pairs that match for the "%" command
 -- 	(local to buffer)
 --  	set mps=(:),{:},[:]
+
+vim.g.vim_dadbod_completion_mark = 'MYMARK'

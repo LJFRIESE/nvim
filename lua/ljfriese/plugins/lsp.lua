@@ -98,7 +98,7 @@ return { -- LSP Configuration & Plugins
       prettierd = { 'markdown' },
       html = { 'html' },
       ruff = { 'python' },
-      sqls = { 'sql' },
+      -- sqls = { 'sql' },
       marksman = { filetypes = { 'quarto' }, root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml') },
       r_language_server = {
         settings = {
