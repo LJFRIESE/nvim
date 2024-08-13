@@ -16,7 +16,7 @@ return { -- Autocompletio
 
     "kristijanhusak/vim-dadbod-completion",
     'ray-x/cmp-treesitter',
-    'ray-x/cmp-sql',
+    -- 'ray-x/cmp-sql',
     -- Symbols
     'onsails/lspkind-nvim',
     'kdheepak/cmp-latex-symbols',
@@ -177,7 +177,7 @@ return { -- Autocompletio
         },
         {
           { name = 'nvim_lsp_signature_help' },
-          { name = "vim-dadbod-completion",},
+          -- { name = "vim-dadbod-completion",},
           { name = 'nvim_lsp' },
           { name = 'treesitter', max_item_count = 3 },
         },
@@ -196,7 +196,9 @@ return { -- Autocompletio
     cmp.setup.filetype({ 'sql' }, {
       sources = {
         { name = 'vim-dadbod-completion' },
-        { name = 'sql' },
+        -- { name = 'sql' }
+         { name = 'nvim_lsp' },
+          { name = 'treesitter', max_item_count = 3 },
         { name = 'buffer' },
       },
     })

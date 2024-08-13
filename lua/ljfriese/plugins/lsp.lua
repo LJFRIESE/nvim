@@ -98,32 +98,43 @@ return { -- LSP Configuration & Plugins
       prettierd = { 'markdown' },
       html = { 'html' },
       ruff = { 'python' },
-      sqls = { 'sql' },
-      marksman = { filetypes = { 'quarto' }, root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml') },
-      r_language_server = {
-        settings = {
-          r = {
-            flags = lsp_flags,
-            lsp = {
-              rich_documentation = false,
+      sqls = { 'sql',
+      settings = {
+        sqls = {
+          connections = {
+            {
+              driver = 'sqlite3',
+              dataSourceName = 'sqlite///:tutorial.db',
             },
           },
         },
       },
-      lua_ls = {
-        -- cmd = {...},
-        -- filetypes = { ...},
-        -- capabilities = {},
-        settings = {
-          Lua = {
-            completion = {
-              callSnippet = 'Replace',
-            },
-            diagnostics = { disable = { 'missing-parameter', 'missing-fields' } },
+    },
+    marksman = { filetypes = { 'quarto' }, root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml') },
+    r_language_server = {
+      settings = {
+        r = {
+          flags = lsp_flags,
+          lsp = {
+            rich_documentation = false,
           },
         },
       },
-    }
+    },
+    lua_ls = {
+      -- cmd = {...},
+      -- filetypes = { ...},
+      -- capabilities = {},
+      settings = {
+        Lua = {
+          completion = {
+            callSnippet = 'Replace',
+          },
+          diagnostics = { disable = { 'missing-parameter', 'missing-fields' } },
+        },
+      },
+    },
+  }
 
     require('mason').setup()
     -- You can add other tools here that you want Mason to install
