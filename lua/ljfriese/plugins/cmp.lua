@@ -3,8 +3,9 @@ return { -- Autocompletio
   'hrsh7th/nvim-cmp',
   event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
+    'folke/lazydev.nvim',
     'hrsh7th/cmp-nvim-lsp',
-    -- 'hrsh7th/cmp-nvim-lsp-signature-help',
+    'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
@@ -42,7 +43,7 @@ return { -- Autocompletio
           luasnip.lsp_expand(args.body)
         end,
       },
-      mode = 'symbol_text',
+      mode = 'symbol',
       completion = { completeopt = 'menu,menuone,noinsert' },
       autocomplete = false,
       mapping = {
@@ -124,7 +125,7 @@ return { -- Autocompletio
           menu = {
             otter = '[🦦]',
             nvim_lsp = '[LSP]',
-            -- nvim_lsp_signature_help = '[sig]',
+            nvim_lsp_signature_help = '[sig]',
             luasnip = '[snip]',
             treesitter = '[TS]',
             buffer = '[buf]',
@@ -167,30 +168,29 @@ return { -- Autocompletio
       },
       -- General setup
       sources = cmp.config.sources({
-        {
-          name = 'lazydev',
-          -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
-          group_index = 0,
-        },
-        {
-          { name = 'luasnip', max_item_count = 3 },
-          { name = 'buffer', max_item_count = 3 },
-        },
-        {
-          -- { name = 'nvim_lsp_signature_help' },
-          { name = 'nvim_lsp' },
-          { name = 'treesitter', max_item_count = 3 },
-        },
-        {
-          { name = 'otter' }, -- for code chunks in quarto
-          { name = 'path' },
-          -- { name = 'pandoc_references' },
-          { name = 'calc' },
-          { name = 'latex_symbols' },
-          { name = 'cmp_r' },
-        },
+        name = 'lazydev',
+        -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
+        group_index = 0,
+      }, {
+        { name = 'luasnip', max_item_count = 3 },
+        { name = 'buffer', max_item_count = 3 },
+        group_index = 1,
+      }, {
+        { name = 'nvim_lsp_signature_help' },
+        { name = 'nvim_lsp' },
+        { name = 'treesitter', max_item_count = 3 },
+        group_index = 2,
+      }, {
+        { name = 'otter' }, -- for code chunks in quarto
+        { name = 'path' },
+        -- { name = 'pandoc_references' },
+        { name = 'calc' },
+        { name = 'latex_symbols' },
+        { name = 'cmp_r' },
+        group_index = 3,
       }),
     })
+
     cmp.setup.filetype({ 'markdown' }, {
       sources = {
         { name = 'buffer', max_item_count = 3 },
@@ -204,15 +204,11 @@ return { -- Autocompletio
     -- Setup sql
     cmp.setup.filetype({ 'sql' }, {
       sources = {
-        {
-          { name = 'vim-dadbod-completion', max_item_count = 4 },
-          { name = 'sqls', max_item_count = 4 },
-        },
-        {
-          { name = 'nvim_lsp' },
-          { name = 'treesitter', max_item_count = 3 },
-          { name = 'buffer', max_item_count = 3 },
-        },
+        { name = 'vim-dadbod-completion', max_item_count = 3 },
+        { name = 'sqls', max_item_count = 3 },
+        { name = 'nvim_lsp' },
+        { name = 'treesitter', max_item_count = 3 },
+        { name = 'buffer', max_item_count = 3 },
       },
     })
     -- `/` cmdline setup.
@@ -240,7 +236,8 @@ return { -- Autocompletio
     -- for friendly snippets
     require('luasnip.loaders.from_vscode').lazy_load()
     -- for custom snippets
-    require('luasnip.loaders.from_vscode').lazy_load({ paths = { vim.fn.stdpath('config') .. '/snips' } })
+    -- uncomment if you decide to use them.
+    -- require('luasnip.loaders.from_vscode').lazy_load({ paths = { vim.fn.stdpath('config') .. '/snips' } })
     -- link quarto and rmarkdown to markdown snippets
     luasnip.filetype_extend('quarto', { 'markdown' })
     luasnip.filetype_extend('rmarkdown', { 'markdown' })
