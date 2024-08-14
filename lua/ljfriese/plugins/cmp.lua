@@ -14,21 +14,20 @@ return { -- Autocompletio
     'L3MON4D3/LuaSnip',
     'saadparwaiz1/cmp_luasnip',
     'rafamadriz/friendly-snippets',
-
+    -- 'onsails/lspkind.nvim',
     'kristijanhusak/vim-dadbod-completion',
     'ray-x/cmp-treesitter',
-
     -- Symbols
-    'onsails/lspkind-nvim',
     'kdheepak/cmp-latex-symbols',
-
+    {"lspkind", dir = "$LOCALAPPDATA/nvim/projects/lspkind", dev = true},
     'jmbuhr/otter.nvim',
     'R-nvim/cmp-r',
     -- 'jmbuhr/cmp-pandoc-references',
   },
-
   config = function()
     local cmp = require('cmp')
+    local types = require("cmp.types")
+
     local luasnip = require('luasnip')
     local lspkind = require('lspkind')
     local has_words_before = function()
@@ -36,6 +35,19 @@ return { -- Autocompletio
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
     end
+
+    ---@type table<integer, integer>
+    local modified_priority = {
+      [types.lsp.CompletionItemKind.Variable] = types.lsp.CompletionItemKind.Method,
+      [types.lsp.CompletionItemKind.Snippet] = 0, -- top
+      [types.lsp.CompletionItemKind.Keyword] = 0, -- top
+      [types.lsp.CompletionItemKind.Text] = 100, -- bottom
+    }
+    ---@param kind integer: kind of completion entry
+    local function modified_kind(kind)
+      return modified_priority[kind] or kind
+    end
+
     cmp.setup({
       snippet = {
         expand = function(args)
@@ -152,28 +164,35 @@ return { -- Autocompletio
       experimental = {
         ghost_text = false,
       },
+      matching = {
+        disallow_fuzzy_matching = true,
+        disallow_fullfuzzy_matching = true,
+        disallow_partial_fuzzy_matching = true,
+        disallow_partial_matching = false,
+        disallow_prefix_unmatching = true,
+      },
       sorting = {
         comparators = {
           cmp.config.compare.offset,
           cmp.config.compare.exact,
           cmp.config.compare.recently_used,
-          cmp.config.compare.score,
-          cmp.config.compare.locality,
-          function(entry1, entry2)
-            local _, entry1_under = entry1.completion_item.label:find('^_+')
-            local _, entry2_under = entry2.completion_item.label:find('^_+')
-            entry1_under = entry1_under or 0
-            entry2_under = entry2_under or 0
-            if entry1_under > entry2_under then
-              return false
-            elseif entry1_under < entry2_under then
-              return true
+          function(entry1, entry2) -- sort by compare kind (Variable, Function etc)
+            local kind1 = modified_kind(entry1:get_kind())
+            local kind2 = modified_kind(entry2:get_kind())
+            if kind1 ~= kind2 then
+              return kind1 - kind2 < 0
             end
           end,
-
-          cmp.config.compare.kind,
-          cmp.config.compare.sort_text,
+          function(entry1, entry2) -- score by lsp, if available
+            local t1 = entry1.completion_item.sortText
+            local t2 = entry2.completion_item.sortText
+            if t1 ~= nil and t2 ~= nil and t1 ~= t2 then
+              return t1 < t2
+            end
+          end,
+          cmp.config.compare.locality,
           cmp.config.compare.length,
+          cmp.config.compare.score,
           cmp.config.compare.order,
         },
       },
@@ -222,18 +241,6 @@ return { -- Autocompletio
         { name = 'treesitter' },
         { name = 'buffer' },
       },
-      -- sorting = {
-      --   comparators = {
-      --     cmp.config.compare.length,
-      --     cmp.config.compare.kind,
-      --     cmp.config.compare.offset,
-      --     cmp.config.compare.exact,
-      --     cmp.config.compare.recently_used,
-      --     cmp.config.compare.score,
-      --     cmp.config.compare.sort_text,
-      --     cmp.config.compare.order,
-      --   },
-      -- },
     })
     -- `/` cmdline setup.
     cmp.setup.cmdline({ '/', '?' }, {
