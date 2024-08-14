@@ -15,7 +15,7 @@ return { -- Autocompletio
     'saadparwaiz1/cmp_luasnip',
     'rafamadriz/friendly-snippets',
     -- 'onsails/lspkind.nvim',
-    'kristijanhusak/vim-dadbod-completion',
+    -- 'kristijanhusak/vim-dadbod-completion',
     'ray-x/cmp-treesitter',
     -- Symbols
     'kdheepak/cmp-latex-symbols',
@@ -26,10 +26,10 @@ return { -- Autocompletio
   },
   config = function()
     local cmp = require('cmp')
-    local types = require("cmp.types")
-
     local luasnip = require('luasnip')
+  -- Local lspkind
     local lspkind = require('lspkind')
+
     local has_words_before = function()
       unpack = unpack or table.unpack
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -37,16 +37,6 @@ return { -- Autocompletio
     end
 
     ---@type table<integer, integer>
-    local modified_priority = {
-      [types.lsp.CompletionItemKind.Variable] = types.lsp.CompletionItemKind.Method,
-      [types.lsp.CompletionItemKind.Snippet] = 0, -- top
-      [types.lsp.CompletionItemKind.Keyword] = 0, -- top
-      [types.lsp.CompletionItemKind.Text] = 100, -- bottom
-    }
-    ---@param kind integer: kind of completion entry
-    local function modified_kind(kind)
-      return modified_priority[kind] or kind
-    end
 
     cmp.setup({
       snippet = {
@@ -176,14 +166,9 @@ return { -- Autocompletio
           cmp.config.compare.offset,
           cmp.config.compare.exact,
           cmp.config.compare.recently_used,
-          function(entry1, entry2) -- sort by compare kind (Variable, Function etc)
-            local kind1 = modified_kind(entry1:get_kind())
-            local kind2 = modified_kind(entry2:get_kind())
-            if kind1 ~= kind2 then
-              return kind1 - kind2 < 0
-            end
-          end,
+          cmp.config.compare.kind,
           function(entry1, entry2) -- score by lsp, if available
+            -- print(entry1:get_completion_item().detail))
             local t1 = entry1.completion_item.sortText
             local t2 = entry2.completion_item.sortText
             if t1 ~= nil and t2 ~= nil and t1 ~= t2 then
@@ -235,9 +220,9 @@ return { -- Autocompletio
     cmp.setup.filetype({ 'sql' }, {
       sources = {
         { name = 'nvim_lsp', max_item_count = 4 },
-        { name = 'vim-dadbod-completion', max_item_count = 3 },
+        -- { name = 'vim-dadbod-completion', max_item_count = 3 },
         { name = 'luasnip', max_item_count = 2 },
-        { name = 'sqls' },
+        -- { name = 'sqls' },
         { name = 'treesitter' },
         { name = 'buffer' },
       },
@@ -271,31 +256,31 @@ return { -- Autocompletio
     --         require("module")
     --           ---@diagnostic disable-next-line: duplicate-set-field
     --           require('cmp.entry').get_documentation = function(self)
-    --                 local item = self:get_completion_item()
-    --
-    --                 if item.documentation then
-    --                     return vim.lsp.util.convert_input_to_markdown_lines(item.documentation)
-    --                 end
-    --
-    --                 -- Use the item's detail as a fallback if there's no documentation.
-    --                 if item.detail then
-    --                     local ft = self.context.filetype
-    --                     local dot_index = string.find(ft, '%.')
-    --                     if dot_index ~= nil then
-    --                         ft = string.sub(ft, 0, dot_index - 1)
-    --                     end
-    --                     return (vim.split(('```%s\n%s```'):format(ft, vim.trim(item.detail)), '\n'))
-    --                 end
-    --
-    --                 return {}
-    --             end
-    -- for friendly snippets
-    require('luasnip.loaders.from_vscode').lazy_load()
-    -- for custom snippets
-    -- uncomment if you decide to use them.
-    -- require('luasnip.loaders.from_vscode').lazy_load({ paths = { vim.fn.stdpath('config') .. '/snips' } })
-    -- link quarto and rmarkdown to markdown snippets
-    luasnip.filetype_extend('quarto', { 'markdown' })
-    luasnip.filetype_extend('rmarkdown', { 'markdown' })
-  end,
-}
+      --                 local item = self:get_completion_item()
+      --
+      --                 if item.documentation then
+      --                     return vim.lsp.util.convert_input_to_markdown_lines(item.documentation)
+      --                 end
+      --
+      --                 -- Use the item's detail as a fallback if there's no documentation.
+      --                 if item.detail then
+      --                     local ft = self.context.filetype
+      --                     local dot_index = string.find(ft, '%.')
+      --                     if dot_index ~= nil then
+      --                         ft = string.sub(ft, 0, dot_index - 1)
+      --                     end
+      --                     return (vim.split(('```%s\n%s```'):format(ft, vim.trim(item.detail)), '\n'))
+      --                 end
+      --
+      --                 return {}
+      --             end
+      -- for friendly snippets
+      require('luasnip.loaders.from_vscode').lazy_load()
+      -- for custom snippets
+      -- uncomment if you decide to use them.
+      -- require('luasnip.loaders.from_vscode').lazy_load({ paths = { vim.fn.stdpath('config') .. '/snips' } })
+      -- link quarto and rmarkdown to markdown snippets
+      luasnip.filetype_extend('quarto', { 'markdown' })
+      luasnip.filetype_extend('rmarkdown', { 'markdown' })
+    end,
+  }
