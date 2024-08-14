@@ -22,7 +22,6 @@ return { -- Autocompletio
     {"lspkind", dir = "$LOCALAPPDATA/nvim/projects/lspkind", dev = true},
     'jmbuhr/otter.nvim',
     'R-nvim/cmp-r',
-    -- 'jmbuhr/cmp-pandoc-references',
   },
   config = function()
     local cmp = require('cmp')
@@ -121,8 +120,6 @@ return { -- Autocompletio
           title = 'Suggestions',
           border = 'rounded',
           winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder,Search:None',
-          -- col_offset = -3,
-          -- side_padding = 0,
         },
         documentation = {
           title = 'Documentation',
@@ -155,18 +152,26 @@ return { -- Autocompletio
         ghost_text = false,
       },
       matching = {
-        disallow_fuzzy_matching = true,
+        -- see https://github.com/hrsh7th/nvim-cmp/blob/a110e12d0b58eefcf5b771f533fc2cf3050680ac/lua/cmp/matcher_spec.lua#L39
+        -- matcher spec tests provide useful examples.
+        -- Below command can inspect match scoring.
+        -- :=require('cmp.matcher').match('RCC', 'CJB_RCCS_VW', {disallow_fuzzy_matching = true, disallow_fullfuzzy_matching = true, disallow_partial_fuzzy_matching = true, disallow_partial_matching = false, disallow_prefix_unmatching = false})
+        disallow_fuzzy_matching = false,
         disallow_fullfuzzy_matching = true,
-        disallow_partial_fuzzy_matching = true,
+        disallow_partial_fuzzy_matching = false,
         disallow_partial_matching = false,
-        disallow_prefix_unmatching = true,
+        disallow_prefix_unmatching = false,
+        disallow_symbol_nonprefix_matching = true,
       },
       sorting = {
         comparators = {
           cmp.config.compare.offset,
+          cmp.config.compare.scopes,
           cmp.config.compare.exact,
           cmp.config.compare.recently_used,
           cmp.config.compare.kind,
+          cmp.config.compare.score,
+          cmp.config.compare.length,
           function(entry1, entry2) -- score by lsp, if available
             -- print(entry1:get_completion_item().detail))
             local t1 = entry1.completion_item.sortText
@@ -176,8 +181,6 @@ return { -- Autocompletio
             end
           end,
           cmp.config.compare.locality,
-          cmp.config.compare.length,
-          cmp.config.compare.score,
           cmp.config.compare.order,
         },
       },
@@ -191,8 +194,8 @@ return { -- Autocompletio
         { name = 'buffer', max_item_count = 3 },
         group_index = 1,
       }, {
-        { name = 'nvim_lsp_signature_help' },
         { name = 'nvim_lsp' },
+        { name = 'nvim_lsp_signature_help' },
         { name = 'treesitter', max_item_count = 3 },
         group_index = 2,
       }, {
@@ -219,10 +222,10 @@ return { -- Autocompletio
     -- Setup sql
     cmp.setup.filetype({ 'sql' }, {
       sources = {
-        { name = 'nvim_lsp', max_item_count = 4 },
-        -- { name = 'vim-dadbod-completion', max_item_count = 3 },
-        { name = 'luasnip', max_item_count = 2 },
-        -- { name = 'sqls' },
+        { name = 'nvim_lsp', },
+        { name = 'nvim_lsp_signature_help' },
+        { name = 'vim-dadbod-completion', max_item_count = 3 },
+        { name = 'luasnip', max_item_count = 3 },
         { name = 'treesitter' },
         { name = 'buffer' },
       },
