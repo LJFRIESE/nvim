@@ -111,7 +111,6 @@ return { -- Autocompletio
           end
         end, { 'i', 's' }),
       },
-      ---@diagnostic disable-next-line: missing-fields
       view = {
         entries = 'custom',
       },
@@ -127,6 +126,8 @@ return { -- Autocompletio
           title = 'Documentation',
           border = 'rounded',
           winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder,Search:None',
+          max_height = math.floor(vim.o.lines * 0.5),
+          max_width = math.floor(vim.o.columns * 0.4),
         },
       },
       formatting = {
@@ -217,9 +218,9 @@ return { -- Autocompletio
         { name = 'nvim_lsp', max_item_count = 4 },
         { name = 'vim-dadbod-completion', max_item_count = 3 },
         { name = 'luasnip', max_item_count = 2 },
-        { name = 'sqls'},
-        { name = 'treesitter'},
-        { name = 'buffer'},
+        { name = 'sqls' },
+        { name = 'treesitter' },
+        { name = 'buffer' },
       },
       -- sorting = {
       --   comparators = {
@@ -241,6 +242,7 @@ return { -- Autocompletio
         { name = 'buffer' },
       },
     })
+
     -- `:` cmdline setup.
     cmp.setup.cmdline(':', {
       mapping = cmp.mapping.preset.cmdline(),
@@ -256,6 +258,30 @@ return { -- Autocompletio
       }),
       matching = { disallow_symbol_nonprefix_matching = false },
     })
+
+    -- interesting idea to explore for formatting documentation
+    -- https://github.com/MariaSolOs/dotfiles/blob/e61e14e92aef1f8229d4b86498f40f1c97e45f9c/.config/nvim/lua/plugins/nvim-cmp.lua
+    --         require("module")
+    --           ---@diagnostic disable-next-line: duplicate-set-field
+    --           require('cmp.entry').get_documentation = function(self)
+    --                 local item = self:get_completion_item()
+    --
+    --                 if item.documentation then
+    --                     return vim.lsp.util.convert_input_to_markdown_lines(item.documentation)
+    --                 end
+    --
+    --                 -- Use the item's detail as a fallback if there's no documentation.
+    --                 if item.detail then
+    --                     local ft = self.context.filetype
+    --                     local dot_index = string.find(ft, '%.')
+    --                     if dot_index ~= nil then
+    --                         ft = string.sub(ft, 0, dot_index - 1)
+    --                     end
+    --                     return (vim.split(('```%s\n%s```'):format(ft, vim.trim(item.detail)), '\n'))
+    --                 end
+    --
+    --                 return {}
+    --             end
     -- for friendly snippets
     require('luasnip.loaders.from_vscode').lazy_load()
     -- for custom snippets
