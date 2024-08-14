@@ -1,7 +1,7 @@
 return { -- Autocompletio
   lazy = true,
   'hrsh7th/nvim-cmp',
-  event = { 'InsertEnter', 'CmdlineEnter' },
+
   dependencies = {
     'folke/lazydev.nvim',
     'hrsh7th/cmp-nvim-lsp',
@@ -10,8 +10,34 @@ return { -- Autocompletio
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
     'hrsh7th/cmp-calc',
+    {
+      'L3MON4D3/LuaSnip',
+      opts = function()
+        local types = require('luasnip.util.types')
 
-    'L3MON4D3/LuaSnip',
+        return {
+          -- Check if the current snippet was deleted.
+          delete_check_events = 'TextChanged',
+          -- Display a cursor-like placeholder in unvisited nodes
+          -- of the snippet.
+          ext_opts = {
+            [types.insertNode] = {
+              unvisited = {
+                virt_text = { { '|', 'Conceal' } },
+                virt_text_pos = 'inline',
+              },
+            },
+            -- In sqls snippets this is leaving a | after the final ;
+            -- [types.exitNode] = {
+            --   unvisited = {
+            --     virt_text = { { '|', 'Conceal' } },
+            --     virt_text_pos = 'inline',
+            --   },
+            -- },
+          },
+        }
+      end,
+    },
     'saadparwaiz1/cmp_luasnip',
     'rafamadriz/friendly-snippets',
     -- 'onsails/lspkind.nvim',
@@ -19,15 +45,17 @@ return { -- Autocompletio
     'ray-x/cmp-treesitter',
     -- Symbols
     'kdheepak/cmp-latex-symbols',
-    {"lspkind", dir = "$LOCALAPPDATA/nvim/projects/lspkind", dev = true},
+    { 'lspkind', dir = '$LOCALAPPDATA/nvim/projects/lspkind', dev = true },
     'jmbuhr/otter.nvim',
     'R-nvim/cmp-r',
   },
-  config = function()
+  event = { 'InsertEnter', 'CmdlineEnter' },
+  opts = function()
     local cmp = require('cmp')
     local luasnip = require('luasnip')
-  -- Local lspkind
-    local lspkind = require('lspkind')
+    local lspkind = require('lspkind') -- Local lspkind
+
+    local winhighlight = 'Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None'
 
     local has_words_before = function()
       unpack = unpack or table.unpack
@@ -35,15 +63,21 @@ return { -- Autocompletio
       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
     end
 
-    ---@type table<integer, integer>
+    -- for friendly snippets
+    require('luasnip.loaders.from_vscode').lazy_load()
+    -- for custom snippets
+    -- uncomment if you decide to use them.
+    -- require('luasnip.loaders.from_vscode').lazy_load({ paths = { vim.fn.stdpath('config') .. '/snips' } })
+    -- link quarto and rmarkdown to markdown snippets
+    luasnip.filetype_extend('quarto', { 'markdown' })
+    luasnip.filetype_extend('rmarkdown', { 'markdown' })
 
-    cmp.setup({
+    return {
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
         end,
       },
-      mode = 'symbol',
       completion = { completeopt = 'menu,menuone,noinsert' },
       autocomplete = false,
       mapping = {
@@ -119,12 +153,12 @@ return { -- Autocompletio
         completion = {
           title = 'Suggestions',
           border = 'rounded',
-          winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder,Search:None',
+          winhighlight = winhighlight,
         },
         documentation = {
           title = 'Documentation',
           border = 'rounded',
-          winhighlight = 'Normal:Pmenu,FloatBorder:FloatBorder,Search:None',
+          winhighlight = winhighlight,
           max_height = math.floor(vim.o.lines * 0.5),
           max_width = math.floor(vim.o.columns * 0.4),
         },
@@ -132,7 +166,7 @@ return { -- Autocompletio
       formatting = {
         format = lspkind.cmp_format({
           maxwidth = 50,
-          ellipsis_char= '...',
+          ellipsis_char = '...',
           mode = 'symbol',
           menu = {
             otter = '[🦦]',
@@ -209,8 +243,32 @@ return { -- Autocompletio
         { name = 'cmp_r' },
         group_index = 3,
       }),
-    })
+    }
+  end,
+  config = function(_, opts)
+    local cmp = require('cmp')
 
+    ---@diagnostic disable-next-line: duplicate-set-field
+    require('cmp.entry').get_documentation = function(self)
+      local item = self:get_completion_item()
+
+      if item.documentation then
+        return vim.lsp.util.convert_input_to_markdown_lines(item.documentation)
+      end
+
+      -- Use the item's detail as a fallback if there's no documentation.
+      if item.detail then
+        local ft = self.context.filetype
+        local dot_index = string.find(ft, '%.')
+        if dot_index ~= nil then
+          ft = string.sub(ft, 0, dot_index - 1)
+        end
+        return (vim.split(('```%s\n%s```'):format(ft, vim.trim(item.detail)), '\n'))
+      end
+
+      return {}
+    end
+    cmp.setup(opts)
     cmp.setup.filetype({ 'markdown' }, {
       sources = {
         { name = 'buffer', max_item_count = 3 },
@@ -224,9 +282,9 @@ return { -- Autocompletio
     -- Setup sql
     cmp.setup.filetype({ 'sql' }, {
       sources = {
-        { name = 'nvim_lsp', },
+        { name = 'nvim_lsp' },
         { name = 'nvim_lsp_signature_help' },
-        { name = 'vim-dadbod-completion'},
+        { name = 'vim-dadbod-completion' },
         { name = 'luasnip', max_item_count = 3 },
         { name = 'treesitter' },
         { name = 'buffer' },
@@ -255,37 +313,7 @@ return { -- Autocompletio
       }),
       matching = { disallow_symbol_nonprefix_matching = false },
     })
-
-    -- interesting idea to explore for formatting documentation
-    -- https://github.com/MariaSolOs/dotfiles/blob/e61e14e92aef1f8229d4b86498f40f1c97e45f9c/.config/nvim/lua/plugins/nvim-cmp.lua
-    --         require("module")
-    --           ---@diagnostic disable-next-line: duplicate-set-field
-    --           require('cmp.entry').get_documentation = function(self)
-      --                 local item = self:get_completion_item()
-      --
-      --                 if item.documentation then
-      --                     return vim.lsp.util.convert_input_to_markdown_lines(item.documentation)
-      --                 end
-      --
-      --                 -- Use the item's detail as a fallback if there's no documentation.
-      --                 if item.detail then
-      --                     local ft = self.context.filetype
-      --                     local dot_index = string.find(ft, '%.')
-      --                     if dot_index ~= nil then
-      --                         ft = string.sub(ft, 0, dot_index - 1)
-      --                     end
-      --                     return (vim.split(('```%s\n%s```'):format(ft, vim.trim(item.detail)), '\n'))
-      --                 end
-      --
-      --                 return {}
-      --             end
-      -- for friendly snippets
-      require('luasnip.loaders.from_vscode').lazy_load()
-      -- for custom snippets
-      -- uncomment if you decide to use them.
-      -- require('luasnip.loaders.from_vscode').lazy_load({ paths = { vim.fn.stdpath('config') .. '/snips' } })
-      -- link quarto and rmarkdown to markdown snippets
-      luasnip.filetype_extend('quarto', { 'markdown' })
-      luasnip.filetype_extend('rmarkdown', { 'markdown' })
-    end,
-  }
+    -- Inside a snippet, use backspace to remove the placeholder.
+    vim.keymap.set('s', '<BS>', '<C-O>s')
+  end,
+}

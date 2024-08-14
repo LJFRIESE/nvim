@@ -3,7 +3,7 @@ return { -- LSP Configuration & Plugins
   dependencies = {
     {
       'williamboman/mason.nvim',
-      config = { ui = { title = 'Mason', border = 'rounded' }, },
+      config = { ui = { title = 'Mason', border = 'rounded' } },
     }, -- NOTE: Must be loaded before dependants
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
