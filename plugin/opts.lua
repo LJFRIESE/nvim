@@ -100,7 +100,7 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 
 -- Max n suggestions in popups
-vim.opt.pumheight = 7
+vim.opt.pumheight = 10
 
 -- windows
 vim.opt.splitright = true

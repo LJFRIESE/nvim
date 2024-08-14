@@ -131,6 +131,8 @@ return { -- Autocompletio
       },
       formatting = {
         format = lspkind.cmp_format({
+          maxwidth = 50,
+          ellipsis_char= '...',
           mode = 'symbol',
           menu = {
             otter = '[🦦]',
@@ -158,7 +160,7 @@ return { -- Autocompletio
         -- :=require('cmp.matcher').match('RCC', 'CJB_RCCS_VW', {disallow_fuzzy_matching = true, disallow_fullfuzzy_matching = true, disallow_partial_fuzzy_matching = true, disallow_partial_matching = false, disallow_prefix_unmatching = false})
         disallow_fuzzy_matching = false,
         disallow_fullfuzzy_matching = true,
-        disallow_partial_fuzzy_matching = false,
+        disallow_partial_fuzzy_matching = true,
         disallow_partial_matching = false,
         disallow_prefix_unmatching = false,
         disallow_symbol_nonprefix_matching = true,
@@ -166,12 +168,13 @@ return { -- Autocompletio
       sorting = {
         comparators = {
           cmp.config.compare.offset,
-          cmp.config.compare.scopes,
           cmp.config.compare.exact,
-          cmp.config.compare.recently_used,
-          cmp.config.compare.kind,
+          cmp.config.compare.scopes,
           cmp.config.compare.score,
+          cmp.config.compare.kind,
+          cmp.config.compare.recently_used,
           cmp.config.compare.length,
+          cmp.config.compare.locality,
           function(entry1, entry2) -- score by lsp, if available
             -- print(entry1:get_completion_item().detail))
             local t1 = entry1.completion_item.sortText
@@ -180,7 +183,6 @@ return { -- Autocompletio
               return t1 < t2
             end
           end,
-          cmp.config.compare.locality,
           cmp.config.compare.order,
         },
       },
@@ -224,7 +226,7 @@ return { -- Autocompletio
       sources = {
         { name = 'nvim_lsp', },
         { name = 'nvim_lsp_signature_help' },
-        { name = 'vim-dadbod-completion', max_item_count = 3 },
+        { name = 'vim-dadbod-completion'},
         { name = 'luasnip', max_item_count = 3 },
         { name = 'treesitter' },
         { name = 'buffer' },
