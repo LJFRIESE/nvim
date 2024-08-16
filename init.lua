@@ -4,10 +4,11 @@ vim.g.projects_dir = vim.env.HOME .. '/projects'
 vim.g.mapleader = ' '
 
 -- Set my colorscheme.
-vim.cmd.colorscheme 'miss-dracula'
+vim.cmd.colorscheme 'rose-akai'
 
 --Install lazy
 local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
+---@diagnostic disable-next-line
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
     'git',

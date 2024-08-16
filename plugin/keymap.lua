@@ -2,7 +2,8 @@ vim.keymap.set('n', '<M-l>', 'D')
 -- Manipulate text
 vim.keymap.set({ 'n', 'x' }, '<leader>d', '"_d', { desc = '[d]elete | Black hole' })
 vim.keymap.set({ 'n', 'x' }, '<leader>p', [["_dP]], { desc = '[P]aste over | Black hole' })
--- vim.keymap.set('n', '<c-p>', 'o<c-r>"<esc>', { desc = '[P]aste | New line' })
+vim.keymap.set('n', '<c-p>', 'o<c-r>"<esc>', { desc = '[P]aste | New line' })
+
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move text down' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move text up' })
 
@@ -32,9 +33,9 @@ vim.keymap.set({ 'n' }, '<c-c>t', ':split<cr>:terminal<cr>i', { desc = '[t]ermin
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'Escape terminal' })
 -- vim.keymap.set({ 'n' }, '<leader>i', '<esc>i```{r}<cr>```<esc>O', { desc = '[i]nsert code chunk' })
 
-vim.keymap.set('n', '<leader>c', function()
-  require('nvim-highlight-colors').toggle()
-end, { desc = 'Toggle [c]olours' })
+vim.keymap.set('n', '<leader>gcc', 'O---@diagnostic disable-next-line<esc>j', {desc = 'disable diagnostic' })
+
+
 
 vim.keymap.set('', '<leader>bf', function()
   require('conform').format({ async = true }, function(err)

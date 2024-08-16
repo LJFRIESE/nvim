@@ -1,7 +1,6 @@
 return { -- Autocompletio
   lazy = true,
   'hrsh7th/nvim-cmp',
-
   dependencies = {
     'folke/lazydev.nvim',
     'hrsh7th/cmp-nvim-lsp',
@@ -40,7 +39,6 @@ return { -- Autocompletio
     },
     'saadparwaiz1/cmp_luasnip',
     'rafamadriz/friendly-snippets',
-    -- 'onsails/lspkind.nvim',
     -- 'kristijanhusak/vim-dadbod-completion',
     'ray-x/cmp-treesitter',
     -- Symbols
@@ -221,11 +219,8 @@ return { -- Autocompletio
         },
       },
       -- General setup
-      sources = cmp.config.sources({
-        name = 'lazydev',
-        -- set group index to 0 to skip loading LuaLS completions as lazydev recommends it
-        group_index = 0,
-      }, {
+      sources = cmp.config.sources(
+      {
         { name = 'luasnip', max_item_count = 3 },
         { name = 'buffer', max_item_count = 3 },
         group_index = 1,
