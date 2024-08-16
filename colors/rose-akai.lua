@@ -159,7 +159,7 @@ local function make_border(fg)
 end
 
 local highlights = {}
-
+-- Treesitter highlights first, then lsp groups follow
 local default_highlights = {
   ColorColumn = { bg = palette.surface },
   Conceal = { bg = 'NONE' },
@@ -181,7 +181,7 @@ local default_highlights = {
   Directory = { fg = palette.foam, bold = styles.bold },
   -- EndOfBuffer = {},
   ErrorMsg = { fg = groups.error, bold = styles.bold },
-  FloatBorder = { fg = palette.gold },
+  FloatBorder = { fg = groups.border },
   FloatcwFooter = { fg = palette.gold },
   FloatTitle = { fg = palette.gold },
   FoldColumn = { fg = palette.muted },
@@ -210,7 +210,7 @@ local default_highlights = {
   RedrawDebugClear = { fg = palette.base, bg = palette.gold },
   RedrawDebugComposed = { fg = palette.base, bg = palette.pine },
   RedrawDebugRecompose = { fg = palette.base, bg = palette.love },
-  Search = { fg = palette.base, bg = palette.rose },
+  Search = { link = 'IncSearch' },
   SignColumn = { fg = palette.text, bg = 'NONE' },
   SpecialKey = { fg = palette.foam },
   SpellBad = { sp = palette.subtle, undercurl = true },
@@ -279,7 +279,7 @@ local default_highlights = {
   Exception = { fg = palette.pine },
   Float = { fg = palette.gold },
   Function = { fg = palette.pine },
-  Identifier = { fg = palette.text },
+  Identifier = { fg = palette.iris },
   Include = { fg = palette.pine },
   Keyword = { fg = palette.love },
   Label = { fg = palette.foam },
@@ -359,8 +359,8 @@ local default_highlights = {
   --- Identifiers
   ['@variable'] = { fg = palette.text, italic = styles.italic },
   ['@variable.builtin'] = { fg = palette.love, bold = styles.bold },
-  ['@variable.parameter'] = { fg = palette.iris, italic = styles.italic },
-  ['@variable.member'] = { fg = palette.foam },
+  ['@variable.parameter'] = { fg = palette.foam, italic = styles.italic },
+  ['@variable.member'] = { fg = palette.iris },
 
   ['@constant'] = { fg = palette.gold },
   ['@constant.builtin'] = { fg = palette.gold, bold = styles.bold },
@@ -697,34 +697,6 @@ local default_highlights = {
   NeorgHeading6Title = { link = 'markdownH6' },
   NeorgMarkerTitle = { fg = palette.foam, bold = styles.bold },
 
-  -- tami5/lspsaga.nvim (fork of glepnir/lspsaga.nvim)
-  DefinitionCount = { fg = palette.rose },
-  DefinitionIcon = { fg = palette.rose },
-  DefinitionPreviewTitle = { fg = palette.rose, bold = styles.bold },
-  LspFloatWinBorder = make_border(),
-  LspFloatWinNormal = { bg = groups.panel },
-  LspSagaAutoPreview = { fg = palette.subtle },
-  LspSagaCodeActionBorder = make_border(palette.rose),
-  LspSagaCodeActionContent = { fg = palette.foam },
-  LspSagaCodeActionTitle = { fg = palette.gold, bold = styles.bold },
-  LspSagaCodeActionTruncateLine = { link = 'LspSagaCodeActionBorder' },
-  LspSagaDefPreviewBorder = make_border(),
-  LspSagaDiagnosticBorder = make_border(palette.gold),
-  LspSagaDiagnosticHeader = { fg = palette.foam, bold = styles.bold },
-  LspSagaDiagnosticTruncateLine = { link = 'LspSagaDiagnosticBorder' },
-  LspSagaDocTruncateLine = { link = 'LspSagaHoverBorder' },
-  LspSagaFinderSelection = { fg = palette.gold },
-  LspSagaHoverBorder = { link = 'LspFloatWinBorder' },
-  LspSagaLspFinderBorder = { link = 'LspFloatWinBorder' },
-  LspSagaRenameBorder = make_border(palette.pine),
-  LspSagaRenamePromptPrefix = { fg = palette.love },
-  LspSagaShTruncateLine = { link = 'LspSagaSignatureHelpBorder' },
-  LspSagaSignatureHelpBorder = make_border(palette.foam),
-  ReferencesCount = { fg = palette.rose },
-  ReferencesIcon = { fg = palette.rose },
-  SagaShadow = { bg = palette.overlay },
-  TargetWord = { fg = palette.iris },
-
   -- ray-x/lsp_signature.nvim
   LspSignatureActiveParameter = { bg = palette.overlay },
 
@@ -1052,13 +1024,13 @@ local transparency_highlights = {
   DiagnosticVirtualTextOk = { fg = groups.ok },
   DiagnosticVirtualTextWarn = { fg = groups.warn },
 
-  FloatBorder = { fg = palette.gold, bg = 'NONE' },
-  FloatTitle = { fg = palette.foam, bg = 'NONE', bold = styles.bold },
+  FloatBorder = { fg = groups.border, bg = 'NONE' },
+  FloatTitle = { fg = groups.border, bg = 'NONE', bold = styles.bold },
   Folded = { fg = palette.text, bg = 'NONE' },
   NormalFloat = { bg = 'NONE' },
   Normal = { fg = palette.text, bg = 'NONE' },
   NormalNC = { fg = palette.text, bg = config.dim_inactive_windows and palette._nc or 'NONE' },
-  Pmenu = { fg = palette.subtle, bg = 'NONE' },
+  Pmenu = { fg = palette.gold, bg = 'NONE' },
   PmenuKind = { fg = palette.foam, bg = 'NONE' },
   SignColumn = { fg = palette.text, bg = 'NONE' },
   StatusLine = { fg = palette.subtle, bg = 'NONE' },
