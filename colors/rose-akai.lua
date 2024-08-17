@@ -161,10 +161,10 @@ end
 local highlights = {}
 -- Treesitter highlights first, then lsp groups follow
 local default_highlights = {
-  ColorColumn = { bg = palette.surface },
+  ColorColumn = { bg = palette.overlay },
   Conceal = { bg = 'NONE' },
   CurSearch = { fg = palette.base, bg = palette.gold },
-  Cursor = { fg = palette.text, bg = palette.highlight_high },
+  Cursor = { fg = palette.text, bg = palette.foam},
   CursorColumn = { bg = palette.overlay },
   -- CursorIM = {},
   CursorLine = { bg = palette.overlay },
@@ -188,7 +188,7 @@ local default_highlights = {
   Folded = { fg = palette.text, bg = groups.panel },
   IncSearch = { link = 'CurSearch' },
   LineNr = { fg = palette.subtle },
-  MatchParen = { fg = palette.muted, bg = palette.leaf, blend = 100 },
+  MatchParen = { link = 'CurSearch'},
   ModeMsg = { fg = palette.subtle },
   MoreMsg = { fg = palette.iris },
   NonText = { fg = palette.muted },
@@ -518,6 +518,7 @@ local default_highlights = {
   ['@lsp.typemod.variable.injected'] = { link = '@variable' },
 
   --- Plugins
+
   -- romgrk/barbar.nvim
   BufferCurrent = { fg = palette.text, bg = palette.overlay },
   BufferCurrentIndex = { fg = palette.text, bg = palette.overlay },
@@ -1048,6 +1049,7 @@ local transparency_highlights = {
   TelescopeSelection = { fg = palette.text, bg = 'NONE', bold = styles.bold },
   TelescopeSelectionCaret = { fg = palette.rose },
 
+
   WhichKeyFloat = { bg = 'NONE' },
   WhichKeyNormal = { bg = 'NONE' },
 
@@ -1136,36 +1138,14 @@ if config.enable.terminal then
   vim.g.terminal_color_15 = palette.text -- bright white
 
   -- Support StatusLineTerm & StatusLineTermNC from vim
-  vim.cmd([[
-  augroup rose-pine
-  autocmd!
-  autocmd TermOpen * if &buftype=='terminal'
-  \|setlocal winhighlight=StatusLine:StatusLineTerm,StatusLineNC:StatusLineTermNC
-  \|else|setlocal winhighlight=|endif
-  autocmd ColorSchemePre * autocmd! rose-pine
-  augroup END
-  ]])
+  -- vim.cmd([[
+  -- augroup rose-pine
+  -- autocmd!
+  -- autocmd TermOpen * if &buftype=='terminal'
+  -- \|setlocal winhighlight=StatusLine:StatusLineTerm,StatusLineNC:StatusLineTermNC
+  -- \|else|setlocal winhighlight=|endif
+  -- autocmd ColorSchemePre * autocmd! rose-pine
+  -- augroup END
+  -- ]])
 end
 
---- Types
--- ["@boolean"] = { fg = palette.rose },
--- ["@number"] = { fg = palette.rose },
--- ["@number.float"] = { fg = palette.rose },
-
--- ["@attribute"] = {},
-
---- Keywords
-
-
-
-
-
--- },
---
--- Change palette colo
--- if highlight.fg == palette.pine then
---     highlight.fg = palette.foam
--- end
--- end,
-
--- })

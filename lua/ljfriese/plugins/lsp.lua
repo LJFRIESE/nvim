@@ -7,7 +7,7 @@ return { -- LSP Configuration & Plugins
     },
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
-    { 'j-hui/fidget.nvim', opts = { notification = { window = { border = 'rounded' } } } },
+    { 'j-hui/fidget.nvim', opts = { notification = { window = { winblend = 0, border = 'rounded' } } } },
     'hrsh7th/cmp-nvim-lsp',
     { 'ray-x/lsp_signature.nvim' },
     'https://git.sr.ht/~whynothugo/lsp_lines.nvim',

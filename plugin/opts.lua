@@ -77,8 +77,8 @@ vim.g.netrw_keepdir = 0 --have cd follow browsing
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 vim.opt.termguicolors = true
-vim.opt.guicursor = ''
-vim.opt.colorcolumn = { '80' }
+vim.opt.guicursor = 'n-v-c-sm:block,i-ci-ve:ver100-Cursor,r-cr-o:hor100'
+vim.opt.colorcolumn = { '88' }
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
