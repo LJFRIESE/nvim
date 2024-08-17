@@ -1,4 +1,5 @@
 local slow_format_filetypes = {}
+-- local log = require("conform.log")
 return {
   -- Linting
   {
@@ -46,7 +47,7 @@ return {
       notify_on_error = true,
       formatters = {
         sqlfluff = {
-          args = { 'fix', '--dialect=oracle', '--processes=-1', '-' },
+          args = { 'fix', '--dialect=oracle', '--processes=-1' },
         },
       },
       -- Mason installs LSP, formatters, and linters.
@@ -74,7 +75,7 @@ return {
           end
         end
 
-        return { timeout_ms = 200, lsp_format = 'fallback' }, on_format
+        return { timeout_ms = 500, lsp_format = 'fallback' }, on_format
       end,
 
       format_after_save = function(bufnr)
