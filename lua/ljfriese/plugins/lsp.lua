@@ -1,10 +1,10 @@
 return { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
-  event = 'VeryLazy',
+  -- event = 'VeryLazy',
   dependencies = {
     {
       'williamboman/mason.nvim',
-      config = { ui = { title = 'Mason', border = 'rounded' } },
+      opts = { ui = { title = 'Mason', border = 'rounded' } },
     },
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
@@ -178,7 +178,7 @@ return { -- LSP Configuration & Plugins
         'lua_ls',
         'ruff',
         'sqls',
-        'markdown-oxide',
+        'markdown_oxide',
         'stylua',
         'sqlfluff',
         'tree-sitter-cli',
