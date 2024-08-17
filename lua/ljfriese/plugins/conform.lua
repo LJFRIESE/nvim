@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-local slow_format_filetypes = {}
--- local log = require("conform.log")
-=======
->>>>>>> af86fb1 (pl no conform)
 return {
   -- Linting
   {
@@ -14,11 +9,15 @@ return {
       local sqlfluff = require('lint').linters.sqlfluff
       sqlfluff.args = {
         'lint',
+        -- '--logger=parser' ,
         '--format=json',
         '--dialect=oracle',
         '--processes=-1',
       }
-
+      --https://github.com/mfussenegger/nvim-lint/blob/debabca63c0905b59ce596a55a8e33eafdf66342/lua/lint/linters/sqlfluff.lua#L40C1-L40C54
+--             severity = vim.diagnostic.severity.ERROR,
+--             Should all lints be ERROR???
+-- why isn't it returning unparsable?
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
         -- quarto = { 'lintr' },
@@ -56,17 +55,19 @@ return {
     }
     },
     opts = {
-<<<<<<< HEAD
-      -- log_level = vim.log.levels.DEBUG,
+      log_level = vim.log.levels.DEBUG,
       notify_on_error = true,
       formatters = {
         sqlfluff = {
-          args = { 'fix', '--dialect=oracle', '--processes=-1' },
+          args = {
+            'fix',
+            -- '--format=json',
+            '--logger=parser' ,
+            '--dialect=oracle',
+            '--processes=-1'
+          },
         },
       },
-=======
-      log_level = vim.log.levels.DEBUG,
->>>>>>> af86fb1 (pl no conform)
       -- Mason installs LSP, formatters, and linters.
       -- When possible, ensure installs over here: ./lsp.lua
       formatters_by_ft = {
@@ -90,27 +91,7 @@ return {
           end
           return { timeout_ms = 500, lsp_format = 'fallback' }
         end,
-
-<<<<<<< HEAD
-        return { timeout_ms = 500, lsp_format = 'fallback' }, on_format
-      end,
-
-      format_after_save = function(bufnr)
-        if not slow_format_filetypes[vim.bo[bufnr].filetype] then
-          return
-        end
-        return { lsp_format = 'fallback' }
-      end,
-=======
-        -- log_level = vim.log.levels.DEBUG,
-        notify_on_error = true,
-        formatters = {
-          sqlfluff = {
-            args = { 'fix', '--dialect=oracle', '--processes=-1', '-' },
-          },
-        },
-      },
->>>>>>> af86fb1 (pl no conform)
+              },
     },
     config = function()
       vim.api.nvim_create_user_command('FormatDisable', function(args)
