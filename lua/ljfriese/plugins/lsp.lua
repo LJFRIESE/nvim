@@ -178,6 +178,7 @@ return { -- LSP Configuration & Plugins
         'lua_ls',
         'ruff',
         'sqls',
+        'prettierd',
         'markdown_oxide',
         'stylua',
         'sqlfluff',

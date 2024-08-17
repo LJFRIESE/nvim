@@ -42,7 +42,7 @@ return {
   {
     'stevearc/conform.nvim',
     event = { 'BufWritePre' },
-    cmd = { 'ConformInfo' },
+    -- cmd = { 'ConformInfo' },
     keys = {
       {
         '<leader>bf',
@@ -70,7 +70,7 @@ return {
       -- Mason installs LSP, formatters, and linters.
       -- When possible, ensure installs over here: ./lsp.lua
       formatters_by_ft = {
-        markdown = { 'markdown-oxide' },
+        markdown = { 'prettierd', },
         python = { 'ruff_format' },
         lua = { 'stylua' },
         sql = { 'sqlfluff' },

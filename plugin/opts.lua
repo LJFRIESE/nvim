@@ -115,10 +115,9 @@ vim.opt.expandtab = true
 vim.opt.smartindent = true
 
 -- Enable break indent
-vim.opt.wrap = false
+vim.opt.wrap = true
+vim.opt.linebreak = true
 
--- Undo
-vim.opt.swapfile = false
 vim.opt.backup = false
 vim.opt.undofile = true
 
