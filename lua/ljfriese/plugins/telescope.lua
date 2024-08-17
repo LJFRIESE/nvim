@@ -16,25 +16,23 @@ return { -- nuzzy Finder (files, lsp, etc)
     { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
   },
   config = function()
-    -- Two important keymaps to use while in Telescope are:
-    --  - Insert mode: <c-/>
-    --  - Normal mode: ?
-    --
-    -- This opens a window that shows you all of the keymaps for the current
-    -- Telescope picker.
-
     local builtin = require('telescope.builtin')
+    local utils = require('telescope.utils')
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[H]elp' })
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[K]eymaps' })
-    vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[F]iles' })
-    vim.keymap.set('n', '<leader>sp', builtin.git_files, { desc = '[P]roject' })
-    -- vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]elect Telescope' }) -- Search available telescope commands
+    vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = 'Global [F]iles' })
+    vim.keymap.set('n', '<leader>sp', builtin.git_files, { desc = '[P]roject files' })
+    vim.keymap.set('n', '<leader>sb', builtin.builtin, { desc = '[B]uiltin Telescopes' })
     vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = 'current [W]ord' })
-    vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = 'by [G]rep' })
+    vim.keymap.set('n', '<leader>sg', function() builtin.live_grep({cwd = utils.buffer_dir()}) end, { desc = '[G]rep buffer drectory' })
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[D]iagnostics' })
-    vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[R]esume' })
+    -- vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[R]esume' })
     vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[.] Recent Files' })
     vim.keymap.set('n', '<leader><leader>', builtin.buffers, { desc = '[ ] Find existing buffers' })
+
+    vim.keymap.set('n', '<leader>sr', builtin.buffers, { desc = '[R]egisters' })
+
+    -- vim.keymap.set('n', '<leader>spp', function() builtin.planets({show_pluto = true, show_moon = true}) end, { desc = '[R]esume' })
 
     vim.keymap.set('n', '<leader>/', function()
       builtin.current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
