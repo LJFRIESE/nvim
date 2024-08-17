@@ -190,8 +190,14 @@ return { -- LSP Configuration & Plugins
       },
     })
 
+    vim.diagnostic.config({virtual_text=false})
     require('lsp_lines').setup()
-    vim.keymap.set('', '<leader>l', require('lsp_lines').toggle, { desc = 'Toggle diagnostic [l]ines' })
-    vim.diagnostic.config({ virtual_text = false })
+    vim.keymap.set('', '<leader>l',
+      function()
+        require('lsp_lines').toggle()
+        vim.diagnostic.config( {virtual_text = not vim.diagnostic.config().virtual_text })
+      end,
+      { desc = 'Toggle diagnostic [l]ines' }
+      )
   end,
 }
