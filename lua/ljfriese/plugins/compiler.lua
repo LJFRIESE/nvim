@@ -1,5 +1,5 @@
 return {{ -- This plugin
-  lazy = true,
+  event = 'VeryLazy',
   'Zeioth/compiler.nvim',
   cmd = { 'CompilerOpen', 'CompilerToggleResults', 'CompilerRedo' },
   dependencies = { 'stevearc/overseer.nvim', 'nvim-telescope/telescope.nvim' },

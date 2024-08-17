@@ -1,5 +1,6 @@
 return { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
+  event = 'VeryLazy',
   dependencies = {
     {
       'williamboman/mason.nvim',
@@ -10,11 +11,8 @@ return { -- LSP Configuration & Plugins
     { 'j-hui/fidget.nvim', opts = { notification = { window = { winblend = 0, border = 'rounded' } } } },
     'hrsh7th/cmp-nvim-lsp',
     { 'ray-x/lsp_signature.nvim' },
-    'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
   },
   opts = function()
-    -- require('lspconfig.ui.windows').default_options.title = LspInfoList
-
     require('lspconfig.ui.windows').default_options.border = 'rounded'
     -- pop up border
     local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
@@ -120,8 +118,15 @@ return { -- LSP Configuration & Plugins
 
     capabilities.textDocument.foldingRange = { lineFoldingOnly = true }
     local servers = {
-      prettierd = {
+      markdown_oxide = {
         filetypes = { 'markdown' },
+        server_capabilities = {
+          workspace = {
+            didChangeWatchedFiles = {
+              dynamicRegistration = true,
+            },
+          }
+        },
       },
       -- html = { 'html' },
       ruff = {
@@ -156,48 +161,39 @@ return { -- LSP Configuration & Plugins
         settings = {
           Lua = {
             -- completion = {
-            --   callSnippet = 'Replace',
-            -- },
-            diagnostics = { disable = { 'missing-parameter', 'missing-fields' } },
+              --   callSnippet = 'Replace',
+              -- },
+              diagnostics = { disable = { 'missing-parameter', 'missing-fields' } },
+            },
           },
         },
-      },
-    }
+      }
 
-    require('mason').setup(opts)
-    -- You can add other tools here that you want Mason to install
-    -- for you, so that they are available from within Neovim.
-    local ensure_installed = vim.tbl_keys(servers or {})
-    vim.list_extend(ensure_installed, {
-      -- 'html',
-      'lua_ls',
-      'ruff',
-      'sqls',
-      -- 'pyright',
-      'stylua',
-      'sqlfluff',
-      'tree-sitter-cli',
-    })
-    require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
+      require('mason').setup(opts)
+      -- You can add other tools here that you want Mason to install
+      -- for you, so that they are available from within Neovim.
+      local ensure_installed = vim.tbl_keys(servers or {})
+      vim.list_extend(ensure_installed, {
+        -- 'html',
+        'lua_ls',
+        'ruff',
+        'sqls',
+        'markdown-oxide',
+        'stylua',
+        'sqlfluff',
+        'tree-sitter-cli',
+      })
+      require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
-    require('mason-lspconfig').setup({
-      handlers = {
-        function(server_name)
-          local server = servers[server_name] or {}
-          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-          require('lspconfig')[server_name].setup(server)
-        end,
-      },
-    })
+      require('mason-lspconfig').setup({
+        handlers = {
+          function(server_name)
+            local server = servers[server_name] or {}
+            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+            require('lspconfig')[server_name].setup(server)
+          end,
+        },
+      })
 
-    vim.diagnostic.config({virtual_text=false})
-    require('lsp_lines').setup()
-    vim.keymap.set('', '<leader>l',
-      function()
-        require('lsp_lines').toggle()
-        vim.diagnostic.config( {virtual_text = not vim.diagnostic.config().virtual_text })
-      end,
-      { desc = 'Toggle diagnostic [l]ines' }
-      )
-  end,
-}
+         end,
+  }

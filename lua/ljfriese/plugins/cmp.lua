@@ -1,6 +1,6 @@
 return { -- Autocompletio
-  lazy = true,
   'hrsh7th/nvim-cmp',
+  event = { 'InsertEnter', 'CmdlineEnter' },
   dependencies = {
     'folke/lazydev.nvim',
     'hrsh7th/cmp-nvim-lsp',
@@ -47,7 +47,6 @@ return { -- Autocompletio
     'jmbuhr/otter.nvim',
     'R-nvim/cmp-r',
   },
-  event = { 'InsertEnter', 'CmdlineEnter' },
   opts = function()
     local cmp = require('cmp')
     local luasnip = require('luasnip')

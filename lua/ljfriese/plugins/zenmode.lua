@@ -1,6 +1,6 @@
 return {
-  lazy = true,
   'folke/zen-mode.nvim',
+  event = "BufReadPost",
   config = function()
       require('zen-mode').setup({
         window = {

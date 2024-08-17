@@ -1,7 +1,7 @@
 return {
   'jpalardy/vim-slime',
-  lazy=true,
-  init = function()
+  event = 'VeryLazy',
+  opts = function()
     vim.g.slime_target = 'neovim'
     vim.g.slime_python_ipython = 1
     vim.g.slime_dispatch_ipython_pause = 100

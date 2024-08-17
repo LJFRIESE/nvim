@@ -1,5 +1,6 @@
 return {
-  lazy = true,
+  events = 'VeryLazy',
+
     'quarto-dev/quarto-nvim',
     ft = { 'quarto' },
     dev = false,

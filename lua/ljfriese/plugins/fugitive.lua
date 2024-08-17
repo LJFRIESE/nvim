@@ -1,5 +1,5 @@
 return {
-  lazy = false,
+  event = 'VeryLazy',
   'tpope/vim-fugitive',
   config = function()
     vim.keymap.set('n', 'gt', vim.cmd.Git, { desc = 'Launch Fugitive ([G]it [S]tuff)' })

@@ -1,6 +1,6 @@
 return { -- nuzzy Finder (files, lsp, etc)
   'nvim-telescope/telescope.nvim',
-  event = 'VimEnter',
+  event = 'UIEnter',
   branch = '0.1.x',
   dependencies = {
     'nvim-lua/plenary.nvim',
