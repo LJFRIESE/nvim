@@ -32,21 +32,7 @@ vim.keymap.set({ 'n' }, '<c-c>t', ':split<cr>:terminal<cr>i', { desc = '[t]ermin
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'Escape terminal' })
 -- vim.keymap.set({ 'n' }, '<leader>i', '<esc>i```{r}<cr>```<esc>O', { desc = '[i]nsert code chunk' })
 
-vim.keymap.set('n', '<leader>gcc', 'O---@diagnostic disable-next-line<esc>j', {desc = 'disable diagnostic' })
-
-
-
-vim.keymap.set('', '<leader>bf', function()
-  require('conform').format({ async = true }, function(err)
-    if not err then
-      local mode = vim.api.nvim_get_mode().mode
-      if vim.startswith(string.lower(mode), 'v') then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', true)
-      end
-    end
-  end)
-  print('Format complete')
-end, { desc = '[F]ormat' })
+vim.keymap.set('n', '<leader>gcc', 'O---@diagnostic disable-next-line<esc>j', { desc = 'disable diagnostic' })
 
 local config_path = vim.fn.stdpath('config')
 local wk = require('which-key')
