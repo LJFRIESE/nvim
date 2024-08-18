@@ -32,7 +32,7 @@ vim.keymap.set({ 'n' }, '<c-c>t', ':split<cr>:terminal<cr>i', { desc = '[t]ermin
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'Escape terminal' })
 -- vim.keymap.set({ 'n' }, '<leader>i', '<esc>i```{r}<cr>```<esc>O', { desc = '[i]nsert code chunk' })
 
-vim.keymap.set('n', '<leader>gcc', 'O---@diagnostic disable-next-line<esc>j', { desc = 'disable diagnostic' })
+vim.keymap.set('n', 'gcd', 'O---@diagnostic disable-next-line<esc>j', { desc = 'disable diagnostic' })
 
 local wk = require('which-key')
 wk.add({
@@ -45,10 +45,6 @@ vim.keymap.set({ 'n', 'i' }, '<C-k>', function()
   require('lsp_signature').toggle_float_win()
 end, { silent = true, noremap = true, desc = 'toggle signature' })
 
-vim.keymap.set({ 'n', 'i' }, '<Leader>k', function()
-  vim.lsp.buf.signature_help()
-end, { silent = true, noremap = true, desc = 'toggle signature' })
-
 vim.keymap.set('n', '<leader>Z', function()
   require('zen-mode').toggle()
   vim.wo.wrap = false
@@ -56,20 +52,29 @@ vim.keymap.set('n', '<leader>Z', function()
   vim.wo.rnu = true
 end, { desc = '[Z]en mode' })
 
+-- vim.keymap.set('n', 'fm', function()
+--   require('ufo').closeAllFolds()
+-- end, { desc = '󱃄 Close All Folds' })
+--
+-- vim.keymap.set('n', 'fr', function()
+--   require('ufo').openFoldsExceptKinds({ 'comment', 'imports' })
+--   vim.opt.scrolloff = vim.g.baseScrolloff -- fix scrolloff setting sometimes being off
+-- end, { desc = '󱃄 Open All Regular Folds' })
+--
+-- vim.keymap.set('n', 'fR', function()
+--   require('ufo').openFoldsExceptKinds({})
+-- end, { desc = '󱃄 Open All Folds' })
+
 -- No idea why t doesn't work
-wk.add({ 'tt', group = '[T]rouble' })
+-- wk.add({ 'tt', group = '[T]rouble' })
 -- vim.keymap.set('n', 's', '<Nop>')
 wk.add({
-  { '<leader>r', group = '[R]egex' },
-  { 'g', group = '[G]o to ...' },
-  { 'gs', group = '[s]urrounding ...' },
-  { '<leader>z', group = 'Fold control' },
-  { '<leader>sy', group = '[Sy]mbols' },
-  { '<leader>g', group = '[G]o to' },
-  { '<leader>s', group = '[S]earch' },
-  { '<leader>f', group = '[F]ind files ...' },
-  -- { '<leader>c', group = '[C]omment' },
+  { 'g', group = '[G]o to ...' }, -- , icon = "󰈆 "},
+  { 'gs', group = '[s]urrounding ...', icon = '' },
+  -- { 'f', group = 'Fold control', icon = '' },
+  { '<leader>s', group = '[S]earch ...', icon = '' },
+  { '<leader>f', group = '[F]ind ...', icon = '' },
   { '<leader>h', group = '[H]arpoon window' },
   { '<leader>b', group = '[B]uffer' },
-  { 'z', group = 'Fold code' },
+  -- { 'z', group = 'Fold code' },
 })

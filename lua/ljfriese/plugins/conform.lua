@@ -45,12 +45,13 @@ return {
     -- cmd = { 'ConformInfo' },
     keys = {
       {
-        '<leader>bf',
+        -- '<leader>bf',
+        'gw',
         function()
           require('conform').format({ async = true })
         end,
         mode = '',
-        desc = '[F]ormat',
+        desc = 'Format',
       },
     },
     opts = {

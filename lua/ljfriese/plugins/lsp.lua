@@ -41,15 +41,8 @@ return { -- LSP Configuration & Plugins
         local builtin = require('telescope.builtin')
         -- Jump to the definition of the word under your cursor.
         --  To jump back, press <C-t>.
-        map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-        map('gd', builtin.lsp_definitions, '[G]oto [D]efinition')
-        map('gr', builtin.lsp_references, '[G]oto [R]eferences')
-        map('gI', builtin.lsp_implementations, '[G]oto [I]mplementation')
-        map('gT', builtin.lsp_type_definitions, '[G]oto [T]ype')
-        -- Fuzzy find all the symbols in your current document.
-        map('<leader>syd', builtin.lsp_document_symbols, '[D]ocument [S]ymbols')
-        map('<leader>syw', builtin.lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
         -- Rename the variable under your cursor.
+        map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
         map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
         map('<leader>gx', vim.lsp.buf.code_action, 'Execute code action')
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
@@ -125,7 +118,7 @@ return { -- LSP Configuration & Plugins
             didChangeWatchedFiles = {
               dynamicRegistration = true,
             },
-          }
+          },
         },
       },
       -- html = { 'html' },
@@ -161,40 +154,39 @@ return { -- LSP Configuration & Plugins
         settings = {
           Lua = {
             -- completion = {
-              --   callSnippet = 'Replace',
-              -- },
-              diagnostics = { disable = { 'missing-parameter', 'missing-fields' } },
-            },
+            --   callSnippet = 'Replace',
+            -- },
+            diagnostics = { disable = { 'missing-parameter', 'missing-fields' } },
           },
         },
-      }
+      },
+    }
 
-      require('mason').setup(opts)
-      -- You can add other tools here that you want Mason to install
-      -- for you, so that they are available from within Neovim.
-      local ensure_installed = vim.tbl_keys(servers or {})
-      vim.list_extend(ensure_installed, {
-        -- 'html',
-        'lua_ls',
-        'ruff',
-        'sqls',
-        'prettierd',
-        'markdown_oxide',
-        'stylua',
-        'sqlfluff',
-        'tree-sitter-cli',
-      })
-      require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
+    require('mason').setup(opts)
+    -- You can add other tools here that you want Mason to install
+    -- for you, so that they are available from within Neovim.
+    local ensure_installed = vim.tbl_keys(servers or {})
+    vim.list_extend(ensure_installed, {
+      -- 'html',
+      'lua_ls',
+      'ruff',
+      'sqls',
+      'prettierd',
+      'markdown_oxide',
+      'stylua',
+      'sqlfluff',
+      'tree-sitter-cli',
+    })
+    require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
-      require('mason-lspconfig').setup({
-        handlers = {
-          function(server_name)
-            local server = servers[server_name] or {}
-            server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-            require('lspconfig')[server_name].setup(server)
-          end,
-        },
-      })
-
-         end,
-  }
+    require('mason-lspconfig').setup({
+      handlers = {
+        function(server_name)
+          local server = servers[server_name] or {}
+          server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+          require('lspconfig')[server_name].setup(server)
+        end,
+      },
+    })
+  end,
+}
