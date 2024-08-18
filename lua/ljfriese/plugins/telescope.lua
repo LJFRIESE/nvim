@@ -111,10 +111,10 @@ return { -- nuzzy Finder (files, lsp, etc)
     -- Fuzzy find all the symbols in your current document.
     vim.keymap.set('n', '<leader>ss', builtin.lsp_document_symbols, { desc = '[s]ymbols (Buffer)' })
     vim.keymap.set('n', '<leader>sS', builtin.lsp_dynamic_workspace_symbols, { desc = '[S]ymbols (Workspace)' })
-    vim.keymap.set('n', 'gd', builtin.lsp_definitions, { desc = '[G]oto [D]efinition' })
-    vim.keymap.set('n', 'gr', builtin.lsp_references, { desc = '[G]oto [R]eferences' })
-    vim.keymap.set('n', 'gI', builtin.lsp_implementations, { desc = '[G]oto [I]mplementation' })
-    vim.keymap.set('n', 'gT', builtin.lsp_type_definitions, { desc = '[G]oto [T]ype' })
+    -- vim.keymap.set('n', 'gd', builtin.lsp_definitions, { desc = '[G]oto [D]efinition' })
+    -- vim.keymap.set('n', 'gr', builtin.lsp_references, { desc = '[G]oto [R]eferences' })
+    -- vim.keymap.set('n', 'gI', builtin.lsp_implementations, { desc = '[G]oto [I]mplementation' })
+    -- vim.keymap.set('n', 'gT', builtin.lsp_type_definitions, { desc = '[G]oto [T]ype' })
 
     require('telescope').setup({
       defaults = {

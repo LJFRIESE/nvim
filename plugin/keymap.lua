@@ -40,10 +40,9 @@ wk.add({
   { '<leader>pv', '<cmd>Ex<cr>' }, --'<cmd>25Lex<cr>'
   { '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>', desc = '[M]ake it [R]ain' },
 })
-
-vim.keymap.set({ 'n', 'i' }, '<C-k>', function()
-  require('lsp_signature').toggle_float_win()
-end, { silent = true, noremap = true, desc = 'toggle signature' })
+-- vim.keymap.set({ 'n', 'i' }, '<C-k>', function()
+--   require('lsp_signature').toggle_float_win()
+-- end, { silent = true, noremap = true, desc = 'toggle signature' })
 
 vim.keymap.set('n', '<leader>Z', function()
   require('zen-mode').toggle()
@@ -76,5 +75,6 @@ wk.add({
   { 'f', desc = '[F]ind ...', icon = '' },
   { '<leader>h', group = '[H]arpoon window' },
   { '<leader>b', group = '[B]uffer' },
+  { '<leader>r', group = '[R]egex replace' },
   { 'z', group = 'Fold code' },
 })
