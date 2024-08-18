@@ -71,10 +71,10 @@ end, { desc = '[Z]en mode' })
 wk.add({
   { 'g', group = '[G]o to ...' }, -- , icon = "󰈆 "},
   { 'gs', group = '[s]urrounding ...', icon = '' },
-  -- { 'f', group = 'Fold control', icon = '' },
   { '<leader>s', group = '[S]earch ...', icon = '' },
-  { '<leader>f', group = '[F]ind ...', icon = '' },
+  { 't', desc = '[T]rouble'},
+  { 'f', desc = '[F]ind ...', icon = '' },
   { '<leader>h', group = '[H]arpoon window' },
   { '<leader>b', group = '[B]uffer' },
-  -- { 'z', group = 'Fold code' },
+  { 'z', group = 'Fold code' },
 })

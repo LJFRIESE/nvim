@@ -33,7 +33,7 @@ return {
           -- print('Lint complete')
         end,
       })
-      vim.keymap.set('n', '<leader>bl', function()
+      vim.keymap.set('n', '<leader>gl', function()
         lint.try_lint()
       end, { desc = '[L]int' })
     end, -- Autoformat
