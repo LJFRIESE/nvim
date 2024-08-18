@@ -34,7 +34,6 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'Escape terminal' })
 
 vim.keymap.set('n', '<leader>gcc', 'O---@diagnostic disable-next-line<esc>j', { desc = 'disable diagnostic' })
 
-local config_path = vim.fn.stdpath('config')
 local wk = require('which-key')
 wk.add({
   hidden = true,
@@ -42,18 +41,13 @@ wk.add({
   { '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>', desc = '[M]ake it [R]ain' },
 })
 
--- wk.add({
---   { '<leader>gc', ':cd ' .. config_path .. '<CR>', desc = '[G]o to [C]onfig' },
---   { '<leader>gg', ':cd ~/git <CR>', desc = '[G]o to [G]it directory' },
--- })
-
 vim.keymap.set({ 'n', 'i' }, '<C-k>', function()
   require('lsp_signature').toggle_float_win()
 end, { silent = true, noremap = true, desc = 'toggle signature' })
 
--- vim.keymap.set({ 'n', 'i' }, '<Leader>k', function()
---   vim.lsp.buf.signature_help()
--- end, { silent = true, noremap = true, desc = 'toggle signature' })
+vim.keymap.set({ 'n', 'i' }, '<Leader>k', function()
+  vim.lsp.buf.signature_help()
+end, { silent = true, noremap = true, desc = 'toggle signature' })
 
 vim.keymap.set('n', '<leader>Z', function()
   require('zen-mode').toggle()
@@ -79,13 +73,3 @@ wk.add({
   { '<leader>b', group = '[B]uffer' },
   { 'z', group = 'Fold code' },
 })
-
-vim.keymap.set('n', '<leader>fP', ':Telescope neovim-project discover', { desc = 'find a project based on patterns.'})
-
-vim.keymap.set('n', '<leader>fW', ':Telescope neovim-project history', { desc = 'select a project from your recent history.'})
-
-vim.keymap.set('n', '<leader>fQ', ':NeovimProjectLoadRecent', { desc = 'open the previous session.'})
-
-vim.keymap.set('n', '<leader>fX', ':NeovimProjectLoadHist' , { desc = 'opens the project from the history providing a project dir.'})
-
-vim.keymap.set('n', '<leader>fT', ':NeovimProjectLoad', { desc = 'opens the project from all your projects providing a project dir.'})
