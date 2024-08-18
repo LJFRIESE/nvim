@@ -42,10 +42,10 @@ wk.add({
   { '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>', desc = '[M]ake it [R]ain' },
 })
 
-wk.add({
-  { '<leader>gc', ':cd ' .. config_path .. '<CR>', desc = '[G]o to [C]onfig' },
-  { '<leader>gg', ':cd ~/git <CR>', desc = '[G]o to [G]it directory' },
-})
+-- wk.add({
+--   { '<leader>gc', ':cd ' .. config_path .. '<CR>', desc = '[G]o to [C]onfig' },
+--   { '<leader>gg', ':cd ~/git <CR>', desc = '[G]o to [G]it directory' },
+-- })
 
 vim.keymap.set({ 'n', 'i' }, '<C-k>', function()
   require('lsp_signature').toggle_float_win()
@@ -73,8 +73,19 @@ wk.add({
   { '<leader>sy', group = '[Sy]mbols' },
   { '<leader>g', group = '[G]o to' },
   { '<leader>s', group = '[S]earch' },
+  { '<leader>f', group = '[F]ind files ...' },
   -- { '<leader>c', group = '[C]omment' },
   { '<leader>h', group = '[H]arpoon window' },
   { '<leader>b', group = '[B]uffer' },
   { 'z', group = 'Fold code' },
 })
+
+vim.keymap.set('n', '<leader>fP', ':Telescope neovim-project discover', { desc = 'find a project based on patterns.'})
+
+vim.keymap.set('n', '<leader>fW', ':Telescope neovim-project history', { desc = 'select a project from your recent history.'})
+
+vim.keymap.set('n', '<leader>fQ', ':NeovimProjectLoadRecent', { desc = 'open the previous session.'})
+
+vim.keymap.set('n', '<leader>fX', ':NeovimProjectLoadHist' , { desc = 'opens the project from the history providing a project dir.'})
+
+vim.keymap.set('n', '<leader>fT', ':NeovimProjectLoad', { desc = 'opens the project from all your projects providing a project dir.'})

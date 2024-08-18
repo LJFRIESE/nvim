@@ -32,6 +32,8 @@
   "mini.ai": { "branch": "main", "commit": "a9b992b13d22a8db8df6beac25afa59a10b5584d" },
   "mini.statusline": { "branch": "main", "commit": "85014aa9e4afe9a3ff1896ad768bf09584bff574" },
   "mini.surround": { "branch": "main", "commit": "57caca9525cec0ea771a67326b0ee637d056078a" },
+  "neovim-project": { "branch": "main", "commit": "16594823c2a3e2214ed8c7d676e5e5beefbe96fd" },
+  "neovim-session-manager": { "branch": "master", "commit": "cbaebd92dce84e9ba63cb07d3199e5a19b204c1a" },
   "nvim-cmp": { "branch": "main", "commit": "ae644feb7b67bf1ce4260c231d1d4300b19c6f30" },
   "nvim-highlight-colors": { "branch": "main", "commit": "a411550ef85cae467b889ba7d1a96bd78332d90e" },
   "nvim-lint": { "branch": "master", "commit": "debabca63c0905b59ce596a55a8e33eafdf66342" },
