@@ -2,7 +2,7 @@ return {
   event = 'VeryLazy',
   'tpope/vim-fugitive',
   config = function()
-    vim.keymap.set('n', 'gt', vim.cmd.Git, { desc = 'Launch Fugitive ([G]it [S]tuff)' })
+    vim.keymap.set('n', 'gt', vim.cmd.Git, { desc = 'Git' })
     local ljfries_Fugitive = vim.api.nvim_create_augroup('ljfries_Fugitive', {})
 
     local autocmd = vim.api.nvim_create_autocmd

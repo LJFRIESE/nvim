@@ -24,7 +24,7 @@ return { -- nuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[H]elp' })
     vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[K]eymaps' })
     vim.keymap.set('n', '<leader>sT', builtin.builtin, { desc = '[T]elescopes' })
-    vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[W]ord under cursor' })
+    vim.keymap.set('n', '<leader>sc', builtin.grep_string, { desc = 'Word under [c]ursor' })
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[D]iagnostics' })
     vim.keymap.set('n', '<leader>sr', builtin.buffers, { desc = '[R]egisters' })
     -- vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[R]esume' })
@@ -53,6 +53,12 @@ return { -- nuzzy Finder (files, lsp, etc)
         cwd = utils.buffer_dir(),
       }))
     end, { desc = 'Local [d]irectory' })
+
+    vim.keymap.set('n', '<leader>sw', function()
+      builtin.live_grep(themes.get_dropdown({
+        prompt_title = '[W]orkspace',
+      }))
+    end, { desc = 'Workspace' })
 
     -- Buffer/File-finding functions
     -- Base find
