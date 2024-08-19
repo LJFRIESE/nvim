@@ -217,12 +217,12 @@ return { -- Autocompletio
       -- General setup
       sources = cmp.config.sources(
       {
+        { name = 'nvim_lsp_signature_help' },
         { name = 'luasnip', max_item_count = 3 },
         { name = 'buffer', max_item_count = 3 },
         group_index = 1,
       }, {
         { name = 'nvim_lsp' },
-        { name = 'nvim_lsp_signature_help' },
         { name = 'treesitter', max_item_count = 3 },
         group_index = 2,
       }, {
@@ -260,28 +260,28 @@ return { -- Autocompletio
       return {}
     end
     cmp.setup(opts)
-    cmp.setup.filetype({ 'markdown' }, {
-      sources = {
-        { name = 'buffer', max_item_count = 3 },
-        { name = 'path' },
-        { name = 'calc' },
-        { name = 'latex_symbols' },
-        { name = 'treesitter', max_item_count = 3 },
-      },
-    })
-
-    -- Setup sql
-    cmp.setup.filetype({ 'sql' }, {
-      sources = {
-        { name = 'nvim_lsp' },
-        { name = 'nvim_lsp_signature_help' },
-        { name = 'vim-dadbod-completion' },
-        { name = 'luasnip', max_item_count = 3 },
-        { name = 'treesitter' },
-        { name = 'buffer' },
-      },
-    })
-    -- `/` cmdline setup.
+    -- cmp.setup.filetype({ 'markdown' }, {
+    --   sources = {
+    --     { name = 'buffer', max_item_count = 3 },
+    --     { name = 'path' },
+    --     { name = 'calc' },
+    --     { name = 'latex_symbols' },
+    --     { name = 'treesitter', max_item_count = 3 },
+    --   },
+    -- })
+    --
+    -- -- Setup sql
+    -- cmp.setup.filetype({ 'sql' }, {
+    --   sources = {
+    --     { name = 'nvim_lsp' },
+    --     { name = 'nvim_lsp_signature_help' },
+    --     { name = 'vim-dadbod-completion' },
+    --     { name = 'luasnip', max_item_count = 3 },
+    --     { name = 'treesitter' },
+    --     { name = 'buffer' },
+    --   },
+    -- })
+    -- `/` search setup.
     cmp.setup.cmdline({ '/', '?' }, {
       mapping = cmp.mapping.preset.cmdline(),
       sources = {
