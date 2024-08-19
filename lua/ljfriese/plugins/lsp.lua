@@ -125,7 +125,6 @@ return { -- LSP Configuration & Plugins
           },
         },
       },
-      -- html = { 'html' },
       ruff = {
         filetypes = { 'python' },
       },
@@ -160,7 +159,8 @@ return { -- LSP Configuration & Plugins
             -- completion = {
             --   callSnippet = 'Replace',
             -- },
-            diagnostics = { disable = { 'missing-parameter', 'missing-fields' } },
+            diagnostics = { disable = { 'missing-parameter', 'missing-fields' },
+            globals = {'vim'}},
           },
         },
       },
@@ -171,7 +171,6 @@ return { -- LSP Configuration & Plugins
     -- for you, so that they are available from within Neovim.
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
-      -- 'html',
       'lua_ls',
       'ruff',
       'sqls',

@@ -101,10 +101,7 @@ return { -- Autocompletio
         end, { 'i', 's' }),
 
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<c-y>'] = cmp.mapping.confirm({
-          select = true,
-        }),
-        ['<CR>'] = cmp.mapping(function(fallback)
+        ['<c-y>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
             if luasnip.expandable() then
               luasnip.expand()

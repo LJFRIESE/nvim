@@ -188,7 +188,7 @@ local default_highlights = {
   Folded = { fg = palette.text, bg = groups.panel },
   IncSearch = { link = 'CurSearch' },
   LineNr = { fg = palette.subtle },
-  MatchParen = { link = 'CurSearch'},
+  MatchParen = { fg = palette.gold, bg = palette.overlay, blend = 0 },
   ModeMsg = { fg = palette.subtle },
   MoreMsg = { fg = palette.iris },
   NonText = { fg = palette.muted },

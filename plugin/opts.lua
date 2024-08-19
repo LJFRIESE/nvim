@@ -133,10 +133,6 @@ vim.g.undotree_DiffCommand = 'FC'
 vim.opt.timeoutlen = 300-- Decrease mapped sequence wait time
 vim.b.slime_cell_delimiter = '```'
 
--- matchpairs	list of pairs that match for the "%" command
--- 	(local to buffer)
---  	set mps=(:),{:},[:]
-
 --         -- interesting idea to explore for formatting documentation
 -- vim.lsp.util.stylize_markdown = function(bufnr, contents, opts)
 --     contents = vim.lsp.util._normalize_markdown(contents, {
