@@ -13,10 +13,6 @@ return {
         '--dialect=oracle',
         '--processes=-1',
       }
-      --https://github.com/mfussenegger/nvim-lint/blob/debabca63c0905b59ce596a55a8e33eafdf66342/lua/lint/linters/sqlfluff.lua#L40C1-L40C54
-      --             severity = vim.diagnostic.severity.ERROR,
-      --             Should all lints be ERROR???
-      -- why isn't it returning unparsable?
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
         -- quarto = { 'lintr' },
@@ -62,7 +58,8 @@ return {
           args = {
             'fix',
             -- '--format=json',
-            '--logger=parser',
+            -- '--logger=parser', -- Adding this line redirected the log output to the active buffer and overwrote the contents.
+            -- Could be used somehow?
             '--dialect=oracle',
             '--processes=-1',
           },

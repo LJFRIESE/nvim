@@ -15,8 +15,8 @@ return {
   },
   init = function()
     vim.opt.sessionoptions:append('globals') -- save global variables that start with an uppercase letter and contain at least one lowercase letter.
-    vim.keymap.set('n', 'fP', ':Telescope neovim-project discover<cr>', { desc = '[F]ind projects' })
-    vim.keymap.set('n', 'fp', ':Telescope neovim-project history<cr>', { desc = '[.] Recent projects' })
+    vim.keymap.set('n', '<leader>fP', ':Telescope neovim-project discover<cr>', { desc = '[F]ind projects' })
+    vim.keymap.set('n', '<leader>fp', ':Telescope neovim-project history<cr>', { desc = '[.] Recent projects' })
     -- vim.keymap.set('n', '<leader>Pq', ':NeovimProjectLoadRecent<cr>', { desc = 'open the previous session.' })
     -- vim.keymap.set('n', '<leader>Px', ':NeovimProjectLoadHist<cr>', { desc = 'opens the project from the history providing a project dir.' })
     -- vim.keymap.set('n', '<leader>Pt', ':NeovimProjectLoad<cr>', { desc = 'opens the project from all your projects providing a project dir.' })
