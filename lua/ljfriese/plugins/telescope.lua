@@ -70,7 +70,7 @@ return { -- nuzzy Finder (files, lsp, etc)
       }))
     end, { desc = '[ ] Find active buffers' })
 
-    vim.keymap.set('n', 'f.', function()
+    vim.keymap.set('n', '<leader>f.', function()
       builtin.oldfiles(themes.get_dropdown({
         prompt_title = 'Find Recent Files',
         previewer = false,
@@ -78,28 +78,28 @@ return { -- nuzzy Finder (files, lsp, etc)
       }))
     end, { desc = '[.] Recent files' })
 
-    vim.keymap.set('n', 'fl', function()
+    vim.keymap.set('n', '<leader>fl', function()
       builtin.find_files(themes.get_dropdown({
         prompt_title = 'Find Local Files (Relative to active buffer)',
         cwd = utils.buffer_dir(),
         previewer = false,
       }))
     end, { desc = '[L]ocal files' })
-
-    vim.keymap.set('n', 'fd', function()
+    -- Local dirs don't need tail
+    vim.keymap.set('n', '<leader>fd', function()
       builtin.find_files(themes.get_dropdown({
         previewer = false,
       }))
     end, { desc = '[D]irectory files' })
 
-    vim.keymap.set('n', 'fw', function()
+    vim.keymap.set('n', '<leader>fw', function()
       builtin.git_files(themes.get_dropdown({
         previewer = true,
       }))
     end, { desc = '[W]orkspace files' })
 
     -- Find files in nvim dir
-    vim.keymap.set('n', 'fn', function()
+    vim.keymap.set('n', '<leader>fn', function()
       builtin.find_files(themes.get_dropdown({
         previewer = false,
         prompt_title = 'Neovim Directory',
@@ -108,7 +108,7 @@ return { -- nuzzy Finder (files, lsp, etc)
     end, { desc = '[N]eovim' })
 
     -- Find files in work git dir
-    vim.keymap.set('n', 'f_', function()
+    vim.keymap.set('n', '<leader>f_', function()
       builtin.find_files(themes.get_dropdown({ previewer = false, prompt_title = 'Git Projects Directory', cwd = '~/git' }))
     end, { desc = 'Git (Work)' })
 
