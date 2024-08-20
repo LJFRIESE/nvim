@@ -1,9 +1,10 @@
-return {{
-    "OXY2DEV/markview.nvim",
-    event = 'VeryLazy',      -- Recommended
+return {
+  {
+    'OXY2DEV/markview.nvim',
+    event = 'VeryLazy', -- Recommended
     -- ft = "markdown", -- If you decide to lazy-load anyway
     config = function()
-    require("markview").setup({
+      require('markview').setup({
         -- modes = { "n" }, -- Change these modes to what you need
         --
         -- hybrid_modes = { "c" },     -- Uses this feature on normal mode
@@ -15,9 +16,10 @@ return {{
         --         vim.wo[win].conecalcursor = "c";
         --     end
         -- }
-    })
-    end
-
-},{
-    "OXY2DEV/helpview.nvim",
-}}
+      })
+    end,
+  },
+  {
+    'OXY2DEV/helpview.nvim',
+  },
+}
