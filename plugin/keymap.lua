@@ -6,8 +6,8 @@ vim.keymap.set('n', '<c-p>', 'o<c-r>"<esc>', { desc = '[P]aste | New line' })
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move text down' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move text up' })
 
-vim.keymap.set('n', 'oo', '$i<right><cr><esc>k$', { desc = 'Insert linebreak above' })
-vim.keymap.set('n', 'OO', '$ki<right><cr><esc>j$', { desc = 'Insert linebreak below' })
+vim.keymap.set('n', 'ok', '$i<right><cr><esc>k$', { desc = 'Insert linebreak above' })
+vim.keymap.set('n', 'oj', '$ki<right><cr><esc>j$', { desc = 'Insert linebreak below' })
 
 vim.keymap.set('n', 'J', 'mzJ`z', { desc = 'Join subsequent line to current line' })
 
@@ -64,9 +64,7 @@ end, { desc = '[Z]en mode' })
 --   require('ufo').openFoldsExceptKinds({})
 -- end, { desc = '󱃄 Open All Folds' })
 
--- No idea why t doesn't work
--- wk.add({ 'tt', group = '[T]rouble' })
--- vim.keymap.set('n', 's', '<Nop>')
+
 wk.add({
   { 'g', group = '[G]o to ...' }, -- , icon = "󰈆 "},
   { 'gs', group = '[s]urrounding ...', icon = '' },
