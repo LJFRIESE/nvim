@@ -1,4 +1,27 @@
 return {
+
+  {
+    'echasnovski/mini.starter',
+    version = '*',
+    dependencies = {
+      'echasnovski/mini.sessions',
+    'nvim-telescope/telescope-file-browser.nvim'
+    },
+    config = function()
+      require('mini.sessions').setup()
+      local starter = require('mini.starter')
+      starter.setup({
+        items = {
+          starter.sections.sessions,
+          starter.sections.telescope(),
+        },
+        content_hooks = {
+          starter.gen_hook.adding_bullet(),
+          starter.gen_hook.aligning('center', 'center'),
+        },
+      })
+    end,
+  },
   -- Add/delete/replace surroundings (brackets, quotes, etc.)
   -- - saiw) - [S]urround [A]dd [I]nner [W]ord [)]Paren
   -- - sd'   - [S]urround [D]elete [']quotes
