@@ -17,15 +17,16 @@ return {
     event = 'VeryLazy',
     dependencies = { 'nvim-lua/plenary.nvim' },
   },
-{
-  'folke/zen-mode.nvim',
-  event = "BufReadPost",
-  config = function()
+  {
+    'folke/zen-mode.nvim',
+    event = 'BufReadPost',
+    config = function()
       require('zen-mode').setup({
         window = {
           width = 90,
           options = {},
         },
       })
-  end,
-},}
+    end,
+  },
+}
