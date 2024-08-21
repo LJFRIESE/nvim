@@ -141,7 +141,13 @@ return { -- LSP Configuration & Plugins
         root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml'),
       },
       r_language_server = {
-        settings = {
+        server_capabilities = {
+          workspace = {
+            didChangeWatchedFiles = {
+              dynamicRegistration = false,
+            },
+          },
+        },        settings = {
           r = {
             flags = lsp_flags,
             lsp = {

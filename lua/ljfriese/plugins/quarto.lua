@@ -1,4 +1,7 @@
 return {
+  -- Conflicting with treesitter in some way.
+  -- Seems to be otter, and maybe context?
+  enable = false,
   events = 'VeryLazy',
 
     'quarto-dev/quarto-nvim',
