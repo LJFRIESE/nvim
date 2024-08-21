@@ -73,7 +73,7 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 vim.g.netrw_keepdir = 0 --have cd follow browsing
 -- current directory follows current file
-vim.opt.autochdir = true
+-- vim.opt.autochdir = true
 -- ui
 -- Show which line your cursor is on
 vim.opt.cursorline = true
