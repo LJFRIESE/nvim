@@ -1,3 +1,4 @@
+
 return { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
@@ -12,7 +13,7 @@ return { -- Highlight, edit, and navigate code
         textobjects = {
             lsp_interop = {
                 enable = true,
-                border = 'rounded',
+                floating_preview_opts = {border = 'rounded'},
                 peek_definition_code = {
                     ['<leader>k'] = { query = '@function.outer', desc = 'Peek definition code'},
                     ['<leader>K'] = { query = '@class.outer', desc = 'Peek definition code' },
@@ -23,14 +24,14 @@ return { -- Highlight, edit, and navigate code
                 lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
                 keymaps = {
                     -- You can use the capture groups defined in textobjects.scm
-                    ['aa'] = '@parameter.outer',
-                    ['af'] = '@function.outer',
-                    ['ac'] = '@class.outer',
-                    ["ao"] = '@block.outer',
-                    ['ia'] = '@parameter.inner',
-                    ['if'] = '@function.inner',
-                    ['ic'] = '@class.inner',
-                    ["io"] = '@block.inner',
+                    ['aa'] = { query = '@paramter.outer', desc = 'argument`'},
+                    ['af'] = { query = '@function.outer', desc = 'function'},
+                    ['ac'] = { query = '@class.outer', desc = 'class'},
+                    -- ["ao"] = { query = '@block.outer', desc = 'brackets'},
+                    ['ia'] = { query = '@parameter.inner', desc = 'argument'},
+                    ['if'] = { query = '@function.inner', desc = 'function'},
+                    ['ic'] = { query = '@class.inner', desc = 'class'},
+                    -- ["io"] = { query = '@block.inner', desc = 'brackets'},
                 },
             },
         },
