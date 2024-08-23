@@ -33,4 +33,3 @@ autocmd({ 'BufWritePre' }, {
   command = [[%s/\s\+$//e]],
 })
 
-

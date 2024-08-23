@@ -113,6 +113,12 @@ return { -- nuzzy Finder (files, lsp, etc)
       }))
     end, { desc = '[N]eovim' })
 
+
+    vim.keymap.set('n', '<leader>fp', function()
+      require('mini.sessions').select()
+    end,
+      {desc = '[P]roject sessions'})
+
     -- Find files in work git dir
     vim.keymap.set('n', '<leader>f_', function()
       builtin.find_files(themes.get_dropdown({ previewer = false, prompt_title = 'Git Projects Directory', cwd = '~/git' }))

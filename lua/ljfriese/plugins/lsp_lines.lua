@@ -5,7 +5,7 @@ return{
 vim.diagnostic.config({ virtual_lines = false })
     vim.diagnostic.config({virtual_text=true})
     require('lsp_lines').setup()
-    vim.keymap.set('', '<leader>l',
+    vim.keymap.set('', '<leader>bl',
     function()
       require('lsp_lines').toggle()
       vim.diagnostic.config( {virtual_text = not vim.diagnostic.config().virtual_text })

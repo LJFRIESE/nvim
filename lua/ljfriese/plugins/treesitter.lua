@@ -15,8 +15,8 @@ return { -- Highlight, edit, and navigate code
                 enable = true,
                 floating_preview_opts = {border = 'rounded'},
                 peek_definition_code = {
-                    ['<leader>k'] = { query = '@function.outer', desc = 'Peek definition code'},
-                    ['<leader>K'] = { query = '@class.outer', desc = 'Peek definition code' },
+                    ['<leader><c-k>'] = { query = '@function.outer', desc = 'Peek definition code'},
+                    ['<leader><c-K>'] = { query = '@class.outer', desc = 'Peek definition code' },
                 },
             },
         --     select = {

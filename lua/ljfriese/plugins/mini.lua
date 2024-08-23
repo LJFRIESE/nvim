@@ -1,11 +1,19 @@
 return {
-
+  {
+    'echasnovski/mini.sessions',
+    lazy = false,
+    version = '*',
+    init = function()
+      require('mini.sessions').setup({})
+    end,
+  },
   {
     'echasnovski/mini.starter',
+    lazy = false,
     version = '*',
     dependencies = {
-      'echasnovski/mini.sessions',
-    'nvim-telescope/telescope-file-browser.nvim'
+      { 'echasnovski/mini.sessions' },
+      'nvim-telescope/telescope-file-browser.nvim',
     },
     config = function()
       require('mini.sessions').setup()

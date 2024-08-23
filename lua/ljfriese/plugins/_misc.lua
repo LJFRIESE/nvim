@@ -2,7 +2,12 @@ return {
   { 'nvim-lua/plenary.nvim' },
   { 'eandrju/cellular-automaton.nvim', event = 'VeryLazy' },
   { 'tpope/vim-sleuth', event = 'VeryLazy' }, -- Detect tabstop and shiftwidth automatically
-  { 'MeanderingProgrammer/render-markdown.nvim', event = 'VeryLazy' },
+  { 'MeanderingProgrammer/render-markdown.nvim',
+    event = 'VeryLazy',
+    opts = {
+      file_types = {'markdown', 'quarto'},
+    }
+  },
   {
     'brenoprata10/nvim-highlight-colors',
     event = 'VeryLazy',

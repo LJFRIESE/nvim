@@ -6,6 +6,7 @@ vim.keymap.set('n', '<c-p>', 'o<c-r>"<esc>', { desc = '[P]aste below' })
 vim.keymap.set('v', 'J', ":m '>+1<CR>gv=gv", { desc = 'Move text down' })
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move text up' })
 
+
 vim.keymap.set('n', 'ok', 'mzO<esc>`z', { desc = 'Insert linebreak above' })
 vim.keymap.set('n', 'oj', 'mzo<esc>`z', { desc = 'Insert linebreak below' })
 
@@ -27,6 +28,12 @@ vim.keymap.set('n', 'gcd', 'O---@diagnostic disable-next-line<esc>j', { desc = '
 -- Window navigation
 vim.keymap.set('n', '<leader><', '<C-w>h', { desc = 'Go to left window' })
 vim.keymap.set('n', '<leader>>', '<C-w>l', { desc = 'Go to right window' })
+
+vim.keymap.set('n', 'n', 'nzz', {desc = 'Next search and center'})
+vim.keymap.set('n', 'N', 'Nzz', {desc = 'Prev search and center'})
+
+vim.keymap.set('n', '<c-d>', 'zz<c-d>', {desc = 'Jump down and center'})
+vim.keymap.set('n', '<c-u>', 'zz<c-u>', {desc = 'Jump up and center'})
 
 -- Misc
 vim.keymap.set('i', '<C-c>', '<Esc>', { desc = 'Esc' })

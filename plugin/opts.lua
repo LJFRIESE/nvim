@@ -134,6 +134,7 @@ vim.g.undotree_DiffCommand = 'FC'
 vim.opt.timeoutlen = 300-- Decrease mapped sequence wait time
 vim.b.slime_cell_delimiter = '```'
 
+
 --         -- interesting idea to explore for formatting documentation
 -- vim.lsp.util.stylize_markdown = function(bufnr, contents, opts)
 --     contents = vim.lsp.util._normalize_markdown(contents, {

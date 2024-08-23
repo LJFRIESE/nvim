@@ -188,10 +188,11 @@ local default_highlights = {
   Folded = { fg = palette.text, bg = groups.panel },
   IncSearch = { link = 'CurSearch' },
   LineNr = { fg = palette.subtle },
-  MatchParen = { fg = palette.gold, bg = palette.overlay, blend = 0 },
+  MatchParen = { fg = palette.rose, bg = 'NONE', blend = 0 },
   ModeMsg = { fg = palette.subtle },
   MoreMsg = { fg = palette.iris },
-  NonText = { fg = palette.muted },
+  -- Virtual text like fold icon
+  NonText = { fg = palette.rose, blend =20 },
   Normal = { fg = palette.text, bg = palette.base },
   NormalFloat = { bg = groups.muted },
   NormalNC = { fg = palette.text, bg = config.dim_inactive_windows and palette._nc or palette.base },
@@ -520,22 +521,22 @@ local default_highlights = {
   --- Plugins
 
   -- romgrk/barbar.nvim
-  BufferCurrent = { fg = palette.text, bg = palette.overlay },
-  BufferCurrentIndex = { fg = palette.text, bg = palette.overlay },
-  BufferCurrentMod = { fg = palette.foam, bg = palette.overlay },
-  BufferCurrentSign = { fg = palette.subtle, bg = palette.overlay },
-  BufferCurrentTarget = { fg = palette.gold, bg = palette.overlay },
-  BufferInactive = { fg = palette.subtle },
-  BufferInactiveIndex = { fg = palette.subtle },
-  BufferInactiveMod = { fg = palette.foam },
-  BufferInactiveSign = { fg = palette.muted },
-  BufferInactiveTarget = { fg = palette.gold },
-  BufferTabpageFill = { fg = 'NONE', bg = 'NONE' },
-  BufferVisible = { fg = palette.subtle },
-  BufferVisibleIndex = { fg = palette.subtle },
-  BufferVisibleMod = { fg = palette.foam },
-  BufferVisibleSign = { fg = palette.muted },
-  BufferVisibleTarget = { fg = palette.gold },
+  -- BufferCurrent = { fg = palette.text, bg = palette.overlay },
+  -- BufferCurrentIndex = { fg = palette.text, bg = palette.overlay },
+  -- BufferCurrentMod = { fg = palette.foam, bg = palette.overlay },
+  -- BufferCurrentSign = { fg = palette.subtle, bg = palette.overlay },
+  -- BufferCurrentTarget = { fg = palette.gold, bg = palette.overlay },
+  -- BufferInactive = { fg = palette.subtle },
+  -- BufferInactiveIndex = { fg = palette.subtle },
+  -- BufferInactiveMod = { fg = palette.foam },
+  -- BufferInactiveSign = { fg = palette.muted },
+  -- BufferInactiveTarget = { fg = palette.gold },
+  -- BufferTabpageFill = { fg = 'NONE', bg = 'NONE' },
+  -- BufferVisible = { fg = palette.subtle },
+  -- BufferVisibleIndex = { fg = palette.subtle },
+  -- BufferVisibleMod = { fg = palette.foam },
+  -- BufferVisibleSign = { fg = palette.muted },
+  -- BufferVisibleTarget = { fg = palette.gold },
 
   -- lewis6991/gitsigns.nvim
   GitSignsAdd = { link = 'SignAdd' },
@@ -1017,6 +1018,20 @@ local default_highlights = {
   GrugFarResultsMatch = { link = 'CurSearch' },
   GrugFarResultsPath = { fg = palette.foam },
   GrugFarResultsStats = { fg = palette.iris },
+
+
+    --ufo
+-- UfoFoldedBg = { fg = palette.foam, bg = palette.rose } ,
+-- UfoFoldedFg = { fg = palette.love , bg = palette.foam },
+--  UfoPreviewSbar = { fg = palette.foam, bg = palette.pine},
+--  UfoPreviewThumb = { fg = palette.foam, bg = palette.pine},
+--  UfoPreviewWinBar= { fg = palette.foam, bg = palette.pine},
+--  UfoPreviewCursorLine= { fg = palette.foam, bg = palette.pine},
+--  UfoFoldedEllipsis= { fg = palette.love , bg = palette.foam },
+--  UfoCursorFoldedLine= { fg = palette.foam, bg = palette.pine},
+-- BufferInactiveSign={ fg = palette.foam, bg = palette.pine},
+--     BufferVisibleSign={ fg = palette.foam, bg = palette.iris},
+
 }
 local transparency_highlights = {
   DiagnosticVirtualTextError = { fg = groups.error },
