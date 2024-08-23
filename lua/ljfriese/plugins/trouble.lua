@@ -1,11 +1,12 @@
 return {
   'folke/trouble.nvim',
+  branch = 'dev',
   events = 'VeryLazy',
   opts = {}, -- for default options, refer to the configuration section for custom setup.
   cmd = 'Trouble',
   keys = {
     {
-      '[t',
+      ']t',
       function()
         if require('trouble').is_open() then
           require('trouble').next({ skip_groups = true, jump = true })
@@ -19,7 +20,7 @@ return {
       desc = 'Jump to next error',
     },
     {
-      ']t',
+      '[t',
       function()
         if require('trouble').is_open() then
           require('trouble').prev({ skip_groups = true, jump = true })

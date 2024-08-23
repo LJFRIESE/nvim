@@ -19,21 +19,21 @@ return { -- Highlight, edit, and navigate code
                     ['<leader>K'] = { query = '@class.outer', desc = 'Peek definition code' },
                 },
             },
-            select = {
-                enable = true,
-                lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-                keymaps = {
-                    -- You can use the capture groups defined in textobjects.scm
-                    ['aa'] = { query = '@paramter.outer', desc = 'argument`'},
-                    ['af'] = { query = '@function.outer', desc = 'function'},
-                    ['ac'] = { query = '@class.outer', desc = 'class'},
-                    -- ["ao"] = { query = '@block.outer', desc = 'brackets'},
-                    ['ia'] = { query = '@parameter.inner', desc = 'argument'},
-                    ['if'] = { query = '@function.inner', desc = 'function'},
-                    ['ic'] = { query = '@class.inner', desc = 'class'},
-                    -- ["io"] = { query = '@block.inner', desc = 'brackets'},
-                },
-            },
+        --     select = {
+        --         enable = true,
+        --         lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
+        --         keymaps = {
+        --             -- You can use the capture groups defined in textobjects.scm
+        --             ['aa'] = { query = '@paramter.outer', desc = 'argument`'},
+        --             ['af'] = { query = '@function.outer', desc = 'function'},
+        --             ['ac'] = { query = '@class.outer', desc = 'class'},
+        --             -- ["ao"] = { query = '@block.outer', desc = 'brackets'},
+        --             ['ia'] = { query = '@parameter.inner', desc = 'argument'},
+        --             ['if'] = { query = '@function.inner', desc = 'function'},
+        --             ['ic'] = { query = '@class.inner', desc = 'class'},
+        --             -- ["io"] = { query = '@block.inner', desc = 'brackets'},
+        --         },
+        --     },
         },
     },
     config = function(_, opts)
