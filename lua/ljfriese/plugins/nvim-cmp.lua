@@ -4,7 +4,7 @@ return { -- Autocompletio
   dependencies = {
     'folke/lazydev.nvim',
     'hrsh7th/cmp-nvim-lsp',
-    'hrsh7th/cmp-nvim-lsp-signature-help',
+    -- 'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
@@ -52,7 +52,6 @@ return { -- Autocompletio
     local luasnip = require('luasnip')
     local lspkind = require('lspkind') -- Local lspkind
 
-    local winhighlight = 'Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None'
 
     local has_words_before = function()
       unpack = unpack or table.unpack
@@ -78,13 +77,6 @@ return { -- Autocompletio
       completion = { completeopt = 'menu,menuone,noinsert' },
       autocomplete = false,
       mapping = {
-        ['<C-g>'] = function()
-          if cmp.visible_docs() then
-            cmp.close_docs()
-          else
-            cmp.open_docs()
-          end
-        end,
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
 
@@ -145,14 +137,14 @@ return { -- Autocompletio
       },
       window = {
         completion = {
-          title = 'Suggestions',
+          -- title = 'Suggestions',
           border = 'rounded',
-          winhighlight = winhighlight,
+          winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
         },
         documentation = {
-          title = 'Documentation',
+          -- title = 'Documentation',
           border = 'rounded',
-          winhighlight = winhighlight,
+          winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
           max_height = math.floor(vim.o.lines * 0.5),
           max_width = math.floor(vim.o.columns * 0.4),
         },
@@ -165,7 +157,8 @@ return { -- Autocompletio
           menu = {
             otter = '[🦦]',
             nvim_lsp = '[LSP]',
-            nvim_lsp_signature_help = '[sig]',
+            -- nvim_lsp_signature_help = '[sig]',
+            lsp_signature = '[x-sig]',
             luasnip = '[snip]',
             treesitter = '[TS]',
             buffer = '[buf]',
@@ -217,7 +210,8 @@ return { -- Autocompletio
       -- General setup
       sources = cmp.config.sources(
       {
-        { name = 'nvim_lsp_signature_help' },
+        -- { name = 'nvim_lsp_signature_help' },
+        { name = 'lsp_signature' },
         { name = 'luasnip', max_item_count = 3 },
         { name = 'buffer', max_item_count = 3 },
         group_index = 1,

@@ -26,11 +26,11 @@ return { -- nuzzy Finder (files, lsp, etc)
     vim.keymap.set('n', '<leader>sT', builtin.builtin, { desc = '[T]elescopes' })
     vim.keymap.set('n', '<leader>sc', builtin.grep_string, { desc = 'Word under [c]ursor' })
     vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[D]iagnostics' })
-    vim.keymap.set('n', '<leader>sr', builtin.buffers, { desc = '[R]egisters' })
+    vim.keymap.set('n', '<leader>sr', builtin.registers, { desc = '[R]egisters' })
     -- vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[R]esume' })
     -- vim.keymap.set('n', '<leader>spp', function() builtin.planets({show_pluto = true, show_moon = true}) end, { desc = '' })
 
-    -- Grep in current buffer
+    -- Grep illcurrent buffer
     vim.keymap.set('n', '<leader>/', function()
       builtin.current_buffer_fuzzy_find(themes.get_dropdown({
         prompt_title = 'Search Current Buffer',
@@ -47,18 +47,24 @@ return { -- nuzzy Finder (files, lsp, etc)
     end, { desc = 'Active [b]uffers' })
 
     -- Grep in all files in same dir as current buf
-    vim.keymap.set('n', '<leader>sd', function()
+    vim.keymap.set('n', '<leader>sl', function()
       builtin.live_grep(themes.get_dropdown({
-        prompt_title = 'Search Local Directory  (Relative to active buffer)',
+        prompt_title = 'Search in Local Directory  (Relative to active buffer)',
         cwd = utils.buffer_dir(),
       }))
-    end, { desc = 'Local [d]irectory' })
+    end, { desc = '[L]ocal diectory' })
 
+    -- Grep in current working dir
     vim.keymap.set('n', '<leader>sw', function()
       builtin.live_grep(themes.get_dropdown({
-        prompt_title = '[W]orkspace',
+        prompt_title = 'Search in Current Workspace',
       }))
-    end, { desc = 'Workspace' })
+    end, { desc = '[W]orkspace' })
+
+    -- Grep in work git dir
+    vim.keymap.set('n', '<leader>s_', function()
+      builtin.live_grep(themes.get_dropdown({ previewer = false, prompt_title = 'Git Projects Directory', cwd = '~/git' }))
+    end, { desc = 'Git (Work)' })
 
     -- Buffer/File-finding functions
     -- Base find

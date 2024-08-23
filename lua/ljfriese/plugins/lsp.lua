@@ -10,16 +10,15 @@ return { -- LSP Configuration & Plugins
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     { 'j-hui/fidget.nvim', opts = { notification = { window = { winblend = 0, border = 'rounded' } } } },
     'hrsh7th/cmp-nvim-lsp',
-    -- { 'ray-x/lsp_signature.nvim' },
+    { 'ray-x/lsp_signature.nvim' },
   },
   opts = function()
-    require('lspconfig.ui.windows').default_options.border = 'rounded'
     -- pop up border
     local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
     ---@diagnostic disable-next-line
     function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
       opts = opts or {}
-      opts.title = 'LSP'
+      opts.title = 'X-SIG'
       opts.border = 'rounded'
       return orig_util_open_floating_preview(contents, syntax, opts, ...)
     end
@@ -27,12 +26,17 @@ return { -- LSP Configuration & Plugins
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
       callback = function(event) -- having maps in callback here means the keybinds only exist when lsp is active
-        -- require('lsp_signature').on_attach({
-        --   hint_enable = false,
-        --   hint_inline = function()
-        --     return 'eol'
-        --   end,
-        -- })
+        require('lsp_signature').on_attach({
+          toggle_key = '<c-k>', -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
+          toggle_key_flip_floatwin_setting = false, -- true: toggle floating_windows: true|false setting after toggle key pressed
+          -- false: floating_windows setup will not change, toggle_key will pop up signature helper, but signature
+          --      -- may not popup when typing depends on floating_window setting
+          hint_enable = true,
+          hint_inline = function()
+            return 'eol'
+          end,
+        })
+
         vim.opt_local.omnifunc = 'v:lua.vim.lsp.omnifunc'
 
         local map = function(keys, func, desc)
@@ -42,10 +46,10 @@ return { -- LSP Configuration & Plugins
         -- Jump to the definition of the word under your cursor.
         --  To jump back, press <C-t>.
         -- Rename the variable under your cursor.
-    map('gd', builtin.lsp_definitions,'[G]oto [D]efinition')
-    map('gr', builtin.lsp_references, '[G]oto [R]eferences' )
-    map('gI', builtin.lsp_implementations, '[G]oto [I]mplementation' )
-    map('gT', builtin.lsp_type_definitions, '[G]oto [T]ype' )
+        map('gd', builtin.lsp_definitions, '[G]oto [D]efinition')
+        map('gr', builtin.lsp_references, '[G]oto [R]eferences')
+        map('gI', builtin.lsp_implementations, '[G]oto [I]mplementation')
+        map('gT', builtin.lsp_type_definitions, '[G]oto [T]ype')
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
         map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
         map('<leader>x', vim.lsp.buf.code_action, 'Execute code action')
@@ -147,7 +151,8 @@ return { -- LSP Configuration & Plugins
               dynamicRegistration = false,
             },
           },
-        },        settings = {
+        },
+        settings = {
           r = {
             flags = lsp_flags,
             lsp = {
@@ -165,8 +170,7 @@ return { -- LSP Configuration & Plugins
             -- completion = {
             --   callSnippet = 'Replace',
             -- },
-            diagnostics = { disable = { 'missing-parameter', 'missing-fields' },
-            globals = {'vim'}},
+            diagnostics = { disable = { 'missing-parameter', 'missing-fields' }, globals = { 'vim' } },
           },
         },
       },
