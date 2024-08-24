@@ -3,7 +3,7 @@ return {
   { 'eandrju/cellular-automaton.nvim', event = 'VeryLazy' },
   { 'tpope/vim-sleuth', event = 'VeryLazy' }, -- Detect tabstop and shiftwidth automatically
   { 'MeanderingProgrammer/render-markdown.nvim',
-    event = 'VeryLazy',
+    event = 'LazyFile',
     opts = {
       file_types = {'markdown', 'quarto'},
     }
