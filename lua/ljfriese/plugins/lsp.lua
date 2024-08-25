@@ -10,42 +10,30 @@ return { -- LSP Configuration & Plugins
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     { 'j-hui/fidget.nvim', opts = { notification = { window = { winblend = 0, border = 'rounded' } } } },
     'hrsh7th/cmp-nvim-lsp',
-    { 'ray-x/lsp_signature.nvim', opts = { hint_enable = false, floating_window = true}},
   },
   opts = function()
-    -- pop up border
-    local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-    ---@diagnostic disable-next-line
-    function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-      opts = opts or {}
-      opts.title = 'X-SIG'
-      opts.border = 'rounded'
-      return orig_util_open_floating_preview(contents, syntax, opts, ...)
-    end
     --  This function gets run when an LSP attaches to a particular buffer.
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
-      callback = function(event) -- having maps in callback here means the keybinds only exist when lsp is active
-        require('lsp_signature').on_attach({
-          toggle_key = '<c-k>', -- toggle signature on and off in insert mode,  e.g. toggle_key = '<M-x>'
-          toggle_key_flip_floatwin_setting = false, -- true: toggle floating_windows: true|false setting after toggle key pressed
-          -- false: floating_windows setup will not change, toggle_key will pop up signature helper, but signature
-          --      -- may not popup when typing depends on floating_window setting
-          hint_enable = true,
-          hint_inline = function()
-            return 'eol'
-          end,
-        })
-
-        vim.opt_local.omnifunc = 'v:lua.vim.lsp.omnifunc'
-
+      -- having maps in callback here means the keybinds only exist when lsp is active
+      callback = function(event)
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        local builtin = require('telescope.builtin')
+        local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
         local map = function(keys, func, desc)
           vim.keymap.set('n', keys, func, { buffer = event.buf, desc = desc })
         end
-        local builtin = require('telescope.builtin')
-        -- Jump to the definition of the word under your cursor.
-        --  To jump back, press <C-t>.
-        -- Rename the variable under your cursor.
+
+        vim.opt_local.omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+        ---@diagnostic disable-next-line
+        function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+          opts = opts or {}
+          opts.title = (client and client.name .. '') or 'LSP'
+          opts.border = 'rounded'
+          return orig_util_open_floating_preview(contents, syntax, opts, ...)
+        end
+
         map('gd', builtin.lsp_definitions, '[G]oto [D]efinition')
         map('gr', builtin.lsp_references, '[G]oto [R]eferences')
         map('gI', builtin.lsp_implementations, '[G]oto [I]mplementation')
@@ -53,12 +41,14 @@ return { -- LSP Configuration & Plugins
         map('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
         map('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
         map('<leader>x', vim.lsp.buf.code_action, 'Execute code action')
+        -- Hover and signature information is decided by LSP creator. Sometimes one is more useful than the other.
         map('K', vim.lsp.buf.hover, 'Hover Documentation')
+        map('<leader>K', vim.lsp.buf.signature_help, 'Signature help')
 
         -- The following two autocommands are used to highlight references of the
         -- word under your cursor when your cursor rests there for a little while.
         -- When you move your cursor, the highlights will be cleared (the second autocommand).
-        local client = vim.lsp.get_client_by_id(event.data.client_id)
+
         if client and client.server_capabilities.documentHighlightProvider then
           local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
           vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
@@ -90,16 +80,9 @@ return { -- LSP Configuration & Plugins
               ---@diagnostic disable-next-line: cast-local-type
               v = nil
             end
-
             client.server_capabilities[k] = v
           end
         end
-        -- The following autocommand is used to enable inlay hints
-        -- if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-        --   map('<leader><C-h>', function()
-        --     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-        --   end, 'Toggle [H]ide hints')
-        -- end
       end,
     })
   end,
@@ -163,13 +146,10 @@ return { -- LSP Configuration & Plugins
       },
       lua_ls = {
         server_capabilities = {
-          semanticTokensProvider = vim.NIL,
+          -- semanticTokensProvider = vim.NIL,
         },
         settings = {
           Lua = {
-            -- completion = {
-            --   callSnippet = 'Replace',
-            -- },
             diagnostics = { disable = { 'missing-parameter', 'missing-fields' }, globals = { 'vim' } },
           },
         },

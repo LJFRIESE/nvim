@@ -4,7 +4,7 @@ return { -- Autocompletio
   dependencies = {
     'folke/lazydev.nvim',
     'hrsh7th/cmp-nvim-lsp',
-    -- 'hrsh7th/cmp-nvim-lsp-signature-help',
+    'hrsh7th/cmp-nvim-lsp-signature-help',
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
     'hrsh7th/cmp-cmdline',
@@ -13,7 +13,8 @@ return { -- Autocompletio
       'L3MON4D3/LuaSnip',
       opts = function()
         local types = require('luasnip.util.types')
-
+        -- Inside a snippet, use backspace to remove the placeholder.
+        vim.keymap.set('s', '<BS>', '<C-O>s')
         return {
           -- Check if the current snippet was deleted.
           delete_check_events = 'TextChanged',
@@ -60,14 +61,13 @@ return { -- Autocompletio
 
     -- for friendly snippets
     require('luasnip.loaders.from_vscode').lazy_load()
-    -- for custom snippets
-    -- uncomment if you decide to use them.
-    -- require('luasnip.loaders.from_vscode').lazy_load({ paths = { vim.fn.stdpath('config') .. '/snips' } })
-    -- link quarto and rmarkdown to markdown snippets
     luasnip.filetype_extend('quarto', { 'markdown' })
     luasnip.filetype_extend('rmarkdown', { 'markdown' })
 
     return {
+      enabled = function()
+        return not cmp.config.context.in_treesitter_capture()
+      end,
       snippet = {
         expand = function(args)
           luasnip.lsp_expand(args.body)
@@ -79,35 +79,26 @@ return { -- Autocompletio
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
 
-        -- Jump to next field in completion template
-        ['<C-l>'] = cmp.mapping(function()
-          if luasnip.expand_or_locally_jumpable() then
-            luasnip.expand_or_jump()
-          end
-        end, { 'i', 's' }),
-        ['<C-h>'] = cmp.mapping(function()
-          if luasnip.locally_jumpable(-1) then
-            luasnip.jump(-1)
-          end
-        end, { 'i', 's' }),
+        ['<C-n>'] = cmp.mapping.select_next_item(), -- not mapping leads to base completion overriding nvim-cmp
+        ['<C-p>'] = cmp.mapping.select_prev_item(), -- not mapping leads to base completion overriding nvim-cmp
 
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<c-y>'] = cmp.mapping(function(fallback)
-          if cmp.visible() then
-            if luasnip.expandable() then
-              luasnip.expand()
-            else
-              cmp.confirm({
-                select = true,
-              })
-            end
+
+        -- Completion and documentation open together by default
+        -- Config below sets docs auto_open = false
+        -- This toggles the documentation portion
+        ['<C-k>'] = cmp.mapping(function(fallback)
+          if cmp.visible_docs() then
+            cmp.close_docs()
+          elseif cmp.visible() then
+            cmp.open_docs()
           else
             fallback()
           end
-        end),
+        end, { 'i', desc = 'Toggle documentation window' }),
+        -- Tab scrolls through completions and through snippet fields
         ['<Tab>'] = cmp.mapping(function(fallback)
           if cmp.visible() then
-            -- You could replace select_next_item() with confirm({ select = true }) to get VS Code autocompletion behavior
             cmp.select_next_item()
           elseif vim.snippet.active({ direction = 1 }) then
             vim.schedule(function()
@@ -130,16 +121,34 @@ return { -- Autocompletio
             fallback()
           end
         end, { 'i', 's' }),
-        ['<c-k>'] = cmp.mapping(function(fallback)
-          if cmp.visible_docs() then
-            cmp.close_docs()
-          elseif cmp.visible() then
-            cmp.open_docs()
+        -- snippets
+        -- Jump to next field in completion template
+        ['<C-l>'] = cmp.mapping(function()
+          if luasnip.expand_or_locally_jumpable() then
+            luasnip.expand_or_jump()
+          end
+        end, { 'i', 's' }),
+        ['<C-h>'] = cmp.mapping(function()
+          if luasnip.locally_jumpable(-1) then
+            luasnip.jump(-1)
+          end
+        end, { 'i', 's' }),
+
+        ['<c-y>'] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            if luasnip.expandable() then
+              luasnip.expand()
+            else
+              cmp.confirm({
+                select = true,
+              })
+            end
           else
             fallback()
           end
-        end, {desc = 'Toggle documentation window'}),
+        end),
       },
+
       view = {
         docs = { auto_open = false },
         entries = 'custom',
@@ -147,13 +156,12 @@ return { -- Autocompletio
       window = {
         completion = {
           -- title = 'Suggestions',
-          border = 'rounded',
+          border = 'single',
           winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
         },
         documentation = {
           -- title = 'Documentation',
-          cmp.config.disable,
-          border = 'rounded',
+          border = 'single',
           winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
           max_height = math.floor(vim.o.lines * 0.5),
           max_width = math.floor(vim.o.columns * 0.4),
@@ -167,8 +175,8 @@ return { -- Autocompletio
           menu = {
             otter = '[🦦]',
             nvim_lsp = '[LSP]',
-            -- nvim_lsp_signature_help = '[sig]',
-            lsp_signature = '[x-sig]',
+            nvim_lsp_signature_help = '[sig]',
+            -- lsp_signature = '[x-sig]',
             luasnip = '[snip]',
             treesitter = '[TS]',
             buffer = '[buf]',
@@ -219,16 +227,12 @@ return { -- Autocompletio
       },
       -- General setup
       sources = cmp.config.sources({
-        -- { name = 'nvim_lsp_signature_help' },
-        { name = 'lsp_signature' },
-        { name = 'luasnip', max_item_count = 3 },
-        { name = 'buffer', max_item_count = 3 },
-        group_index = 1,
-      }, {
+        { name = 'nvim_lsp_signature_help' },
         { name = 'nvim_lsp' },
+        { name = 'luasnip', max_item_count = 3 },
+        -- { name = 'lsp_signature' },
+        { name = 'buffer', max_item_count = 3 },
         { name = 'treesitter', max_item_count = 3 },
-        group_index = 2,
-      }, {
         { name = 'otter' }, -- for code chunks in quarto
         { name = 'path' },
         -- { name = 'pandoc_references' },
@@ -263,27 +267,27 @@ return { -- Autocompletio
       return {}
     end
     cmp.setup(opts)
-    -- cmp.setup.filetype({ 'markdown' }, {
-    --   sources = {
-    --     { name = 'buffer', max_item_count = 3 },
-    --     { name = 'path' },
-    --     { name = 'calc' },
-    --     { name = 'latex_symbols' },
-    --     { name = 'treesitter', max_item_count = 3 },
-    --   },
-    -- })
-    --
-    -- -- Setup sql
-    -- cmp.setup.filetype({ 'sql' }, {
-    --   sources = {
-    --     { name = 'nvim_lsp' },
-    --     { name = 'nvim_lsp_signature_help' },
-    --     { name = 'vim-dadbod-completion' },
-    --     { name = 'luasnip', max_item_count = 3 },
-    --     { name = 'treesitter' },
-    --     { name = 'buffer' },
-    --   },
-    -- })
+    cmp.setup.filetype({ 'markdown' }, {
+      sources = {
+        { name = 'buffer', max_item_count = 3 },
+        { name = 'path' },
+        { name = 'calc' },
+        { name = 'latex_symbols' },
+        { name = 'treesitter', max_item_count = 3 },
+      },
+    })
+
+    -- Setup sql
+    cmp.setup.filetype({ 'sql' }, {
+      sources = {
+        { name = 'nvim_lsp' },
+        -- { name = 'nvim_lsp_signature_help' },
+        { name = 'vim-dadbod-completion' },
+        { name = 'luasnip', max_item_count = 3 },
+        { name = 'treesitter' },
+        { name = 'buffer' },
+      },
+    })
     -- `/` search setup.
     cmp.setup.cmdline({ '/', '?' }, {
       mapping = cmp.mapping.preset.cmdline(),
@@ -307,7 +311,6 @@ return { -- Autocompletio
       }),
       matching = { disallow_symbol_nonprefix_matching = false },
     })
-    -- Inside a snippet, use backspace to remove the placeholder.
-    vim.keymap.set('s', '<BS>', '<C-O>s')
   end,
 }
+

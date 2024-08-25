@@ -49,8 +49,7 @@ vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'Escape terminal' })
 
 vim.keymap.set('n', 'U', '<C-r>', { desc = 'Redo' })-- Make U opposite to u.
 
-
-vim.g.cmptoggle = false -- initialize global var to false -> nvim-cmp turned off per default
+vim.g.cmptoggle = true -- initialize global var
 local cmp = require('cmp')
 cmp.setup({
   enabled = function()
@@ -59,9 +58,6 @@ cmp.setup({
 })
 vim.keymap.set('n', '<leader>m', '<cmd>lua vim.g.cmptoggle = not vim.g.cmptoggle<CR>', { desc = 'Toggle nvim-cmp' })
 
-vim.keymap.set({ 'n', 'i' }, '<C-k>', function() -- Overloaded to toggle nvim-cmp documentation window as well.
-  require('lsp_signature').toggle_float_win()
-end, { silent = true, noremap = true, desc = 'Toggle LSP signature' })
 
 vim.keymap.set('n', '<leader>Z', function()
   require('zen-mode').toggle()
