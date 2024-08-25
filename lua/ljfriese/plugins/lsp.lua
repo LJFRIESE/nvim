@@ -10,7 +10,7 @@ return { -- LSP Configuration & Plugins
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     { 'j-hui/fidget.nvim', opts = { notification = { window = { winblend = 0, border = 'rounded' } } } },
     'hrsh7th/cmp-nvim-lsp',
-    { 'ray-x/lsp_signature.nvim' },
+    { 'ray-x/lsp_signature.nvim', opts = { hint_enable = false, floating_window = false}},
   },
   opts = function()
     -- pop up border

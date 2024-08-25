@@ -1,3 +1,4 @@
+
 -- Manipulate text
 vim.keymap.set({ 'n', 'x' }, '<leader>d', '"_d', { desc = '[d]elete | Black hole' })
 vim.keymap.set({ 'n', 'x' }, '<leader>p', [["_dP]], { desc = '[P]aste | Black hole' })
@@ -26,6 +27,7 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = '[Q]uickfix
 vim.keymap.set('n', 'gcd', 'O---@diagnostic disable-next-line<esc>j', { desc = 'disable diagnostic' })
 
 -- Window navigation
+vim.keymap.set('n', '|', '<c-w>v', { desc = 'Virtical split' })
 vim.keymap.set('n', '<leader><', '<C-w>h', { desc = 'Go to left window' })
 vim.keymap.set('n', '<leader>>', '<C-w>l', { desc = 'Go to right window' })
 
@@ -57,6 +59,7 @@ wk.add({
   { '<leader>pv', '<cmd>Ex<cr>' }, --'<cmd>25Lex<cr>'
   { '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>', desc = '[M]ake it [R]ain' },
 })
+
 
 wk.add({
   { 'g', group = '[G]o to ...' }, -- , icon = "󰈆 "},
