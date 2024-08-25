@@ -19,7 +19,6 @@ vim.opt.fillchars = {
 }
 local fcs = vim.opt.fillchars:get()
 
--- Stolen from Akinsho
 local function get_fold(lnum)
   if vim.fn.foldclosedend(lnum - 1) ~= -1 then
     return ''
@@ -135,6 +134,13 @@ vim.opt.timeoutlen = 300-- Decrease mapped sequence wait time
 vim.b.slime_cell_delimiter = '```'
 
 
+--- Disable health checks for these providers.
+vim.g.loaded_python3_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0
+
+
 --         -- interesting idea to explore for formatting documentation
 -- vim.lsp.util.stylize_markdown = function(bufnr, contents, opts)
 --     contents = vim.lsp.util._normalize_markdown(contents, {
@@ -145,4 +151,4 @@ vim.b.slime_cell_delimiter = '```'
 --     vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, contents)
     --
     -- return contents
--- end
+--- end

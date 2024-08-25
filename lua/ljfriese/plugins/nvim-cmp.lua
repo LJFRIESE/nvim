@@ -52,7 +52,6 @@ return { -- Autocompletio
     local luasnip = require('luasnip')
     local lspkind = require('lspkind') -- Local lspkind
 
-
     local has_words_before = function()
       unpack = unpack or table.unpack
       local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -131,8 +130,18 @@ return { -- Autocompletio
             fallback()
           end
         end, { 'i', 's' }),
+        ['<c-k>'] = cmp.mapping(function(fallback)
+          if cmp.visible_docs() then
+            cmp.close_docs()
+          elseif cmp.visible() then
+            cmp.open_docs()
+          else
+            fallback()
+          end
+        end, {desc = 'Toggle documentation window'}),
       },
       view = {
+        docs = { auto_open = false },
         entries = 'custom',
       },
       window = {
@@ -143,6 +152,7 @@ return { -- Autocompletio
         },
         documentation = {
           -- title = 'Documentation',
+          cmp.config.disable,
           border = 'rounded',
           winhighlight = 'Normal:Normal,FloatBorder:FloatBorder,CursorLine:Visual,Search:None',
           max_height = math.floor(vim.o.lines * 0.5),
@@ -208,8 +218,7 @@ return { -- Autocompletio
         },
       },
       -- General setup
-      sources = cmp.config.sources(
-      {
+      sources = cmp.config.sources({
         -- { name = 'nvim_lsp_signature_help' },
         { name = 'lsp_signature' },
         { name = 'luasnip', max_item_count = 3 },

@@ -10,7 +10,7 @@ return { -- LSP Configuration & Plugins
     'WhoIsSethDaniel/mason-tool-installer.nvim',
     { 'j-hui/fidget.nvim', opts = { notification = { window = { winblend = 0, border = 'rounded' } } } },
     'hrsh7th/cmp-nvim-lsp',
-    { 'ray-x/lsp_signature.nvim', opts = { hint_enable = false, floating_window = false}},
+    { 'ray-x/lsp_signature.nvim', opts = { hint_enable = false, floating_window = true}},
   },
   opts = function()
     -- pop up border
@@ -95,11 +95,11 @@ return { -- LSP Configuration & Plugins
           end
         end
         -- The following autocommand is used to enable inlay hints
-        if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
-          map('<leader><C-h>', function()
-            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
-          end, 'Toggle [H]ide hints')
-        end
+        -- if client and client.server_capabilities.inlayHintProvider and vim.lsp.inlay_hint then
+        --   map('<leader><C-h>', function()
+        --     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+        --   end, 'Toggle [H]ide hints')
+        -- end
       end,
     })
   end,

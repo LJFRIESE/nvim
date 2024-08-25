@@ -24,15 +24,16 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Next [d]iagnostic'
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Current line [E]rror messages' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = '[Q]uickfix list' })
 
-vim.keymap.set('n', 'gcd', 'O---@diagnostic disable-next-line<esc>j', { desc = 'disable diagnostic' })
+vim.keymap.set('n', 'gcd', 'O---@diagnostic disable-next-line<esc>j', { desc = '[d]isable diagnostic' })
+vim.keymap.set('n', 'gcl', 'A--no lint<esc>', { desc = 'disable [l]int' })
 
 -- Window navigation
 vim.keymap.set('n', '|', '<c-w>v', { desc = 'Virtical split' })
 vim.keymap.set('n', '<leader><', '<C-w>h', { desc = 'Go to left window' })
 vim.keymap.set('n', '<leader>>', '<C-w>l', { desc = 'Go to right window' })
 
-vim.keymap.set('n', 'n', 'nzz', {desc = 'Next search and center'})
-vim.keymap.set('n', 'N', 'Nzz', {desc = 'Prev search and center'})
+vim.keymap.set('n', 'n', 'nzzzv', { desc = 'Next result' })
+vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Previous result' })
 
 vim.keymap.set('n', '<c-d>', 'zz<c-d>', {desc = 'Jump down and center'})
 vim.keymap.set('n', '<c-u>', 'zz<c-u>', {desc = 'Jump up and center'})
@@ -43,8 +44,16 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Kill search highli
 vim.keymap.set({ 'n' }, '<c-c>t', ':split<cr>:terminal<cr>i', { desc = '[t]erminal' })
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'Escape terminal' })
 -- vim.keymap.set({ 'n' }, '<leader>i', '<esc>i```{r}<cr>```<esc>O', { desc = '[i]nsert code chunk' })
+-- Make U opposite to u.
+  vim.keymap.set('n', 'U', '<C-r>', { desc = 'Redo' })
+-- Indent while remaining in visual mode.
+vim.keymap.set('v', '<', '<gv')
+vim.keymap.set('v', '>', '>gv')
 
-
+-- Overloaded to toggle nvim-cmp documentation window as well.
+vim.keymap.set({ 'n', 'i' }, '<C-k>', function()
+  require('lsp_signature').toggle_float_win()
+end, { silent = true, noremap = true, desc = 'Toggle LSP signature' })
 
 vim.keymap.set('n', '<leader>Z', function()
   require('zen-mode').toggle()
@@ -53,13 +62,14 @@ vim.keymap.set('n', '<leader>Z', function()
   vim.wo.rnu = true
 end, { desc = '[Z]en mode' })
 
+
+-- Which-key groupings
 local wk = require('which-key')
 wk.add({
   hidden = true,
   { '<leader>pv', '<cmd>Ex<cr>' }, --'<cmd>25Lex<cr>'
   { '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>', desc = '[M]ake it [R]ain' },
 })
-
 
 wk.add({
   { 'g', group = '[G]o to ...' }, -- , icon = "󰈆 "},
@@ -72,22 +82,4 @@ wk.add({
   { '<leader>r', group = '[R]egex replace' },
   { 'z', group = 'Fold code' },
 })
-
--- vim.keymap.set('n', 'fm', function()
---   require('ufo').closeAllFolds()
--- end, { desc = '󱃄 Close All Folds' })
---
--- vim.keymap.set('n', 'fr', function()
---   require('ufo').openFoldsExceptKinds({ 'comment', 'imports' })
---   vim.opt.scrolloff = vim.g.baseScrolloff -- fix scrolloff setting sometimes being off
--- end, { desc = '󱃄 Open All Regular Folds' })
---
--- vim.keymap.set('n', 'fR', function()
---   require('ufo').openFoldsExceptKinds({})
--- end, { desc = '󱃄 Open All Folds' })
-
-
--- vim.keymap.set({ 'n', 'i' }, '<C-k>', function()
---   require('lsp_signature').toggle_float_win()
--- end, { silent = true, noremap = true, desc = 'toggle signature' })
 
