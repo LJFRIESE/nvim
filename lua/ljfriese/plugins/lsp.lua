@@ -12,6 +12,7 @@ return { -- LSP Configuration & Plugins
     'hrsh7th/cmp-nvim-lsp',
   },
   opts = function()
+    require('lspconfig.ui.windows').default_options.border = 'rounded'
     --  This function gets run when an LSP attaches to a particular buffer.
     vim.api.nvim_create_autocmd('LspAttach', {
       group = vim.api.nvim_create_augroup('kickstart-lsp-attach', { clear = true }),
