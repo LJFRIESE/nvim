@@ -1,6 +1,6 @@
 -- Manipulate text
-vim.keymap.set({ 'n', 'x' }, 'x', '"_x', { desc = 'Black hole' })
-vim.keymap.set({ 'n', 'x' }, 'X', '"_X', { desc = 'Black hole' })
+vim.keymap.set({ 'n', 'x' }, 'x', '"_d', { desc = 'Black hole' })
+vim.keymap.set({ 'n', 'x' }, 'X', '"_D', { desc = 'Black hole' })
 
 vim.keymap.set('n', '<c-p><c-p>', 'O<c-r>"<esc>', { desc = '[P]aste above' })
 vim.keymap.set('n', '<c-p>', 'o<c-r>"<esc>', { desc = '[P]aste below' })
