@@ -1,6 +1,5 @@
 return { -- LSP Configuration & Plugins
   'neovim/nvim-lspconfig',
-  -- event = 'VeryLazy',
   dependencies = {
     {
       'williamboman/mason.nvim',
@@ -98,8 +97,6 @@ return { -- LSP Configuration & Plugins
 
     capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
     capabilities.textDocument.completion.completionItem.snippetSupport = true
-    -- stops quarto preview fighting with nvim
-    -- capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
 
     capabilities.textDocument.foldingRange = { lineFoldingOnly = true }
     local servers = {
@@ -132,7 +129,7 @@ return { -- LSP Configuration & Plugins
         server_capabilities = {
           workspace = {
             didChangeWatchedFiles = {
-              dynamicRegistration = false,
+              dynamicRegistration = false, -- stops quarto preview fighting with nvim
             },
           },
         },
