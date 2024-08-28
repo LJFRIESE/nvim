@@ -96,7 +96,7 @@ return {
           -- local filename = MiniStatusline.section_filename({ trunc_width = 140 })
           local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
           local search = MiniStatusline.section_searchcount({ trunc_width = 75 })
-          local session =     get_session()
+          local session = get_session()
 
           return MiniStatusline.combine_groups({
             { hl = mode_hl, strings = { mode } },
@@ -105,7 +105,7 @@ return {
             { hl = 'MiniStatuslineFilename', strings = { '%t' .. ' | ' .. session } },
             '%=', -- End left alignment
             { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
-            { hl = mode_hl, strings = { search, '%2l:%-2L'} },
+            { hl = mode_hl, strings = { search, '%2l:%-2L' } },
           })
         end,
       },

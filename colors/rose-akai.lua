@@ -932,7 +932,7 @@ local default_highlights = {
 
   MiniStatuslineDevinfo = { fg = palette.subtle, bg = palette.base },
   MiniStatuslineFileinfo = { link = 'MiniStatuslineDevinfo' },
-  MiniStatuslineFilename = { fg = palette.subtle, bg = palette.base },
+  MiniStatuslineFilename = { fg = palette.foam, bg = palette.base },
   MiniStatuslineInactive = { link = 'MiniStatuslineFilename' },
   MiniStatuslineModeCommand = { fg = palette.base, bg = palette.rose, bold = styles.bold },
   MiniStatuslineModeInsert = { fg = palette.base, bg = palette.pine, bold = styles.bold },
@@ -961,8 +961,8 @@ local default_highlights = {
   -- CopilotSuggestion = { fg = palette.muted, italic = styles.italic },
   --
   -- -- nvim-treesitter/nvim-treesitter-context
-  -- TreesitterContext = { bg = palette.overlay },
-  -- TreesitterContextLineNumber = { fg = palette.subtle },
+  TreesitterContext = { bg = palette.overlay },
+  TreesitterContextLineNumber = { fg = palette.subtle },
   --
   -- -- RRethy/vim-illuminate
   -- IlluminatedWordRead = { link = 'LspReferenceRead' },
@@ -1076,8 +1076,8 @@ local transparency_highlights = {
   IblScope = { fg = palette.subtle },
   IblWhitespace = { fg = palette.rose },
 
-  TreesitterContext = { bg = 'NONE' },
-  TreesitterContextLineNumber = { fg = palette.rose, bg = 'NONE' },
+  TreesitterContext = { fg = palette.subtle, bg = 'NONE' },
+  TreesitterContextLineNumber = { fg = palette.subtle, bg = 'NONE' },
 
   MiniFilesTitleFocused = { fg = palette.rose, bg = 'NONE', bold = styles.bold },
 
@@ -1157,13 +1157,13 @@ if config.enable.terminal then
   vim.g.terminal_color_15 = palette.text -- bright white
 
   -- Support StatusLineTerm & StatusLineTermNC from vim
-  -- vim.cmd([[
-  -- augroup rose-pine
-  -- autocmd!
-  -- autocmd TermOpen * if &buftype=='terminal'
-  -- \|setlocal winhighlight=StatusLine:StatusLineTerm,StatusLineNC:StatusLineTermNC
-  -- \|else|setlocal winhighlight=|endif
-  -- autocmd ColorSchemePre * autocmd! rose-pine
-  -- augroup END
-  -- ]])
+  vim.cmd([[
+  augroup rose-pine
+  autocmd!
+  autocmd TermOpen * if &buftype=='terminal'
+  \|setlocal winhighlight=StatusLine:StatusLineTerm,StatusLineNC:StatusLineTermNC
+  \|else|setlocal winhighlight=|endif
+  autocmd ColorSchemePre * autocmd! rose-pine
+  augroup END
+  ]])
 end
