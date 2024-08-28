@@ -189,15 +189,23 @@ return { -- Autocompletio
           },
         }),
       },
-      experimental = {
-        ghost_text = false,
-      },
       matching = {
         -- see https://github.com/hrsh7th/nvim-cmp/blob/a110e12d0b58eefcf5b771f533fc2cf3050680ac/lua/cmp/matcher_spec.lua#L39
         -- matcher spec tests provide useful examples.
         -- Below command can inspect match scoring.
-        -- :=require('cmp.matcher').match('RCC', 'CJB_RCCS_VW', {disallow_fuzzy_matching = true, disallow_fullfuzzy_matching = true, disallow_partial_fuzzy_matching = true, disallow_partial_matching = false, disallow_prefix_unmatching = false})
-        disallow_fuzzy_matching = false,
+        -- res = function(input)
+        --   return
+        --     require('cmp.matcher').match(input, 'CJB_RCCS_VW', {
+        -- 	disallow_fuzzy_matching = true,
+        -- 	disallow_fullfuzzy_matching = true,
+        -- 	disallow_partial_fuzzy_matching = true,
+        -- 	disallow_partial_matching = false,
+        -- 	disallow_prefix_unmatching = false,
+        --   })
+        -- end
+        --
+        -- print(vim.inspect(res('CJB')))
+        disallow_fuzzy_matching = true,
         disallow_fullfuzzy_matching = true,
         disallow_partial_fuzzy_matching = true,
         disallow_partial_matching = false,
@@ -313,4 +321,3 @@ return { -- Autocompletio
     })
   end,
 }
-

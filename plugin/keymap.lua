@@ -43,6 +43,7 @@ vim.keymap.set('n', '<c-u>', 'zz<c-u>', { desc = 'Jump up and center' })
 
 -- Misc
 vim.keymap.set('i', '<C-c>', '<Esc>', { desc = 'Esc' })
+vim.keymap.set('n', 'gt', '<cmd>Neogit<cr>', { desc = 'Neogit' })
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>', { desc = 'Kill search highlight' })
 vim.keymap.set('n', '<c-c>t', ':split<cr>:terminal<cr>i', { desc = '[t]erminal' })
 vim.keymap.set('t', '<Esc>', '<C-\\><C-n>', { desc = 'Escape terminal' })
