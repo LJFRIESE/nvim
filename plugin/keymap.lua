@@ -40,6 +40,7 @@ vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Previous result' })
 
 vim.keymap.set('n', '<c-d>', 'zz<c-d>', { desc = 'Jump down and center' })
 vim.keymap.set('n', '<c-u>', 'zz<c-u>', { desc = 'Jump up and center' })
+vim.keymap.set('n', '<leader>bda', ':%bdelete|edit #|normal`"', {desc = 'Delete all other buffers'})
 
 -- Misc
 vim.keymap.set('i', '<C-c>', '<Esc>', { desc = 'Esc' })

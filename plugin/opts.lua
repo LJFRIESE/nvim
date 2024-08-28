@@ -70,15 +70,13 @@ vim.o.nu = true
 vim.g.netrw_liststyle = 3
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
-vim.g.netrw_keepdir = 0 --have cd follow browsing
--- current directory follows current file
--- vim.opt.autochdir = true
+
 -- ui
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 vim.opt.termguicolors = true
 vim.opt.guicursor = 'n-v-c-sm:block,i-ci-ve:ver100-Cursor,r-cr-o:hor100'
-vim.opt.colorcolumn = { '88' }
+vim.opt.colorcolumn = { '89' }
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
 
@@ -114,9 +112,10 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
--- Enable break indent
-vim.opt.wrap = true
-vim.opt.linebreak = true
+vim.opt.textwidth = 88
+-- -- Enable break indent
+-- vim.opt.wrap = true
+-- vim.opt.linebreak = true
 
 vim.opt.backup = false
 vim.opt.undofile = true
