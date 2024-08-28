@@ -101,7 +101,7 @@ return { -- LSP Configuration & Plugins
     capabilities.textDocument.foldingRange = { lineFoldingOnly = true }
     local servers = {
       markdown_oxide = {
-        filetypes = { 'markdown' },
+        filetypes = { 'markdown' , 'quarto'},
         server_capabilities = {
           workspace = {
             didChangeWatchedFiles = {
@@ -121,10 +121,10 @@ return { -- LSP Configuration & Plugins
           documentFormattingProvider = false,
         },
       },
-      marksman = {
-        filetypes = { 'quarto' },
-        root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml'),
-      },
+      -- marksman = {
+      --   filetypes = { 'quarto' },
+      --   root_dir = util.root_pattern('.git', '.marksman.toml', '_quarto.yml'),
+      -- },
       r_language_server = {
         server_capabilities = {
           workspace = {

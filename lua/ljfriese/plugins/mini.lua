@@ -1,7 +1,7 @@
 return {
   {
     'echasnovski/mini.sessions',
-    lazy = false,
+    event = 'VimEnter',
     version = '*',
     init = function()
       require('mini.sessions').setup({})
@@ -16,7 +16,7 @@ return {
       'nvim-telescope/telescope-file-browser.nvim',
     },
     config = function()
-      require('mini.sessions').setup()
+      -- require('mini.sessions').setup()
       local starter = require('mini.starter')
       starter.setup({
         items = {
@@ -76,16 +76,14 @@ return {
       use_icons = vim.g.have_nerd_font,
       content = {
         active = function()
-          local MiniStatusline = require('mini.Statusline')
-          local MiniSessions = require('mini.Sessions')
+          local MiniStatusline = require('mini.statusline')
+          -- local MiniSessions = require('mini.sessions')
           local get_session = function()
-            local session_name = ''
-            if MiniSessions.config.file ~= nil then
-              session_name = MiniSessions.config.file
+            if vim.v.this_session ~= '' then
+              return vim.fs.basename(vim.v.this_session)
             else
-              session_name = MiniSessions.get_latest()
+              return 'No Active Session'
             end
-            return session_name
           end
 
           local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
@@ -102,7 +100,7 @@ return {
             { hl = mode_hl, strings = { mode } },
             { hl = 'MiniStatuslineDevinfo', strings = { git, diff, diagnostics, lsp } },
             '%<%=', -- Mark general truncate point
-            { hl = 'MiniStatuslineFilename', strings = { '%t' .. ' | ' .. session } },
+            { hl = 'MiniStatuslineFilename', strings = { '%t' .. ' | ' .. get_session() } },
             '%=', -- End left alignment
             { hl = 'MiniStatuslineFileinfo', strings = { fileinfo } },
             { hl = mode_hl, strings = { search, '%2l:%-2L' } },
