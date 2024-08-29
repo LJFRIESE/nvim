@@ -356,7 +356,7 @@ local default_highlights = {
   mkdRule = { fg = palette.subtle },
   mkdURL = { link = 'markdownUrl' },
 
-  --- Identifiers
+  --- Treesitter Identifiers
   ['@variable'] = { fg = palette.text, italic = styles.italic },
   ['@variable.builtin'] = { fg = palette.love, bold = styles.bold },
   ['@variable.parameter'] = { fg = palette.foam, italic = styles.italic },
@@ -498,7 +498,7 @@ local default_highlights = {
   -- ["@spell"] = {},
   -- ["@nospell"] = {},
 
-  --- Semantic
+  --- LSP Semantic tokens
   ['@lsp.type.comment'] = {},
   ['@lsp.type.comment.c'] = { link = '@comment' },
   ['@lsp.type.comment.cpp'] = { link = '@comment' },
@@ -520,24 +520,6 @@ local default_highlights = {
 
   --- Plugins
 
-  -- romgrk/barbar.nvim
-  -- BufferCurrent = { fg = palette.text, bg = palette.overlay },
-  -- BufferCurrentIndex = { fg = palette.text, bg = palette.overlay },
-  -- BufferCurrentMod = { fg = palette.foam, bg = palette.overlay },
-  -- BufferCurrentSign = { fg = palette.subtle, bg = palette.overlay },
-  -- BufferCurrentTarget = { fg = palette.gold, bg = palette.overlay },
-  -- BufferInactive = { fg = palette.subtle },
-  -- BufferInactiveIndex = { fg = palette.subtle },
-  -- BufferInactiveMod = { fg = palette.foam },
-  -- BufferInactiveSign = { fg = palette.muted },
-  -- BufferInactiveTarget = { fg = palette.gold },
-  -- BufferTabpageFill = { fg = 'NONE', bg = 'NONE' },
-  -- BufferVisible = { fg = palette.subtle },
-  -- BufferVisibleIndex = { fg = palette.subtle },
-  -- BufferVisibleMod = { fg = palette.foam },
-  -- BufferVisibleSign = { fg = palette.muted },
-  -- BufferVisibleTarget = { fg = palette.gold },
-
   -- lewis6991/gitsigns.nvim
   GitSignsAdd = { link = 'SignAdd' },
   GitSignsChange = { link = 'SignChange' },
@@ -545,75 +527,6 @@ local default_highlights = {
   SignAdd = { fg = groups.git_add, bg = 'NONE' },
   SignChange = { fg = groups.git_change, bg = 'NONE' },
   SignDelete = { fg = groups.git_delete, bg = 'NONE' },
-
-  -- mvllow/modes.nvim
-  -- ModesCopy = { bg = palette.gold },
-  -- ModesDelete = { bg = palette.love },
-  -- ModesInsert = { bg = palette.foam },
-  -- ModesReplace = { bg = palette.pine },
-  -- ModesVisual = { bg = palette.iris },
-  --
-  -- -- kyazdani42/nvim-tree.lua
-  -- NvimTreeEmptyFolderName = { fg = palette.muted },
-  -- NvimTreeFileDeleted = { fg = groups.git_delete },
-  -- NvimTreeFileDirty = { fg = groups.git_dirty },
-  -- NvimTreeFileMerge = { fg = groups.git_merge },
-  -- NvimTreeFileNew = { fg = palette.foam },
-  -- NvimTreeFileRenamed = { fg = groups.git_rename },
-  -- NvimTreeFileStaged = { fg = groups.git_stage },
-  -- NvimTreeFolderIcon = { fg = palette.subtle },
-  -- NvimTreeFolderName = { fg = palette.foam },
-  -- NvimTreeGitDeleted = { fg = groups.git_delete },
-  -- NvimTreeGitDirty = { fg = groups.git_dirty },
-  -- NvimTreeGitIgnored = { fg = groups.git_ignore },
-  -- NvimTreeGitMerge = { fg = groups.git_merge },
-  -- NvimTreeGitNew = { fg = groups.git_add },
-  -- NvimTreeGitRenamed = { fg = groups.git_rename },
-  -- NvimTreeGitStaged = { fg = groups.git_stage },
-  -- NvimTreeImageFile = { fg = palette.text },
-  -- NvimTreeNormal = { link = 'Normal' },
-  -- NvimTreeOpenedFile = { fg = palette.text, bg = palette.overlay },
-  -- NvimTreeOpenedFolderName = { link = 'NvimTreeFolderName' },
-  -- NvimTreeRootFolder = { fg = palette.foam, bold = styles.bold },
-  -- NvimTreeSpecialFile = { link = 'NvimTreeNormal' },
-  -- NvimTreeWindowPicker = { link = 'StatusLineTerm' },
-  --
-  -- nvim-neotest/neotest
-  -- NeotestAdapterName = { fg = palette.iris },
-  -- NeotestBorder = { fg = palette.highlight_med },
-  -- NeotestDir = { fg = palette.foam },
-  -- NeotestExpandMarker = { fg = palette.highlight_med },
-  -- NeotestFailed = { fg = palette.love },
-  -- NeotestFile = { fg = palette.text },
-  -- NeotestFocused = { fg = palette.gold, bg = palette.highlight_med },
-  -- NeotestIndent = { fg = palette.highlight_med },
-  -- NeotestMarked = { fg = palette.rose, bold = styles.bold },
-  -- NeotestNamespace = { fg = palette.gold },
-  -- NeotestPassed = { fg = palette.pine },
-  -- NeotestRunning = { fg = palette.gold },
-  -- NeotestWinSelect = { fg = palette.muted },
-  -- NeotestSkipped = { fg = palette.subtle },
-  -- NeotestTarget = { fg = palette.love },
-  -- NeotestTest = { fg = palette.gold },
-  -- NeotestUnknown = { fg = palette.subtle },
-  -- NeotestWatching = { fg = palette.iris },
-  --
-  -- nvim-neo-tree/neo-tree.nvim
-  -- NeoTreeGitAdded = { fg = groups.git_add },
-  -- NeoTreeGitConflict = { fg = groups.git_merge },
-  -- NeoTreeGitDeleted = { fg = groups.git_delete },
-  -- NeoTreeGitIgnored = { fg = groups.git_ignore },
-  -- NeoTreeGitModified = { fg = groups.git_dirty },
-  -- NeoTreeGitRenamed = { fg = groups.git_rename },
-  -- NeoTreeGitUntracked = { fg = groups.git_untracked },
-  -- NeoTreeTabActive = { fg = palette.text, bg = palette.overlay },
-  -- NeoTreeTabInactive = { fg = palette.subtle },
-  -- NeoTreeTabSeparatorActive = { link = 'WinSeparator' },
-  -- NeoTreeTabSeparatorInactive = { link = 'WinSeparator' },
-  -- NeoTreeTitleBar = { link = 'StatusLineTerm' },
-
-  -- folke/flash.nvim
-  FlashLabel = { fg = palette.base, bg = palette.love },
 
   -- folke/which-key.nvim
   WhichKey = { fg = palette.iris },
@@ -671,55 +584,13 @@ local default_highlights = {
   NeogitHunkHeader = { bg = groups.panel },
   NeogitHunkHeaderHighlight = { bg = groups.panel },
 
-  -- vimwiki/vimwiki
-  VimwikiHR = { fg = palette.subtle },
-  VimwikiHeader1 = { link = 'markdownH1' },
-  VimwikiHeader2 = { link = 'markdownH2' },
-  VimwikiHeader3 = { link = 'markdownH3' },
-  VimwikiHeader4 = { link = 'markdownH4' },
-  VimwikiHeader5 = { link = 'markdownH5' },
-  VimwikiHeader6 = { link = 'markdownH6' },
-  VimwikiHeaderChar = { fg = palette.subtle },
-  VimwikiLink = { link = 'markdownUrl' },
-  VimwikiList = { fg = palette.iris },
-  VimwikiNoExistsLink = { fg = palette.love },
-
-  -- nvim-neorg/neorg
-  -- NeorgHeading1Prefix = { link = 'markdownH1Delimiter' },
-  -- NeorgHeading1Title = { link = 'markdownH1' },
-  -- NeorgHeading2Prefix = { link = 'markdownH2Delimiter' },
-  -- NeorgHeading2Title = { link = 'markdownH2' },
-  -- NeorgHeading3Prefix = { link = 'markdownH3Delimiter' },
-  -- NeorgHeading3Title = { link = 'markdownH3' },
-  -- NeorgHeading4Prefix = { link = 'markdownH4Delimiter' },
-  -- NeorgHeading4Title = { link = 'markdownH4' },
-  -- NeorgHeading5Prefix = { link = 'markdownH5Delimiter' },
-  -- NeorgHeading5Title = { link = 'markdownH5' },
-  -- NeorgHeading6Prefix = { link = 'markdownH6Delimiter' },
-  -- NeorgHeading6Title = { link = 'markdownH6' },
-  -- NeorgMarkerTitle = { fg = palette.foam, bold = styles.bold },
-  --
-  -- ray-x/lsp_signature.nvim
-  -- LspSignatureActiveParameter = { bg = palette.overlay },
-
-  -- rlane/pounce.nvim
-  -- PounceAccept = { fg = palette.love, bg = palette.love, blend = 20 },
-  -- PounceAcceptBest = { fg = palette.gold, bg = palette.gold, blend = 20 },
-  -- PounceGap = { link = 'Search' },
-  -- PounceMatch = { link = 'Search' },
-
   -- ggandor/leap.nvim
   LeapLabelPrimary = { link = 'IncSearch' },
   LeapLabelSecondary = { link = 'StatusLineTerm' },
   LeapMatch = { link = 'MatchParen' },
+  -- folke/flash.nvim
+  FlashLabel = { fg = palette.base, bg = palette.love },
 
-  -- phaazon/hop.nvim
-  -- smoka7/hop.nvim
-  -- HopNextKey = { fg = palette.love, bg = palette.love, blend = 20 },
-  -- HopNextKey1 = { fg = palette.foam, bg = palette.foam, blend = 20 },
-  -- HopNextKey2 = { fg = palette.pine, bg = palette.pine, blend = 20 },
-  -- HopUnmatched = { fg = palette.muted },
-  --
   -- nvim-telescope/telescope.nvim
   TelescopeBorder = make_border(),
   TelescopeMatching = { fg = palette.rose },
@@ -730,34 +601,7 @@ local default_highlights = {
   TelescopeSelectionCaret = { fg = palette.rose, bg = palette.overlay },
   TelescopeTitle = { fg = palette.foam, bold = styles.bold },
 
-  -- ibhagwan/fzf-lua
-  -- FzfLuaBorder = make_border(),
-  -- FzfLuaBufFlagAlt = { fg = palette.subtle },
-  -- FzfLuaBufFlagCur = { fg = palette.subtle },
-  -- FzfLuaCursorLine = { fg = palette.text, bg = palette.overlay },
-  -- FzfLuaFilePart = { fg = palette.text },
-  -- FzfLuaHeaderBind = { fg = palette.rose },
-  -- FzfLuaHeaderText = { fg = palette.love },
-  -- FzfLuaNormal = { link = 'NormalFloat' },
-  -- FzfLuaTitle = { link = 'FloatTitle' },
 
-  -- rcarriga/nvim-notify
-  -- NotifyDEBUGBorder = make_border(),
-  -- NotifyDEBUGIcon = { link = 'NotifyDEBUGTitle' },
-  -- NotifyDEBUGTitle = { fg = palette.muted },
-  -- NotifyERRORBorder = make_border(groups.error),
-  -- NotifyERRORIcon = { link = 'NotifyERRORTitle' },
-  -- NotifyERRORTitle = { fg = groups.error },
-  -- NotifyINFOBorder = make_border(groups.info),
-  -- NotifyINFOIcon = { link = 'NotifyINFOTitle' },
-  -- NotifyINFOTitle = { fg = groups.info },
-  -- NotifyTRACEBorder = make_border(palette.iris),
-  -- NotifyTRACEIcon = { link = 'NotifyTRACETitle' },
-  -- NotifyTRACETitle = { fg = palette.iris },
-  -- NotifyWARNBorder = make_border(groups.warn),
-  -- NotifyWARNIcon = { link = 'NotifyWARNTitle' },
-  -- NotifyWARNTitle = { fg = groups.warn },
-  -- NotifyBackground = { bg = palette.surface },
 
   -- rcarriga/nvim-dap-ui
   DapUIBreakpointsCurrentLine = { fg = palette.gold, bold = styles.bold },
@@ -779,101 +623,14 @@ local default_highlights = {
   DapUIWatchesEmpty = { fg = palette.love },
   DapUIWatchesError = { link = 'DapUIWatchesEmpty' },
   DapUIWatchesValue = { link = 'DapUIThread' },
-
-  -- glepnir/dashboard-nvim
-  -- DashboardCenter = { fg = palette.gold },
-  -- DashboardFooter = { fg = palette.iris },
-  -- DashboardHeader = { fg = palette.pine },
-  -- DashboardShortcut = { fg = palette.love },
-
-  -- -- SmiteshP/nvim-navic
-  -- NavicIconsArray = { fg = palette.gold },
-  -- NavicIconsBoolean = { fg = palette.rose },
-  -- NavicIconsClass = { fg = palette.foam },
-  -- NavicIconsConstant = { fg = palette.gold },
-  -- NavicIconsConstructor = { fg = palette.gold },
-  -- NavicIconsEnum = { fg = palette.gold },
-  -- NavicIconsEnumMember = { fg = palette.foam },
-  -- NavicIconsEvent = { fg = palette.gold },
-  -- NavicIconsField = { fg = palette.foam },
-  -- NavicIconsFile = { fg = palette.muted },
-  -- NavicIconsFunction = { fg = palette.pine },
-  -- NavicIconsInterface = { fg = palette.foam },
-  -- NavicIconsKey = { fg = palette.iris },
-  -- NavicIconsKeyword = { fg = palette.pine },
-  -- NavicIconsMethod = { fg = palette.iris },
-  -- NavicIconsModule = { fg = palette.rose },
-  -- NavicIconsNamespace = { fg = palette.muted },
-  -- NavicIconsNull = { fg = palette.love },
-  -- NavicIconsNumber = { fg = palette.gold },
-  -- NavicIconsObject = { fg = palette.gold },
-  -- NavicIconsOperator = { fg = palette.subtle },
-  -- NavicIconsPackage = { fg = palette.muted },
-  -- NavicIconsProperty = { fg = palette.foam },
-  -- NavicIconsString = { fg = palette.gold },
-  -- NavicIconsStruct = { fg = palette.foam },
-  -- NavicIconsTypeParameter = { fg = palette.foam },
-  -- NavicIconsVariable = { fg = palette.text },
-  -- NavicSeparator = { fg = palette.subtle },
-  -- NavicText = { fg = palette.subtle },
   --
-  -- folke/noice.nvim
-  NoiceCursor = { fg = palette.highlight_high, bg = palette.text },
-
   -- folke/trouble.nvim
   TroubleText = { fg = palette.subtle },
   TroubleCount = { fg = palette.iris, bg = palette.surface },
   TroubleNormal = { fg = palette.text, bg = groups.panel },
 
   -- echasnovski/mini.nvim
-  MiniAnimateCursor = { reverse = true, nocombine = true },
-  MiniAnimateNormalFloat = { link = 'NormalFloat' },
 
-  MiniClueBorder = { link = 'FloatBorder' },
-  MiniClueDescGroup = { link = 'DiagnosticFloatingWarn' },
-  MiniClueDescSingle = { link = 'NormalFloat' },
-  MiniClueNextKey = { link = 'DiagnosticFloatingHint' },
-  MiniClueNextKeyWithPostkeys = { link = 'DiagnosticFloatingError' },
-  MiniClueSeparator = { link = 'DiagnosticFloatingInfo' },
-  MiniClueTitle = { bg = groups.panel, bold = styles.bold },
-
-  MiniCompletionActiveParameter = { underline = true },
-
-  MiniCursorword = { underline = true },
-  MiniCursorwordCurrent = { underline = true },
-
-  MiniDepsChangeAdded = { fg = groups.git_add },
-  MiniDepsChangeRemoved = { fg = groups.git_delete },
-  MiniDepsHint = { link = 'DiagnosticHint' },
-  MiniDepsInfo = { link = 'DiagnosticInfo' },
-  MiniDepsMsgBreaking = { link = 'DiagnosticWarn' },
-  MiniDepsPlaceholder = { link = 'Comment' },
-  MiniDepsTitle = { link = 'Title' },
-  MiniDepsTitleError = { link = 'DiffDelete' },
-  MiniDepsTitleSame = { link = 'DiffText' },
-  MiniDepsTitleUpdate = { link = 'DiffAdd' },
-
-  MiniDiffOverAdd = { fg = groups.git_add, bg = groups.git_add, blend = 20 },
-  MiniDiffOverChange = { fg = groups.git_change, bg = groups.git_change, blend = 20 },
-  MiniDiffOverContext = { bg = palette.surface },
-  MiniDiffOverDelete = { fg = groups.git_delete, bg = groups.git_delete, blend = 20 },
-  MiniDiffSignAdd = { fg = groups.git_add },
-  MiniDiffSignChange = { fg = groups.git_change },
-  MiniDiffSignDelete = { fg = groups.git_delete },
-
-  MiniFilesBorder = { link = 'FloatBorder' },
-  MiniFilesBorderModified = { link = 'DiagnosticFloatingWarn' },
-  MiniFilesCursorLine = { link = 'CursorLine' },
-  MiniFilesDirectory = { link = 'Directory' },
-  MiniFilesFile = { fg = palette.text },
-  MiniFilesNormal = { link = 'NormalFloat' },
-  MiniFilesTitle = { link = 'FloatTitle' },
-  MiniFilesTitleFocused = { fg = palette.rose, bg = groups.panel, bold = styles.bold },
-
-  MiniHipatternsFixme = { fg = palette.base, bg = groups.error, bold = styles.bold },
-  MiniHipatternsHack = { fg = palette.base, bg = groups.warn, bold = styles.bold },
-  MiniHipatternsNote = { fg = palette.base, bg = groups.info, bold = styles.bold },
-  MiniHipatternsTodo = { fg = palette.base, bg = groups.hint, bold = styles.bold },
 
   MiniIconsAzure = { fg = palette.foam },
   MiniIconsBlue = { fg = palette.pine },
@@ -885,40 +642,6 @@ local default_highlights = {
   MiniIconsRed = { fg = palette.love },
   MiniIconsYellow = { fg = palette.gold },
 
-  MiniIndentscopeSymbol = { fg = palette.muted },
-  MiniIndentscopeSymbolOff = { fg = palette.gold },
-
-  MiniJump = { sp = palette.gold, undercurl = true },
-
-  MiniJump2dDim = { fg = palette.subtle },
-  MiniJump2dSpot = { fg = palette.gold, bold = styles.bold, nocombine = true },
-  MiniJump2dSpotAhead = { fg = palette.foam, bg = palette.surface, nocombine = true },
-  MiniJump2dSpotUnique = { fg = palette.rose, bold = styles.bold, nocombine = true },
-
-  MiniMapNormal = { link = 'NormalFloat' },
-  MiniMapSymbolCount = { link = 'Special' },
-  MiniMapSymbolLine = { link = 'Title' },
-  MiniMapSymbolView = { link = 'Delimiter' },
-
-  MiniNotifyBorder = { link = 'FloatBorder' },
-  MiniNotifyNormal = { link = 'NormalFloat' },
-  MiniNotifyTitle = { link = 'FloatTitle' },
-
-  MiniOperatorsExchangeFrom = { link = 'IncSearch' },
-
-  MiniPickBorder = { link = 'FloatBorder' },
-  MiniPickBorderBusy = { link = 'DiagnosticFloatingWarn' },
-  MiniPickBorderText = { bg = groups.panel },
-  MiniPickIconDirectory = { link = 'Directory' },
-  MiniPickIconFile = { link = 'MiniPickNormal' },
-  MiniPickHeader = { link = 'DiagnosticFloatingHint' },
-  MiniPickMatchCurrent = { link = 'CursorLine' },
-  MiniPickMatchMarked = { link = 'Visual' },
-  MiniPickMatchRanges = { fg = palette.foam },
-  MiniPickNormal = { link = 'NormalFloat' },
-  MiniPickPreviewLine = { link = 'CursorLine' },
-  MiniPickPreviewRegion = { link = 'IncSearch' },
-  MiniPickPrompt = { bg = groups.panel, bold = styles.bold },
 
   MiniStarterCurrent = { nocombine = true },
   MiniStarterFooter = { fg = palette.subtle },
@@ -942,41 +665,10 @@ local default_highlights = {
   MiniStatuslineModeVisual = { fg = palette.base, bg = palette.iris, bold = styles.bold },
   MiniSurround = { link = 'IncSearch' },
 
-  MiniTablineCurrent = { fg = palette.text, bg = palette.overlay, bold = styles.bold },
-  MiniTablineFill = { link = 'TabLineFill' },
-  MiniTablineHidden = { fg = palette.subtle, bg = groups.panel },
-  MiniTablineModifiedCurrent = { fg = palette.overlay, bg = palette.text, bold = styles.bold },
-  MiniTablineModifiedHidden = { fg = groups.panel, bg = palette.subtle },
-  MiniTablineModifiedVisible = { fg = groups.panel, bg = palette.text },
-  MiniTablineTabpagesection = { link = 'Search' },
-  MiniTablineVisible = { fg = palette.text, bg = groups.panel },
 
-  MiniTestEmphasis = { bold = styles.bold },
-  MiniTestFail = { fg = palette.love, bold = styles.bold },
-  MiniTestPass = { fg = palette.foam, bold = styles.bold },
-
-  MiniTrailspace = { bg = palette.love },
-
-  --  -- github/copilot.vim
-  -- CopilotSuggestion = { fg = palette.muted, italic = styles.italic },
-  --
   -- -- nvim-treesitter/nvim-treesitter-context
   TreesitterContext = { bg = palette.overlay },
   TreesitterContextLineNumber = { fg = palette.subtle },
-  --
-  -- -- RRethy/vim-illuminate
-  -- IlluminatedWordRead = { link = 'LspReferenceRead' },
-  -- IlluminatedWordText = { link = 'LspReferenceText' },
-  -- IlluminatedWordWrite = { link = 'LspReferenceWrite' },
-  --
-  -- HiPhish/rainbow-delimiters.nvim
-  RainbowDelimiterBlue = { fg = palette.pine },
-  RainbowDelimiterCyan = { fg = palette.foam },
-  RainbowDelimiterGreen = { fg = palette.leaf },
-  RainbowDelimiterOrange = { fg = palette.rose },
-  RainbowDelimiterRed = { fg = palette.love },
-  RainbowDelimiterViolet = { fg = palette.iris },
-  RainbowDelimiterYellow = { fg = palette.gold },
 
   -- MeanderingProgrammer/render-markdown.nvim
   RenderMarkdownBullet = { fg = palette.rose },
@@ -996,23 +688,7 @@ local default_highlights = {
   RenderMarkdownTableRow = { fg = palette.subtle },
   RenderMarkdownUnchecked = { fg = palette.subtle },
 
-  -- MagicDuck/grug-far.nvim
-  -- GrugFarHelpHeader = { fg = palette.pine },
-  -- GrugFarHelpHeaderKey = { fg = palette.gold },
-  -- GrugFarHelpWinActionKey = { fg = palette.gold },
-  -- GrugFarHelpWinActionPrefix = { fg = palette.foam },
-  -- GrugFarHelpWinActionText = { fg = palette.pine },
-  -- GrugFarHelpWinHeader = { link = 'FloatTitle' },
-  -- GrugFarInputLabel = { fg = palette.foam },
-  -- GrugFarInputPlaceholder = { link = 'Comment' },
-  -- GrugFarResultsActionMessage = { fg = palette.foam },
-  -- GrugFarResultsChangeIndicator = { fg = groups.git_change },
-  -- GrugFarResultsHeader = { fg = palette.pine },
-  -- GrugFarResultsLineNo = { fg = palette.iris },
-  -- GrugFarResultsLineColumn = { link = 'GrugFarResultsLineNo' },
-  -- GrugFarResultsMatch = { link = 'CurSearch' },
-  -- GrugFarResultsPath = { fg = palette.foam },
-  -- GrugFarResultsStats = { fg = palette.iris },
+
   rmdCodeDelim = {fg = palette.rose},
   --ufo
   -- UfoFoldedBg = { fg = palette.foam, bg = palette.rose } ,
