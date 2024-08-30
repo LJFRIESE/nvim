@@ -250,6 +250,7 @@ return { -- Autocompletio
         group_index = 3,
       }),
     }
+  end,
   config = function(_, opts)
     local cmp = require('cmp')
 
