@@ -3,7 +3,11 @@ return { -- LSP Configuration & Plugins
   dependencies = {
     {
       'williamboman/mason.nvim',
-      opts = { ui = { title = 'Mason', border = 'rounded' } },
+      opts = {
+        ui = { title = 'Mason', border = 'rounded' },
+
+    log_level = vim.log.levels.DEBUG,
+      },
     },
     'williamboman/mason-lspconfig.nvim',
     'WhoIsSethDaniel/mason-tool-installer.nvim',
@@ -101,7 +105,7 @@ return { -- LSP Configuration & Plugins
     capabilities.textDocument.foldingRange = { lineFoldingOnly = true }
     local servers = {
       markdown_oxide = {
-        filetypes = { 'markdown' , 'quarto'},
+        filetypes = { 'markdown', 'quarto' },
         server_capabilities = {
           workspace = {
             didChangeWatchedFiles = {
@@ -113,10 +117,13 @@ return { -- LSP Configuration & Plugins
       ruff = {
         filetypes = { 'python' },
       },
+      -- SQLS is a little bitch. It will only run with this exact cmd.
+      -- config.yml file must be in the /user/{USER}
+      -- Anything else and it will break.
+      -- SQLS is CASE-SENSITIVE from join snippets. Table names must be matched to
+      -- trigger them.
       sqls = {
         cmd = { 'sqls', '-config', 'config.yml' },
-        filetypes = { 'sql' },
-        root_dir = util.root_pattern('config.yml'),
         server_capabilities = {
           documentFormattingProvider = false,
         },
@@ -154,6 +161,7 @@ return { -- LSP Configuration & Plugins
       },
     }
 
+
     require('mason').setup(opts)
     -- You can add other tools here that you want Mason to install
     -- for you, so that they are available from within Neovim.
@@ -161,6 +169,7 @@ return { -- LSP Configuration & Plugins
     vim.list_extend(ensure_installed, {
       'lua_ls',
       'ruff',
+      'jq',
       'sqls',
       'prettierd',
       'markdown_oxide',

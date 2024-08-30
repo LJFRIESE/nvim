@@ -40,7 +40,7 @@ return { -- Autocompletio
     },
     'saadparwaiz1/cmp_luasnip',
     'rafamadriz/friendly-snippets',
-    -- 'kristijanhusak/vim-dadbod-completion',
+    'kristijanhusak/vim-dadbod-completion',
     'ray-x/cmp-treesitter',
     -- Symbols
     'kdheepak/cmp-latex-symbols',
@@ -250,7 +250,6 @@ return { -- Autocompletio
         group_index = 3,
       }),
     }
-  end,
   config = function(_, opts)
     local cmp = require('cmp')
 
@@ -288,11 +287,10 @@ return { -- Autocompletio
     -- Setup sql
     cmp.setup.filetype({ 'sql' }, {
       sources = {
-        { name = 'nvim_lsp' },
-        -- { name = 'nvim_lsp_signature_help' },
-        { name = 'vim-dadbod-completion' },
+        { name = 'nvim_lsp' , max_item_count = 5},
+        { name = 'vim-dadbod-completion', max_item_count = 5 },
         { name = 'luasnip', max_item_count = 3 },
-        { name = 'treesitter' },
+        -- { name = 'treesitter' },
         { name = 'buffer' },
       },
     })

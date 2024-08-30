@@ -6,7 +6,7 @@ return { -- Highlight, edit, and navigate code
   },
   build = ':TSUpdate',
   opts = {
-    ensure_installed = { 'yaml', 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'vim', 'vimdoc', 'sql', 'r', 'markdown', 'markdown_inline', 'rnoweb', 'sql' },
+    ensure_installed = { 'yaml', 'json', 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'vim', 'vimdoc', 'sql', 'r', 'markdown', 'markdown_inline', 'rnoweb', 'sql' },
     auto_install = true,
     indent = { enable = true },
     textobjects = {
