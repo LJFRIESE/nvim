@@ -288,12 +288,11 @@ return { -- Autocompletio
     -- Setup sql
     cmp.setup.filetype({ 'sql' }, {
       sources = {
-        { name = 'nvim_lsp' },
-        -- { name = 'nvim_lsp_signature_help' },
-        { name = 'vim-dadbod-completion' },
-        { name = 'luasnip', max_item_count = 3 },
+        {{ name = 'nvim_lsp' },
+        { name = 'luasnip', max_item_count = 3 },},
+        {{ name = 'vim-dadbod-completion' },
         { name = 'treesitter' },
-        { name = 'buffer' },
+        { name = 'buffer' },}
       },
     })
     -- `/` search setup.
