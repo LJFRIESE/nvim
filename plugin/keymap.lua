@@ -40,7 +40,7 @@ vim.keymap.set('n', 'N', 'Nzzzv', { desc = 'Previous result' })
 
 vim.keymap.set('n', '<c-d>', 'zz<c-d>', { desc = 'Jump down and center' })
 vim.keymap.set('n', '<c-u>', 'zz<c-u>', { desc = 'Jump up and center' })
-vim.keymap.set('n', '<leader>bda', ':%bdelete|edit #|normal`"', {desc = 'Delete all other buffers'})
+vim.keymap.set('n', '<leader>bd', ':%bdelete|edit #|normal`"', {desc = 'Delete all other buffers'})
 
 -- Misc
 vim.keymap.set('i', '<C-c>', '<Esc>', { desc = 'Esc' })
@@ -58,7 +58,7 @@ cmp.setup({
     return vim.g.cmptoggle
   end,
 })
-vim.keymap.set('n', '<leader>m', '<cmd>lua vim.g.cmptoggle = not vim.g.cmptoggle<CR>', { desc = 'Toggle nvim-cmp' })
+vim.keymap.set('n', '<leader>bc', '<cmd>lua vim.g.cmptoggle = not vim.g.cmptoggle<CR>', { desc = 'Toggle nvim-cmp' })
 
 
 vim.keymap.set('n', '<leader>Z', function()
@@ -81,8 +81,9 @@ wk.add({
   { 'gs', group = '[s]urrounding ...', icon = '' },
   { '<leader>s', group = '[S]earch ...', icon = '' },
   { '<leader>t', desc = '[T]rouble' },
+  { '<leader>g', desc = '[G]it' },
   { '<leader>f', desc = '[F]ind ...', icon = '' },
-  { '<leader>h', group = '[H]arpoon window' },
+  -- { '<leader>h', group = '[H]arpoon' },
   { '<leader>b', group = '[B]uffer' },
   { '<leader>r', group = '[R]egex replace' },
   { 'z', group = 'Fold code' },
