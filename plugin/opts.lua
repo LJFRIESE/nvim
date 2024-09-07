@@ -57,48 +57,39 @@ _G.get_statuscol = function()
   return '%s%{' .. line_func() .. '}%= ' .. get_fold(vim.v.lnum) .. ' '
 end
 
--- Global vars
-vim.o.statuscolumn = '%!v:lua.get_statuscol()'
-vim.g.have_nerd_font = true
 
-vim.opt.mouse = 'a'
-vim.opt.clipboard = 'unnamedplus'
 
-vim.o.rnu = true
-vim.o.nu = true
-
+-- netrw
 vim.g.netrw_liststyle = 3
 vim.g.netrw_browse_split = 0
 vim.g.netrw_banner = 0
 
 -- ui
--- Show which line your cursor is on
+vim.g.have_nerd_font = true
 vim.opt.cursorline = true
-vim.opt.termguicolors = true
-vim.opt.guicursor = 'n-v-c-sm:block,i-ci-ve:ver100-Cursor,r-cr-o:hor100'
-vim.opt.colorcolumn = { '89' }
--- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
+vim.opt.termguicolors = true
 
--- Set highlight on search, but clear on pressing <Esc> in normal mode
+vim.opt.guicursor = 'n-v-c-sm:block,i-ci-ve:ver100-Cursor,r-cr-o:hor100'
+vim.opt.statuscolumn = '%!v:lua.get_statuscol()'
+vim.opt.colorcolumn = { '89' }
+vim.opt.textwidth = 88
+
+vim.opt.relnum = true
+vim.opt.number = true
+vim.opt.signcolumn = 'yes'
+
 vim.opt.hlsearch = true
 vim.opt.incsearch = true
+vim.opt.inccommand = 'split'-- Preview substitutions live
 
--- Preview substitutions live, as you type!
-vim.opt.inccommand = 'split'
-
-vim.opt.signcolumn = 'yes'
-vim.opt.isfname:append('@-@')
+vim.opt.ignorecase = true-- Case-insensitive searching
+vim.opt.smartcase = true--UNLESS \C or one or more capital letters in the search term
 
 vim.opt_global.sidescroll = 20
 vim.opt_global.scrolloff = 8
 
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-
--- Max n suggestions in popups
-vim.opt.pumheight = 10
+vim.opt.pumheight = 10-- Max n suggestions in popups
 
 -- windows
 vim.opt.splitright = true
@@ -112,42 +103,24 @@ vim.opt.shiftwidth = 4
 vim.opt.expandtab = true
 vim.opt.smartindent = true
 
-vim.opt.textwidth = 88
--- -- Enable break indent
--- vim.opt.wrap = true
--- vim.opt.linebreak = true
-
-vim.opt.backup = false
-vim.opt.undofile = true
-
--- Decrease update time
-vim.opt.updatetime = 250
-
--- Save undo history
-vim.opt.undofile = true
-vim.g.undotree_DiffCommand = 'FC'
-
 -- Plugins
-
 vim.opt.timeoutlen = 300-- Decrease mapped sequence wait time
 vim.b.slime_cell_delimiter = '```'
 
+-- misc
+vim.opt.mouse = 'a'
+vim.opt.clipboard = 'unnamedplus'
+
+vim.opt.backup = false
+
+vim.opt.undofile = true
+vim.opt.undofile = true-- Save undo history
+vim.g.undotree_DiffCommand = 'FC'
+
+vim.opt.isfname:append('@-@')
 
 --- Disable health checks for these providers.
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_node_provider = 0
-
-
---         -- interesting idea to explore for formatting documentation
--- vim.lsp.util.stylize_markdown = function(bufnr, contents, opts)
---     contents = vim.lsp.util._normalize_markdown(contents, {
---         width = vim.lsp.util._make_floating_popup_size(contents, opts),
---     })
---     vim.bo[bufnr].filetype = 'markdown'
---     vim.treesitter.start(bufnr)
---     vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, contents)
-    --
-    -- return contents
---- end
