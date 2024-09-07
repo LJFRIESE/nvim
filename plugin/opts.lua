@@ -5,18 +5,9 @@
 -- Consequently, the vim-internal fold levels need to be disabled by setting
 -- them to 99.
 vim.opt.fillchars = {
-  horiz = '─',
-  horizup = '┴',
-  horizdown = '┬',
-  vert = '│',
-  vertleft = '┤',
-  vertright = '├',
-  verthoriz = '┼',
-  fold = ' ',
-  foldopen = '⎧',
-  foldclose = '',
-  foldsep = '│',
+  horiz = '─', horizup = '┴', horizdown = '┬', vert = '│', vertleft = '┤', vertright = '├', verthoriz = '┼', fold = ' ', foldopen = '⎧', foldclose = '', foldsep = '│',
 }
+
 local fcs = vim.opt.fillchars:get()
 
 local function get_fold(lnum)
@@ -58,66 +49,110 @@ _G.get_statuscol = function()
 end
 
 
+-- General ====================================================================
+
+vim.o.backup       = false          -- Don't store backup
+vim.o.mouse        = 'a'            -- Enable mouse
+vim.o.mousescroll  = 'ver:25,hor:6' -- Customize mouse scroll
+vim.o.switchbuf    = 'usetab'       -- Use already opened buffers when switching
+vim.o.timeoutlen = 300              -- Decrease mapped sequence wait time
+
+vim.opt.clipboard = 'unnamedplus'
+
+vim.o.undofile     = true           -- Enable persistent undo
+vim.g.undotree_DiffCommand = 'FC'
+
+vim.opt.isfname:append('@-@')
+
+-- Plugins
+vim.b.slime_cell_delimiter = '```' --move to quarto
 
 -- netrw
-vim.g.netrw_liststyle = 3
-vim.g.netrw_browse_split = 0
-vim.g.netrw_banner = 0
+vim.g.netrw_liststyle     = 3
+vim.g.netrw_browse_split  = 0
+vim.g.netrw_banner        = 0
 
--- ui
-vim.g.have_nerd_font = true
-vim.opt.cursorline = true
-vim.opt.showmode = false
-vim.opt.termguicolors = true
+-- UI =========================================================================
+vim.g.have_nerd_font      = true
+vim.opt.cursorline        = true
+vim.opt.showmode          = false
+vim.opt.termguicolors     = true
 
-vim.opt.guicursor = 'n-v-c-sm:block,i-ci-ve:ver100-Cursor,r-cr-o:hor100'
-vim.opt.statuscolumn = '%!v:lua.get_statuscol()'
-vim.opt.colorcolumn = { '89' }
-vim.opt.textwidth = 88
+vim.opt.guicursor         = 'n-v-c-sm:block,i-ci-ve:ver100-Cursor,r-cr-o:hor100'
+vim.opt.statuscolumn      = '%!v:lua.get_statuscol()'
+vim.opt.textwidth         = 88
+vim.opt.colorcolumn       = '+1'
 
-vim.opt.relnum = true
-vim.opt.number = true
-vim.opt.signcolumn = 'yes'
+vim.o.winblend      = 10        -- Make floating windows slightly transparentvim.o.wrap          = false     -- Display long lines as just one linevim.o.linebreak       = true   -- Wrap long lines at 'breakat' (if 'wrap' is set)
+vim.o.list            = true   -- Show helpful character indicators
 
-vim.opt.hlsearch = true
-vim.opt.incsearch = true
-vim.opt.inccommand = 'split'-- Preview substitutions live
+vim.o.cursorlineopt   = 'screenline,number' -- Show cursor line only screen line when wrapped
+vim.o.breakindentopt  = 'list:-1' -- Add padding for lists when 'wrap' is on
+vim.opt.rnu           = true
+vim.opt.number        = true
+vim.opt.signcolumn    = 'yes'
 
-vim.opt.ignorecase = true-- Case-insensitive searching
-vim.opt.smartcase = true--UNLESS \C or one or more capital letters in the search term
+vim.opt.hlsearch      = true
+vim.opt.incsearch     = true
+vim.opt.inccommand    = 'split' -- Preview substitutions live
+
+vim.o.ignorecase      = true    -- Ignore case when searching (use `\C` to force not doing that)
+vim.o.incsearch       = true  -- Show search results while typing
 
 vim.opt_global.sidescroll = 20
-vim.opt_global.scrolloff = 8
+vim.opt_global.scrolloff  = 8
 
-vim.opt.pumheight = 10-- Max n suggestions in popups
-
+vim.opt.pumheight         = 10    -- Max n suggestions in popups
+vim.o.pumblend            = 10    -- Make builtin completion menus slightly transparent
+--
 -- windows
 vim.opt.splitright = true
 vim.opt.splitbelow = true
 
+-- Editing ====================================================================
+vim.opt.iskeyword:append('-')  -- Treat dash separated words as a word text object-
+-- Does this improve the SQL snippet cmp?
+vim.o.infercase     = true     -- Infer letter cases for a richer built-in keyword completion
+
+-- Define pattern for a start of 'numbered' list. This is responsible for
+-- correct formatting of lists when using `gw`. This basically reads as 'at
+-- least one special character (digit, -, +, *) possibly followed some
+-- punctuation (. or `)`) followed by at least one space is a start of list
+-- item'
+vim.o.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
+
 -- whitespace
-vim.opt.tabstop = 4
+vim.opt.tabstop     = 4
 vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+vim.opt.shiftwidth  = 4
 
-vim.opt.expandtab = true
-vim.opt.smartindent = true
+vim.o.autoindent    = true     -- Use auto indent
+vim.o.smartindent   = true
+vim.o.expandtab     = true     -- Convert tabs to spaces
+vim.o.formatoptions = 'rqnl1j' -- Improve comment editing
 
--- Plugins
-vim.opt.timeoutlen = 300-- Decrease mapped sequence wait time
-vim.b.slime_cell_delimiter = '```'
 
--- misc
-vim.opt.mouse = 'a'
-vim.opt.clipboard = 'unnamedplus'
+-- Spelling ===================================================================
+vim.o.spelllang    = 'en,ru,uk'   -- Define spelling dictionaries
+vim.o.spelloptions = 'camel'      -- Treat parts of camelCase words as seprate words
+vim.opt.complete:append('kspell') -- Add spellcheck options for autocomplete
+vim.opt.complete:remove('t')      -- Don't use tags for completion
 
-vim.opt.backup = false
+vim.o.dictionary = vim.fn.stdpath('config') .. '/misc/dict/english.txt' -- Use specific dictionaries
 
-vim.opt.undofile = true
-vim.opt.undofile = true-- Save undo history
-vim.g.undotree_DiffCommand = 'FC'
+-- Custom autocommands ========================================================
+local augroup = vim.api.nvim_create_augroup('CustomSettings', {})
+vim.api.nvim_create_autocmd('FileType', {
+  group = augroup,
+  callback = function()
+    -- Don't auto-wrap comments and don't insert comment leader after hitting 'o'
+    -- If don't do this on `FileType`, this keeps reappearing due to being set in
+    -- filetype plugins.
+    vim.cmd('setlocal formatoptions-=c formatoptions-=o')
+  end,
+  desc = [[Ensure proper 'formatoptions']],
+})
 
-vim.opt.isfname:append('@-@')
 
 --- Disable health checks for these providers.
 vim.g.loaded_python3_provider = 0
