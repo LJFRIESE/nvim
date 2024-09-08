@@ -2,7 +2,10 @@ return {
   'folke/trouble.nvim',
   branch = 'dev',
   events = 'VeryLazy',
-  opts = {}, -- for default options, refer to the configuration section for custom setup.
+  opts = {
+    auto_close = true,
+      auto_jump = true,
+  },
   cmd = 'Trouble',
   keys = {
     {
@@ -65,3 +68,21 @@ return {
     },
   },
 }
+
+
+-- local actions = require("telescope.actions")
+-- local open_with_trouble = require("trouble.sources.telescope").open
+--
+-- -- Use this to add more results without clearing the trouble list
+-- local add_to_trouble = require("trouble.sources.telescope").add
+--
+-- local telescope = require("telescope")
+--
+-- telescope.setup({
+--   defaults = {
+--     mappings = {
+--       i = { ["<c-t>"] = open_with_trouble },
+--       n = { ["<c-t>"] = open_with_trouble },
+--     },
+--   },
+-- })
