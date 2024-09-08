@@ -105,7 +105,7 @@ return { -- LSP Configuration & Plugins
     capabilities.textDocument.foldingRange = { lineFoldingOnly = true }
     local servers = {
       markdown_oxide = {
-        filetypes = { 'markdown', 'quarto' },
+        filetypes = { 'markdown', },--'quarto' },
         server_capabilities = {
           workspace = {
             didChangeWatchedFiles = {

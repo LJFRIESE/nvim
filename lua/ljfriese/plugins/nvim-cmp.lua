@@ -61,7 +61,7 @@ return { -- Autocompletio
 
     -- for friendly snippets
     require('luasnip.loaders.from_vscode').lazy_load()
-    luasnip.filetype_extend('quarto', { 'markdown' })
+    -- luasnip.filetype_extend('quarto', { 'markdown' })
     luasnip.filetype_extend('rmarkdown', { 'markdown' })
 
     return {
@@ -241,7 +241,7 @@ return { -- Autocompletio
         -- { name = 'lsp_signature' },
         { name = 'buffer', max_item_count = 3 },
         { name = 'treesitter', max_item_count = 3 },
-        { name = 'otter' }, -- for code chunks in quarto
+        -- { name = 'otter' }, -- for code chunks in quarto
         { name = 'path' },
         -- { name = 'pandoc_references' },
         { name = 'calc' },

@@ -133,7 +133,7 @@ vim.o.formatoptions = 'rqnl1j' -- Improve comment editing
 
 
 -- Spelling ===================================================================
-vim.o.spelllang    = 'en,ru,uk'   -- Define spelling dictionaries
+vim.o.spelllang    = 'en,uk'   -- Define spelling dictionaries
 vim.o.spelloptions = 'camel'      -- Treat parts of camelCase words as seprate words
 vim.opt.complete:append('kspell') -- Add spellcheck options for autocomplete
 vim.opt.complete:remove('t')      -- Don't use tags for completion

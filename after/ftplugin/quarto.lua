@@ -1,1 +1,1 @@
-vim.bo.commentstring = "<!--%s-->"
+-- Quarto lsp/treesitter knows qmd comment string <!--%s-->
