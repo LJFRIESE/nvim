@@ -21,12 +21,7 @@ return {
       end, { desc = 'Toggle [c]olours' })
     end,
   },
-  {
-    'folke/todo-comments.nvim',
-    event = 'VeryLazy',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-  },
-  {
+    {
     'folke/zen-mode.nvim',
     event = 'BufReadPost',
     config = function()
