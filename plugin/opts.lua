@@ -63,6 +63,10 @@ vim.o.undofile     = true           -- Enable persistent undo
 vim.g.undotree_DiffCommand = 'FC'
 
 vim.opt.isfname:append('@-@')
+-- sync buffers automatically
+vim.opt.autoread = true
+-- disable neovim generating a swapfile and showing the error
+vim.opt.swapfile = false
 
 -- Plugins
 vim.b.slime_cell_delimiter = '```' --move to quarto
