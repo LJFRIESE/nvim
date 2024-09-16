@@ -104,6 +104,9 @@ return { -- LSP Configuration & Plugins
 
     capabilities.textDocument.foldingRange = { lineFoldingOnly = true }
     local servers = {
+      gopls = {
+  filetypes = {'go'},
+      },
       markdown_oxide = {
         filetypes = { 'markdown', },--'quarto' },
         server_capabilities = {
@@ -167,6 +170,7 @@ return { -- LSP Configuration & Plugins
     -- for you, so that they are available from within Neovim.
     local ensure_installed = vim.tbl_keys(servers or {})
     vim.list_extend(ensure_installed, {
+      'gopls',
       'lua_ls',
       'ruff',
       'jq',
