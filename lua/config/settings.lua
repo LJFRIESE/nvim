@@ -113,7 +113,8 @@ vim.g.loaded_node_provider = 0
 --   capabilities = require('blink.cmp').get_lsp_capabilities(),
 -- })
 
+vim.lsp.enable('sqls')
 vim.lsp.enable('luals')
-vim.lsp.enable('gopls')
+-- vim.lsp.enable('gopls')
 vim.lsp.enable('marksman')
-vim.lsp.enable('ahk')
+-- vim.lsp.enable('ahk')

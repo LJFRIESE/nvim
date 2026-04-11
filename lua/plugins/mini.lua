@@ -11,7 +11,7 @@ vim.pack.add({
 require('mini.misc').setup()
 require('mini.misc').setup_auto_root()
 
-require('mini.sessions').setup({ opts = { autoread = true } })
+require('mini.sessions').setup({ autoread = true, autowrite = true })
 
 
 

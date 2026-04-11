@@ -1,6 +1,7 @@
-vim.pack.add({ {
-    src = 'https://github.com/stevearc/conform.nvim',
-    data = {
+vim.pack.add({ { src = 'https://github.com/stevearc/conform.nvim',
+} })
+
+require('conform').setup({
         opts = {
             -- log_level = vim.log.levels.DEBUG,
             notify_on_error = true,
@@ -13,6 +14,4 @@ vim.pack.add({ {
             },
         },
     }
-} })
-
-require('conform').setup()
+)

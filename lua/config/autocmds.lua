@@ -76,6 +76,8 @@ vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 -- Prefer LSP folding if client supports it
 vim.api.nvim_create_autocmd('LspAttach', {
     callback = function(args)
+
+
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if client:supports_method('textDocument/foldingRange') then
             local win = vim.api.nvim_get_current_win()
@@ -120,6 +122,13 @@ function _G.custom_foldtext()
     table.insert(result, { "  " .. n_lines, "Special" })
     return result
 end
+
+vim.api.nvim_create_autocmd('LspAttach', {
+    callback = function(args)
+        local opts = { buffer = args.buf }
+    end,
+})
+
 
 vim.api.nvim_create_autocmd('LspProgress', {
     ---@param ev {data: {client_id: integer, params: lsp.ProgressParams}}

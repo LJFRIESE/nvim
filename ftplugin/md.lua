@@ -1,6 +1,6 @@
 vim.pack.add({
-    "https://github.com/MeanderingProgrammer/render-markdown.nvim",
-    "https://github.com/iamcco/markdown-preview.nvim",
+    { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim", },
+    { src = "https://github.com/iamcco/markdown-preview.nvim", }
 })
 
 local renderOpts = {

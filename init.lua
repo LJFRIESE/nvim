@@ -37,6 +37,14 @@ MapKeys = function(keys)
     end
 end
 
+
+
+require("config.settings")
+
+require("plugins.dadbod")
+require("plugins.blink")
+
+
 require("plugins.snacks")
 require("plugins.oil")
 require("plugins.conform")
@@ -46,4 +54,3 @@ require("plugins.which-key")
 
 require("config.keymaps")
 require("config.autocmds")
-require("config.settings")

@@ -16,7 +16,6 @@ function help_lookup()
         print('Help: ' .. expr)
         return
     end
-    vim.lsp.buf.hover()
     print('No entry: ' .. expr)
 end
 
@@ -99,11 +98,15 @@ vim.keymap.set('t', '<c-c><c-c>', '<c-\\><c-n>', { desc = 'Enter normal mode fro
 vim.keymap.set('n', '<leader>i', ':Inspect<CR>', { desc = '[I]nspect' })
 vim.keymap.set('v', '<leader>x', ':lua<CR>', { desc = '[L]ine' })
 
+-- Show documentation/hover information
+vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+-- Go to definition
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
 vim.api.nvim_set_keymap('n', '<C-k>', ':lua help_lookup()<CR>', { noremap = true, silent = true })
 
 -- Make U opposite to u.
 vim.keymap.set('n', 'U', '<C-r>', { desc = 'Redo' })
-vim.keymap.set('n', "<leader>U", function() require('undotree').toggle() end, { desc = '[u]ndo tree' })
+vim.keymap.set('n', "<leader>U", function()require('undotree').toggle()end,{ desc = '[u]ndo tree' })
 
 -- vim.keymap.set('n', '<esc><esc>', '<cmd>ccl<CR>', { desc = 'Close quick fix window' })
 vim.keymap.set('n', '<leader>C', function()
@@ -113,4 +116,25 @@ end, { desc = 'Toggle [c]olours' })
 -- Open Oil
 vim.keymap.set('n', '-', '<CMD>Oil<CR>', { desc = 'Open parent directory' })
 
+local wk = require('which-key')
+wk.add({
+    { 'g', desc = '[G]o ...' },
+    { 'gc', group = '[C]omment' },
+    { '<leader>d', desc = '[D]ebug ...' },
+    { '<leader>c', group = '[C]ompile ...' },
+    { '<leader>s', group = '[S]earch ...', icon = '' },
+    { '<leader>f', group = '[F]ind ...', icon = '' },
+    { '<leader>g', group = '[G]it' },
+    { '<leader>gt', group = '[T]oggle ...' },
+    { '<leader>b', group = '[B]uffer' },
+    { '<leader>r', group = '[R]egex replace' },
+    { '<leader>o', group = 'Insert linebreak ...' },
+})
+
+
+
+
 -- stylua: ignore end
+
+
+
