@@ -2,20 +2,54 @@ vim.g.projects_dir = vim.env.HOME .. '/projects'
 vim.g.mapleader = ' '
 
 -- Folding =====================================================================
-vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
 -- vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 
--- Nice and simple folding
--- vim.o.fillchars = { foldclose = '', }
--- vim.o.foldmethod = ""
+-- Folding lsp
+vim.o.foldmethod = 'expr'
 -- Default to treesitter folding
--- vim.o.foldexpr = ''
--- vim.o.foldtext = ""
--- See autocmds for prefer LSP fold function
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+-- Prefer LSP folding if client supports it
 
 vim.opt.foldcolumn = "0"
 vim.opt.foldtext = "v:lua.custom_foldtext()"
+vim.opt.fillchars:append({ foldclose = '', fold = " " })
+local function fold_virt_text(result, s, lnum, coloff)
+    if not coloff then
+        coloff = 0
+    end
+    local text = ""
+    local hl
+    for i = 1, #s do
+        local char = s:sub(i, i)
+        local hls = vim.treesitter.get_captures_at_pos(0, lnum, coloff + i - 1)
+        local _hl = hls[#hls]
+        if _hl then
+            local new_hl = "@" .. _hl.capture
+            if new_hl ~= hl then
+                table.insert(result, { text, hl })
+                text = ""
+                hl = nil
+            end
+            text = text .. char
+            hl = new_hl
+        else
+            text = text .. char
+        end
+    end
+    table.insert(result, { text, hl })
+end
+
+function _G.custom_foldtext()
+    local start = vim.fn.getline(vim.v.foldstart):gsub("\t", string.rep(" ", vim.o.tabstop))
+    local n_lines = vim.v.foldend - vim.v.foldstart
+    local result = {}
+    fold_virt_text(result, start, vim.v.foldstart)
+    table.insert(result, { "  " .. n_lines, "Special" })
+    return result
+end
+
 -- General ====================================================================
 
 vim.opt.winborder = 'rounded'
@@ -49,11 +83,11 @@ vim.opt.cursorline     = true
 vim.opt.cursorlineopt  = 'screenline,number' -- Show cursor line only screen line when wrapped
 vim.opt.guicursor      = 'n-sm:block-Cursor,i-t:ver30-iCursor,v:block-vCursor,r-c:block-cCursor,o:block-oCursor'
 
-vim.opt.diffopt="internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram"
+vim.opt.diffopt        = "internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram"
 
 vim.opt.statuscolumn   = '%l%s'
 vim.opt.signcolumn     = 'yes:1'
-vim.opt.colorcolumn    = '+1' -- Highlight after textwidth
+vim.opt.colorcolumn    = '+1'      -- Highlight after textwidth
 
 vim.opt.breakindentopt = 'list:-1' -- Add padding for lists when 'wrap' is on
 vim.opt.rnu            = true
@@ -105,16 +139,3 @@ vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_node_provider = 0
-
--- LSP ===========================================================================
-
--- vim.lsp.config('*', {
---   root_markers = { '.git' }, -- Set default root marker for all clients
---   capabilities = require('blink.cmp').get_lsp_capabilities(),
--- })
-
-vim.lsp.enable('sqls')
-vim.lsp.enable('luals')
--- vim.lsp.enable('gopls')
-vim.lsp.enable('marksman')
--- vim.lsp.enable('ahk')

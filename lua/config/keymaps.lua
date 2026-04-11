@@ -20,7 +20,6 @@ function help_lookup()
 end
 
 -- Manipulate text
-
 -- Join line but keep cursor on mark
 vim.keymap.set('n', 'J', 'mzJ`z')
 
@@ -89,19 +88,14 @@ vim.keymap.set('n', '<c-d>', 'zz<c-d>', { desc = 'Center on jump' })
 
 vim.keymap.set('n', '<leader>bd', ':%bdelete|edit #|normal`"', { desc = 'Delete all other buffers' })
 vim.keymap.set('n', '<esc>', '<cmd>nohlsearch<CR>', { desc = 'Kill search highlight' })
-vim.keymap.set('n', '<leader>t', function()
-    require('custom.floaterminal').toggle_terminal()
-end, { desc = '[T]erminal' })
 
-vim.keymap.set('t', '<c-c><c-c>', '<c-\\><c-n>', { desc = 'Enter normal mode from Terminal' })
 
 vim.keymap.set('n', '<leader>i', ':Inspect<CR>', { desc = '[I]nspect' })
 vim.keymap.set('v', '<leader>x', ':lua<CR>', { desc = '[L]ine' })
 
+
 -- Show documentation/hover information
-vim.keymap.set('n', 'K', vim.lsp.buf.hover)
 -- Go to definition
-vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
 vim.api.nvim_set_keymap('n', '<C-k>', ':lua help_lookup()<CR>', { noremap = true, silent = true })
 
 -- Make U opposite to u.
@@ -131,10 +125,5 @@ wk.add({
     { '<leader>o', group = 'Insert linebreak ...' },
 })
 
-
-
-
 -- stylua: ignore end
-
-
 

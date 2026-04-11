@@ -1,19 +1,14 @@
 vim.pack.add({
     { src = 'https://github.com/echasnovski/mini.ai' },
-    {
-        src = 'https://github.com/echasnovski/mini.sessions'
-    }, {
-    src = 'https://github.com/echasnovski/mini.misc'
-},
-    { src = 'https://github.com/echasnovski/mini.surround' }
-    , { src = 'https://github.com/echasnovski/mini.statusline' } })
+    { src = 'https://github.com/echasnovski/mini.sessions' },
+    { src = 'https://github.com/echasnovski/mini.misc' },
+    { src = 'https://github.com/echasnovski/mini.surround' },
+    { src = 'https://github.com/echasnovski/mini.statusline' } })
 
 require('mini.misc').setup()
 require('mini.misc').setup_auto_root()
 
 require('mini.sessions').setup({ autoread = true, autowrite = true })
-
-
 
 require('mini.surround').setup({
     opts = {
@@ -25,7 +20,6 @@ require('mini.surround').setup({
     }
 }
 )
-
 
 require('mini.ai').setup({
     silent = true,

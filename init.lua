@@ -40,10 +40,10 @@ end
 
 
 require("config.settings")
+require("config.autocmds")
 
 require("plugins.dadbod")
 require("plugins.blink")
-
 
 require("plugins.snacks")
 require("plugins.oil")
@@ -53,4 +53,17 @@ require("plugins.misc")
 require("plugins.which-key")
 
 require("config.keymaps")
-require("config.autocmds")
+
+
+
+-- LSP ===========================================================================
+vim.lsp.config('*', {
+  root_markers = { '.git' }, -- Set default root marker for all clients
+  capabilities = require('blink.cmp').get_lsp_capabilities(),
+})
+--
+vim.lsp.enable('sqls')
+vim.lsp.enable('luals')
+-- vim.lsp.enable('gopls')
+vim.lsp.enable('marksman')
+-- vim.lsp.enable('ahk')

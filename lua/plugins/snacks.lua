@@ -1,30 +1,22 @@
 -- very clean snacks
 -- https://tduyng.com/blog/vim-pack-and-snacks/#setting-up-which-keynvim
 
-vim.pack.add({
-    {
-        src = "https://github.com/folke/snacks.nvim",
-        data = {
-            opts = {
-                quickfile = {},
-                picker = { enabled = true , lazygit = true, terminal = true},
-                notifier = {},
-                -- words = {},
-                indent = {
-                    animate = { duration = { steps = 5, total = 50 } }
-                },
-            },
-        }
-    } })
+vim.pack.add({ { src = "https://github.com/folke/snacks.nvim", } })
 
-require("snacks").setup()
-
-
+require("snacks").setup({
+    quickfile = {},
+    picker = { enabled = true, lazygit = true, terminal = true },
+    notifier = {},
+    -- words = {},
+    indent = {
+        animate = { duration = { steps = 5, total = 50 } }
+    }
+})
 
 local Snacks = require("snacks")
 -- Snacks.picker
 local keys = {
-    { "<leader>gg",     function() Snacks.lazygit() end,                                     desc = "Lazygit" },
+    { "<leader>gg",       function() Snacks.lazygit() end,                                         desc = "Lazygit" },
     { "<leader>/",        function() Snacks.picker.grep() end,                                     desc = "Grep" },
     { "<leader>:",        function() Snacks.picker.command_history() end,                          desc = "Command History" },
     -- find
