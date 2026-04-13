@@ -70,8 +70,9 @@ local keys = {
         'tq',
         '<cmd>Trouble qflist toggle<cr>',
         desc = '[Q]uickfix List',
-    },
-}
+
+
+    }, }
 
 
 MapKeys(keys)

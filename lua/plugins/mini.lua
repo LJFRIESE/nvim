@@ -60,10 +60,10 @@ require('mini.statusline').setup({
             local lsp = MiniStatusline.section_lsp({ trunc_width = 75 })
             local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
             local search = MiniStatusline.section_searchcount({ trunc_width = 75 })
-
+            local db = vim.fn['db_ui#statusline']()
             return MiniStatusline.combine_groups({
                 { hl = mode_hl,                 strings = { mode } },
-                { hl = 'MiniStatuslineDevinfo', strings = {} },
+                { hl = 'MiniStatuslineDevinfo', strings = { lsp, db } },
                 '%<%=', -- truncate point
                 { hl = 'MiniStatuslineFileInfo', strings = { '%t' .. ' | ' .. get_session() } },
                 '%=',   -- End left alignment

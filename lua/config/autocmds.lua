@@ -1,3 +1,13 @@
+vim.api.nvim_create_autocmd('PackChanged', {
+    callback = function(ev)
+        local name, kind = ev.data.spec.name, ev.data.kind
+        if name == 'nvim-treesitter' and kind == 'update' then
+            if not ev.data.active then vim.cmd.packadd('nvim-treesitter') end
+            vim.cmd('TSUpdate')
+        end
+    end
+})
+
 -- Highlight yanked text
 local yank_group = vim.api.nvim_create_augroup('HighlightYank', {})
 vim.api.nvim_create_autocmd('TextYankPost', {
@@ -105,16 +115,8 @@ vim.api.nvim_create_autocmd('QuickFixCmdPost', {
     end,
 })
 
--- Set nowrap if window is left than textwidth
-vim.api.nvim_create_autocmd('WinResized', {
-    pattern = '*',
-    callback = function()
-        local win_width = vim.api.nvim_win_get_width(0)
-        local text_width = vim.opt.textwidth._value
-        local wide_enough = win_width < text_width + 1
-        vim.api.nvim_set_option_value('wrap', wide_enough, {})
-    end,
-})
+
+
 
 --- Center when inserting
 vim.api.nvim_create_autocmd('InsertEnter', {

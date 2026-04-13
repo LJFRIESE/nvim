@@ -2,19 +2,14 @@ vim.g.projects_dir = vim.env.HOME .. '/projects'
 vim.g.mapleader = ' '
 
 -- Folding =====================================================================
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
--- vim.o.foldlevelstart = 99
 vim.o.foldenable = true
+vim.o.foldmethod = 'expr'                          -- Folding lsp
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- Default to treesitter folding
 
--- Folding lsp
-vim.o.foldmethod = 'expr'
--- Default to treesitter folding
-vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
--- Prefer LSP folding if client supports it
-
-vim.opt.foldcolumn = "0"
+vim.o.foldcolumn = "0"
 vim.opt.foldtext = "v:lua.custom_foldtext()"
 vim.opt.fillchars:append({ foldclose = '', fold = " " })
+
 local function fold_virt_text(result, s, lnum, coloff)
     if not coloff then
         coloff = 0
@@ -23,7 +18,7 @@ local function fold_virt_text(result, s, lnum, coloff)
     local hl
     for i = 1, #s do
         local char = s:sub(i, i)
-        local hls = vim.treesitter.get_captures_at_pos(0, lnum, coloff + i - 1)
+        local hls = vim.treesitter.get_captures_at_pos(0, lnum - 1, coloff + i - 1)
         local _hl = hls[#hls]
         if _hl then
             local new_hl = "@" .. _hl.capture
@@ -76,19 +71,20 @@ vim.diagnostic.config({
 })
 
 -- UI =========================================================================
-vim.g.have_nerd_font   = true
-vim.opt.termguicolors  = true
+vim.g.have_nerd_font  = true
+vim.opt.termguicolors = true
 
-vim.opt.cursorline     = true
-vim.opt.cursorlineopt  = 'screenline,number' -- Show cursor line only screen line when wrapped
-vim.opt.guicursor      = 'n-sm:block-Cursor,i-t:ver30-iCursor,v:block-vCursor,r-c:block-cCursor,o:block-oCursor'
+vim.opt.cursorline    = true
+vim.opt.cursorlineopt = 'screenline,number'  -- Show cursor line only screen line when wrapped
+vim.opt.guicursor     = 'n-sm:block-Cursor,i-t:ver30-iCursor,v:block-vCursor,r-c:block-cCursor,o:block-oCursor'
 
-vim.opt.diffopt        = "internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram"
+vim.opt.diffopt       = "internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram"
 
-vim.opt.statuscolumn   = '%l%s'
-vim.opt.signcolumn     = 'yes:1'
-vim.opt.colorcolumn    = '+1'      -- Highlight after textwidth
-
+vim.opt.statuscolumn  = '%l%s'
+vim.opt.signcolumn    = 'yes:1'
+vim.opt.colorcolumn   = '+1'  -- Highlight after textwidth
+vim.o.wrap            = false
+vim.api.nvim_set_option_value('wrap', wide_enough, {})
 vim.opt.breakindentopt = 'list:-1' -- Add padding for lists when 'wrap' is on
 vim.opt.rnu            = true
 vim.opt.number         = true
@@ -116,7 +112,6 @@ vim.opt.infercase     = true  -- Infer letter cases for a richer built-in keywor
 -- least one special character (digit, -, +, *) possibly followed some
 -- punctuation (. or `)`) followed by at least one space is a start of list item'
 vim.opt.formatlistpat = [[^\s*[0-9\-\+\*]\+[\.\)]*\s\+]]
-
 vim.opt.tabstop       = 4
 vim.opt.softtabstop   = 4
 vim.opt.shiftwidth    = 4
@@ -124,7 +119,7 @@ vim.opt.shiftwidth    = 4
 vim.opt.autoindent    = true
 vim.opt.smartindent   = true
 vim.opt.expandtab     = true
-vim.opt.formatoptions = 'rqnl1j' -- Improve comment editing. Trust me.
+vim.opt.formatoptions = 'tcrqnl1j' -- Improve comment editing. Trust me.
 
 -- Spelling ===================================================================
 vim.opt.spelllang     = 'en,uk'                                        -- Define spelling dictionaries

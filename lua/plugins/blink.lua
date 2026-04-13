@@ -1,6 +1,7 @@
 vim.pack.add({
     { src = 'https://github.com/rafamadriz/friendly-snippets' },
     { src = 'https://github.com/mikavilpas/blink-ripgrep.nvim', },
+    { src = 'https://github.com/folke/lazydev.nvim' },
     {
         src = 'https://github.com/saghen/blink.cmp',
         version = 'v1.10.2',
@@ -19,9 +20,12 @@ require("blink.cmp").setup({
                 name = "Dadbod",
                 module = "vim_dadbod_completion.blink"
             },
-        },
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink", },},
         per_filetype = {
             sql = { "lsp", "dadbod", "snippets" },
+            -- lua = { inherit_defaults = true, 'lazydev' },
         },
     },
     keymap = {
