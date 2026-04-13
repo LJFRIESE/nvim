@@ -32,10 +32,14 @@ end
 
 require("config.settings")
 require("config.autocmds")
+require("config.marks")
+require("config.keymaps")
 
 require("plugins.dadbod")
 require("plugins.blink")
 
+require("plugins.git")
+require("plugins.treesitter")
 require("plugins.snacks")
 require("plugins.oil")
 require("plugins.conform")
@@ -43,7 +47,6 @@ require("plugins.mini")
 require("plugins.misc")
 require("plugins.which-key")
 
-require("config.keymaps")
 
 
 

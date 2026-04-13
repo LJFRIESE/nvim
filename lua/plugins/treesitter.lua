@@ -59,3 +59,14 @@ vim.pack.add( {
 require('nvim-treesitter').setup()
 require('treesitter-context').setup()
 require('treesj').setup()
+
+-- Toggle treesitter-context
+vim.keymap.set('', '<leader>bc', function()
+    local tsc = require('treesitter-context')
+    if tsc.enabled() then
+        tsc.disable()
+    else
+        tsc.enable()
+    end
+end, { desc = 'Toggle treesitter [c]ontext' })
+

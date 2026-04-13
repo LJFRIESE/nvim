@@ -45,16 +45,6 @@ vim.keymap.set({ 'n', 'v' }, 'C', '"_C')
 -- Match to non-nvim contexts
 vim.keymap.set('i', '<C-H>', '<C-W>')
 
--- Toggle treesitter-context
-vim.keymap.set('', '<leader>bc', function()
-    local tsc = require('treesitter-context')
-    if tsc.enabled() then
-        tsc.disable()
-    else
-        tsc.enable()
-    end
-end, { desc = 'Toggle treesitter [c]ontext' })
-
 -- Diagnostic keymaps
 
 vim.keymap.set('', '<leader>bl', function()
@@ -98,7 +88,6 @@ vim.api.nvim_set_option_value('wrap', not cur, {})
 end, {desc = 'Toggle [w]rap'})
 -- Make U opposite to u.
 vim.keymap.set('n', 'U', '<C-r>', { desc = 'Redo' })
-vim.keymap.set('n', "<leader>u", function() require('undotree').toggle() end, { desc = '[u]ndo tree' })
 
 -- vim.keymap.set('n', '<esc><esc>', '<cmd>ccl<CR>', { desc = 'Close quick fix window' })
 vim.keymap.set('n', '<leader>bc', function()

@@ -5,4 +5,6 @@ vim.pack.add({
 
 require("undotree").setup()
 
+vim.keymap.set('n', "<leader>u", function() require('undotree').toggle() end, { desc = '[u]ndo tree' })
+
 require("nvim-highlight-colors").setup()

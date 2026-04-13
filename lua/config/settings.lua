@@ -2,6 +2,7 @@ vim.g.projects_dir = vim.env.HOME .. '/projects'
 vim.g.mapleader = ' '
 
 -- Folding =====================================================================
+vim.o.foldlevelstart=99
 vim.o.foldenable = true
 vim.o.foldmethod = 'expr'                          -- Folding lsp
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()' -- Default to treesitter folding

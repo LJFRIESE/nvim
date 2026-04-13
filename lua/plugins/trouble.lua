@@ -10,6 +10,18 @@ require("trouble").setup({
     },
 })
 
+-- Open trouble when quickfix is opened
+-- add cmd :ccl to also auto-close the qf buf. Not sure if I want to yet...
+vim.api.nvim_create_autocmd('QuickFixCmdPost', {
+    callback = function()
+        vim.cmd([[Trouble qflist open]])
+        vim.cmd([[ccl]])
+    end,
+})
+
+
+
+
 local keys = {
     {
         ']t',
