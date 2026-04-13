@@ -54,10 +54,10 @@ vim.keymap.set('', '<leader>bl', function()
     })
 end, { desc = 'Toggle diagnostic [l]ines' })
 
-vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = 1 })
+vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 })
 end, { desc = '[D]iagnostic' })
 
-vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = -1 })
+vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 })
 end, { desc = '[D]iagnostic' })
 
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = '[d]iagnostics' })
