@@ -35,14 +35,15 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
     end,
 })
 
-vim.api.nvim_create_autocmd('FileType', {
-    group = vim.api.nvim_create_augroup('ljfriese/formatting', {}),
-    pattern = '*',
-    callback = function()
-        vim.cmd('setlocal formatoptions-=c formatoptions-=o')
-    end,
-    desc = [[Ensure proper 'formatoptions']],
-})
+-- This was something about plugins/ftplugin files overwriting things... Necessary?
+--vim.api.nvim_create_autocmd('FileType', {
+--    group = vim.api.nvim_create_augroup('ljfriese/formatting', {}),
+--    pattern = '*',
+--    callback = function()
+--        vim.cmd('setlocal formatoptions-=c formatoptions-=o')
+--    end,
+--    desc = [[Ensure proper 'formatoptions']],
+--})
 
 -- Search for word under cursor
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
