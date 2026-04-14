@@ -10,11 +10,18 @@ require('conform').setup({
                 default_format_opts = {
                     lsp_format = 'fallback',
                 },
-                format_on_save = { timeout_ms = 500, lsp_format = 'fallback' },
+--                format_on_save = { timeout_ms = 500, lsp_format = 'fallback' },
             },
         },
     }
 )
+-- Format on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function(args)
+    require("conform").format({ bufnr = args.buf })
+  end,
+})
 
 -- Format command
 vim.api.nvim_create_user_command('Format', function(args)
