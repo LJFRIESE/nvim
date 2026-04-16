@@ -120,7 +120,7 @@ vim.opt.shiftwidth    = 4
 vim.opt.autoindent    = true
 vim.opt.smartindent   = true
 vim.opt.expandtab     = true
-vim.opt.formatoptions = 'tcro/qanl1j' -- Improve comment editing. Trust me.
+vim.opt.formatoptions = 'tcro/qnl1j' -- Improve comment editing. Trust me.
 
 -- Spelling ===================================================================
 vim.opt.spelllang     = 'en,uk'                                        -- Define spelling dictionaries

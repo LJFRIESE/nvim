@@ -54,10 +54,12 @@ vim.keymap.set('', '<leader>bl', function()
     })
 end, { desc = 'Toggle diagnostic [l]ines' })
 
-vim.keymap.set('n', '[d', function() vim.diagnostic.jump({ count = -1 })
+vim.keymap.set('n', '[d', function()
+    vim.diagnostic.jump({ count = -1 })
 end, { desc = '[D]iagnostic' })
 
-vim.keymap.set('n', ']d', function() vim.diagnostic.jump({ count = 1 })
+vim.keymap.set('n', ']d', function()
+    vim.diagnostic.jump({ count = 1 })
 end, { desc = '[D]iagnostic' })
 
 vim.keymap.set('n', '<leader>d', vim.diagnostic.open_float, { desc = '[d]iagnostics' })
@@ -66,7 +68,6 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = '[q]uickfix
 vim.keymap.set('n', 'gcd', 'O---@diagnostic disable-next-line<esc>j', { desc = '[d]iagnostic disable' })
 vim.keymap.set('n', 'gcl', 'A--no lint<esc>', { desc = '[l]int disable' })
 
-vim.keymap.set('n', 'gw', '<cmd>Format<CR>', { desc = 'Format' })
 
 -- Window navigation
 vim.keymap.set('n', '<c-w>_', '<c-w>v', { desc = 'Virtical split' })
@@ -83,9 +84,9 @@ vim.keymap.set('n', '<leader>i', ':Inspect<CR>', { desc = '[I]nspect' })
 vim.keymap.set('v', '<leader>cl', ':lua<CR>', { desc = '[L]ine' })
 
 vim.keymap.set('n', '<leader>bw', function()
-local cur = vim.api.nvim_get_option_value('wrap',{})
-vim.api.nvim_set_option_value('wrap', not cur, {})
-end, {desc = 'Toggle [w]rap'})
+    local cur = vim.api.nvim_get_option_value('wrap', {})
+    vim.api.nvim_set_option_value('wrap', not cur, {})
+end, { desc = 'Toggle [w]rap' })
 -- Make U opposite to u.
 vim.keymap.set('n', 'U', '<C-r>', { desc = 'Redo' })
 

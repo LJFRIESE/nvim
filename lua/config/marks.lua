@@ -19,7 +19,7 @@ local ns = vim.api.nvim_create_namespace 'ljfriese/marks'
 local function decor_mark(bufnr, mark)
     pcall(vim.api.nvim_buf_set_extmark, bufnr, ns, mark.pos[2] - 1, 0, {
         sign_text = mark.mark:sub(1),
-        sign_hl_group = 'DiagnosticSignOk',
+        sign_hl_group = 'Tag',
     })
 end
 
@@ -130,29 +130,6 @@ local function check_bookmark(mark)
     return false
 end
 
--- Delete any bookmark from the current buffer
-local function delete_bookmark(mark)
-    if mark then
-        mark = char2mark(mark)
-    else
-        mark = vim.fn.getcharstr()
-    end
-    if check_bookmark(mark) then
-        vim.api.nvim_del_mark(mark2char(mark))
-        _G.file_bookmarks[mark] = nil
-        bookmark_notification("Delete mark #" .. mark)
-    else
-        bookmark_notification("Mark #" .. mark .. " not set")
-    end
-end
-
--- Delete all bookmarks accross all buffers
-local function delete_all_bookmarks()
-    bookmark_notification("Delete all bookmarks")
-    vim.cmd("delmarks A-I")
-    _G.file_bookmarks = {}
-end
-
 -- This overwrites default behaviour for setting marks 1-9 using m, but it leaves
 -- all other uses unimpaired. Marks 1-9 are by default the location of the cursor at
 -- the nth previous time that vim was closed.
@@ -190,4 +167,3 @@ vim.keymap.set("n", "'", function()
         end
     end
 end)
-
