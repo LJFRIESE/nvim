@@ -26,6 +26,7 @@ wk.add({
     { '<leader>g', group = '[G]it' },
     { '<leader>gt', group = '[T]oggle ...' },
     { '<leader>b', group = '[B]uffer' },
+    { '<leader>m', group = '[M]arks' },
     { '<leader>r', group = '[R]egex replace' },
     { '<leader>o', group = 'Insert linebreak ...' },
 })

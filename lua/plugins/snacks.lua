@@ -65,7 +65,7 @@ local keys = {
     { "<leader>sM", function() Snacks.picker.man() end,     desc = "Man Pages" },
     { "<leader>sm", function() Snacks.picker.marks({}) end, desc = "Search marks" },
     {
-        "<leader>mm",
+        "<leader>m",
         function()
             Snacks.picker.marks({
                 layout = {
