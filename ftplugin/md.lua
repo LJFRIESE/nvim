@@ -1,7 +1,9 @@
-vim.pack.add({
-    { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim", },
-    { src = "https://github.com/iamcco/markdown-preview.nvim", }
-})
+if not package.loaded['render-markdown'] then
+    vim.pack.add({
+        { src = "https://github.com/MeanderingProgrammer/render-markdown.nvim", },
+        { src = "https://github.com/iamcco/markdown-preview.nvim", }
+    })
+end
 
 local renderOpts = {
     heading = {

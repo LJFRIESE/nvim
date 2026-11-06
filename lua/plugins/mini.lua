@@ -11,16 +11,16 @@ require('mini.misc').setup_auto_root()
 require('mini.sessions').setup({ autoread = true, autowrite = true })
 
 require('mini.surround').setup({
-    opts = {
-        highlight_duration = 500,
-        n_lines = 100,
-        respect_selection_type = false,
-        search_method = 'cover',
-        silent = false,
-    }
-}
-)
+    highlight_duration = 500,
+    n_lines = 100,
+    respect_selection_type = false,
+    search_method = 'cover',
+    silent = false,
+})
 
+-- NOTE: mini.ai's default `an`/`in`/`al`/`il` mappings override the
+-- Neovim 0.12 built-in LSP selection mappings. Map LSP selection manually
+-- (vim.lsp.buf.selection_range) if you need it.
 require('mini.ai').setup({
     silent = true,
     n_lines = 500,
@@ -61,9 +61,17 @@ require('mini.statusline').setup({
             local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
             local search = MiniStatusline.section_searchcount({ trunc_width = 75 })
             local db = vim.fn['db_ui#statusline']()
+            local diag = vim.diagnostic.status()
+            local progress = vim.ui.progress_status()
+            local git = vim.b.gitsigns_head
+            if git and git ~= '' then
+                git = ' ' .. git
+            else
+                git = ''
+            end
             return MiniStatusline.combine_groups({
                 { hl = mode_hl,                 strings = { mode } },
-                { hl = 'MiniStatuslineDevinfo', strings = { lsp, db } },
+                { hl = 'MiniStatuslineDevinfo', strings = { git, lsp, db, diag, progress } },
                 '%<%=', -- truncate point
                 { hl = 'MiniStatuslineFileInfo', strings = { '%t' .. ' | ' .. get_session() } },
                 '%=',   -- End left alignment

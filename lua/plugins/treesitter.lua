@@ -1,43 +1,9 @@
 vim.pack.add({
     {
         src = 'https://github.com/nvim-treesitter/nvim-treesitter',
-        data = {
-            opts = {
-                ensure_installed = {
-                    'vimdoc',
-                    'toml',
-                    'go',
-                    'json',
-                    'diff',
-                    'html',
-                    'lua',
-                    'vimdoc',
-                    'sql',
-                    'r',
-                    'markdown',
-                    'markdown_inline',
-                    'sql',
-                },
-                auto_install = true,
-                indent = { enable = true },
-            },
-        }
     },
     {
         src = 'https://github.com/nvim-treesitter/nvim-treesitter-context',
-        data = {
-            opts = {
-                enable = true,
-                max_lines = 4,           -- How many lines the window should span. Values <= 0 mean no limit.
-                min_window_height = 0,   -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-                line_numbers = true,
-                multiline_threshold = 4, -- Maximum number of lines to show for a single context
-                trim_scope = 'inner',    -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-                mode = 'topline',        -- Line used to calculate context. Choices: 'cursor', 'topline'
-                separator = '-',
-                zindex = 20,
-            },
-        }
     },
     {
         src = 'https://github.com/Wansmer/treesj',
@@ -60,17 +26,45 @@ vim.pack.add({
 })
 
 require('nvim-treesitter').setup()
-require('treesitter-context').setup()
+
+-- Only auto-install parsers when the tree-sitter CLI is available.
+if vim.fn.executable('tree-sitter') == 1 then
+    require('nvim-treesitter').install({
+        'vimdoc',
+        'toml',
+        'go',
+        'json',
+        'diff',
+        'html',
+        'lua',
+        'sql',
+        'r',
+        'markdown',
+        'markdown_inline',
+    })
+end
+
+require('treesitter-context').setup({
+    enable = true,
+    max_lines = 4,
+    min_window_height = 0,
+    line_numbers = true,
+    multiline_threshold = 4,
+    trim_scope = 'inner',
+    mode = 'topline',
+    separator = '-',
+    zindex = 20,
+})
 
 -- Toggle treesitter-context
-vim.keymap.set('', '<leader>bc', function()
+vim.keymap.set('', '<leader>bt', function()
     local tsc = require('treesitter-context')
     if tsc.enabled() then
         tsc.disable()
     else
         tsc.enable()
     end
-end, { desc = 'Toggle treesitter [c]ontext' })
+end, { desc = 'Toggle treesitter con[t]ext' })
 
 require('treesj').setup({
     use_default_keymaps = false,

@@ -2,12 +2,10 @@ vim.pack.add({ {
     src = 'https://github.com/folke/trouble.nvim' } })
 
 require("trouble").setup({
-    opts = {
-        warn_no_results = true, -- show a warning when there are no results
-        open_no_results = true, -- open the trouble window when there are no results
-        auto_close = true,
-        auto_jump = true,
-    },
+    warn_no_results = true, -- show a warning when there are no results
+    open_no_results = true, -- open the trouble window when there are no results
+    auto_close = true,
+    auto_jump = true,
 })
 
 -- Open trouble when quickfix is opened

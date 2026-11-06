@@ -21,7 +21,7 @@ end
 
 -- Show documentation/hover information
 -- Go to definition
-vim.api.nvim_set_keymap('n', '<C-k>', ':lua help_lookup()<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<C-k>', ':lua help_lookup()<CR>', { noremap = true, silent = true })
 
 -- Manipulate text
 -- Join line but keep cursor on mark

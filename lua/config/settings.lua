@@ -1,5 +1,4 @@
 vim.g.projects_dir = vim.env.HOME .. '/projects'
-vim.g.mapleader = ' '
 
 -- Folding =====================================================================
 vim.o.foldlevelstart=99
@@ -19,6 +18,8 @@ local function fold_virt_text(result, s, lnum, coloff)
     local hl
     for i = 1, #s do
         local char = s:sub(i, i)
+        -- TODO (0.13): vim.treesitter.get_captures_at_pos is deprecated;
+        -- replace with vim.treesitter.get_captures once available.
         local hls = vim.treesitter.get_captures_at_pos(0, lnum - 1, coloff + i - 1)
         local _hl = hls[#hls]
         if _hl then
@@ -49,6 +50,8 @@ end
 -- General ====================================================================
 
 vim.opt.winborder = 'rounded'
+vim.o.pumborder = 'rounded'
+vim.o.messagesopt = 'hit-enter,history:500,progress:c'
 vim.opt.autoread  = true  -- sync buffers automatically
 vim.opt.backup    = false -- Don't store backup
 vim.opt.clipboard = 'unnamedplus'
@@ -67,25 +70,27 @@ vim.diagnostic.config({
     virtual_lines = false,
     jump = {
         wrap = true,
-        float = true
+        on_jump = function(diag)
+            if diag then
+                vim.diagnostic.open_float()
+            end
+        end,
     },
 })
 
 -- UI =========================================================================
-vim.g.have_nerd_font  = true
 vim.opt.termguicolors = true
 
 vim.opt.cursorline    = true
 vim.opt.cursorlineopt = 'screenline,number'  -- Show cursor line only screen line when wrapped
 vim.opt.guicursor     = 'n-sm:block-Cursor,i-t:ver30-iCursor,v:block-vCursor,r-c:block-cCursor,o:block-oCursor'
 
-vim.opt.diffopt       = "internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram"
+vim.opt.diffopt       = "internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram,inline:char"
 
 vim.opt.statuscolumn  = '%l%s'
 vim.opt.signcolumn    = 'yes:1'
 vim.opt.colorcolumn   = '+1'  -- Highlight after textwidth
 vim.o.wrap            = false
-vim.api.nvim_set_option_value('wrap', wide_enough, {})
 vim.opt.breakindentopt = 'list:-1' -- Add padding for lists when 'wrap' is on
 vim.opt.rnu            = true
 vim.opt.number         = true
@@ -96,7 +101,6 @@ vim.opt.incsearch      = true
 vim.opt.inccommand     = 'split' -- Preview substitutions live
 
 vim.opt.ignorecase     = true    -- Ignore case when searching (use `\C` to force not doing that)
-vim.opt.incsearch      = true    -- Show search results while typing
 
 vim.opt.sidescroll     = 20
 vim.opt.scrolloff      = 8

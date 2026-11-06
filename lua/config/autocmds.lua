@@ -4,7 +4,9 @@ vim.api.nvim_create_autocmd('PackChanged', {
         local name, kind = ev.data.spec.name, ev.data.kind
         if name == 'nvim-treesitter' and kind == 'update' then
             if not ev.data.active then vim.cmd.packadd('nvim-treesitter') end
-            vim.cmd('TSUpdate')
+            if vim.fn.executable('tree-sitter') == 1 then
+                vim.cmd('TSUpdate')
+            end
         end
     end
 })
@@ -47,10 +49,15 @@ vim.api.nvim_create_autocmd({ 'FileType' }, {
 
 -- Search for word under cursor
 vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-    desc = 'Search word under cursor',
+    desc = 'Trim trailing whitespace',
     group = vim.api.nvim_create_augroup('ljfriese/yanking', {}),
     pattern = '*',
-    command = [[%s/\s\+$//e]],
+    callback = function(args)
+        if vim.bo[args.buf].buftype ~= '' then
+            return
+        end
+        pcall(vim.cmd, 'silent! %s/\\s\\+$//e')
+    end,
 })
 
 vim.api.nvim_create_autocmd('BufReadPost', {
@@ -70,7 +77,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     group = vim.api.nvim_create_augroup('ljfriese/yanking', {}),
     pattern = '*',
     callback = function()
-        vim.highlight.on_yank({
+        vim.hl.on_yank({
             higroup = 'IncSearch',
             timeout = 100,
         })
@@ -83,26 +90,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if client:supports_method('textDocument/foldingRange') then
             local win = vim.api.nvim_get_current_win()
-            vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+            vim.api.nvim_win_set_option(win, 'foldexpr', 'v:lua.vim.lsp.foldexpr()')
         end
     end,
 })
 
-
-vim.api.nvim_create_autocmd('LspProgress', {
-    group = vim.api.nvim_create_augroup('ljfriese/lsp', {}),
-    callback = function(ev)
-        local spinner = { '⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏' }
-        vim.notify(vim.lsp.status(), 'info', {
-            id = 'lsp_progress',
-            title = 'LSP Progress',
-            opts = function(notif)
-                notif.icon = ev.data.params.value.kind == 'end' and ' ' or
-                    spinner[math.floor(vim.uv.hrtime() / (1e6 * 80)) % #spinner + 1]
-            end,
-        })
-    end,
-})
 
 --- Center when inserting
 vim.api.nvim_create_autocmd('InsertEnter', {

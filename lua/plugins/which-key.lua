@@ -24,6 +24,7 @@ wk.add({
     { '<leader>s', group = '[S]earch ...', icon = '' },
     { '<leader>f', group = '[F]ind ...', icon = '' },
     { '<leader>g', group = '[G]it' },
+    { '<leader>gh', group = '[H]unk' },
     { '<leader>gt', group = '[T]oggle ...' },
     { '<leader>b', group = '[B]uffer' },
     { '<leader>m', group = '[M]arks' },
