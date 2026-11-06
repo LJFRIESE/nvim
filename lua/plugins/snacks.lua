@@ -30,9 +30,6 @@ local keys = {
     { "<leader>fg", function() Snacks.picker.git_files() end,                                desc = "Find Git Files" },
     { "<leader>fr", function() Snacks.picker.recent() end,                                   desc = "Recent" },
     { "<leader>fp", function() Snacks.picker.projects() end,                                 desc = "[P]rojects" },
-    -- git
-    { "<leader>gc", function() Snacks.picker.git_log() end,                                  desc = "Git Log" },
-    { "<leader>gs", function() Snacks.picker.git_status() end,                               desc = "Git Status" },
     -- Grep
     { "<leader>/",  function() Snacks.picker.grep() end,                                     desc = "Grep" },
     { "<leader>sb", function() Snacks.picker.lines() end,                                    desc = "Buffer Lines" },
